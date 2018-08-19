@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row" *ngIf="(usuario && usuario.uid) || creating">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Nombre(s)</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.name" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Apellido(s)</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="usuario.last_name" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput2">Dirección</label>
+        <input type="text" class="form-control" id="exampleInput2" [(ngModel)]="usuario.address" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput9">Email</label>
+        <input type="email" class="form-control" id="exampleInput9" [(ngModel)]="usuario.email" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput7">Contraseña</label>
+        <input type="password" class="form-control" id="exampleInput7" [(ngModel)]="usuario.password" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput8">Repetir</label>
+        <input type="password" class="form-control" id="exampleInput8" [(ngModel)]="usuario.repeat" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="exampleInput3">Teléfono</label>
+        <input type="text" class="form-control" id="exampleInput3" [(ngModel)]="usuario.telefono" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput4"># del IMSS</label>
+        <input type="text" class="form-control" id="exampleInput4" [(ngModel)]="usuario.imss" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInput5">Es supervisor?</label>
+        <select class="form-control" id="exampleInput5" [(ngModel)]="usuario.is_supervisor">
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInput6">Supervisor</label>
+        <select class="form-control" id="exampleInput6" [(ngModel)]="usuario.supervisor">
+          <option *ngFor="let u of usuarios" value="{{u.uid}}">{{u.name}} {{u.last_name}}</option>
+        </select>
+      </div>
+      <hr />
+      <button class="btn btn-primary" (click)="save()">Guardar</button>
+      <button class="btn btn-default" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+  <br />
+  <button class="btn btn-primary btn-sm float-right" *ngIf="!((usuario && usuario.uid) || creating)" (click)="creating = true">
+    <i class="fas fa-plus"></i> Agregar Nuevo
+  </button>
+  <h3>Usuarios</h3>
+  <hr />
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-hover table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col"># de IMSS</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Dirección</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let usuario of usuarios | search: query">
+      <th scope="row">{{usuario.name}} {{usuario.last_name}}</th>
+      <td>{{usuario.imss}}</td>
+      <td>{{usuario.telefono}}</td>
+      <td>{{usuario.address}}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" ngbTooltip="Ver/Editar" (click)="select(usuario)">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar" (click)="remove(usuario)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Listado de Formularios</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openInstallation()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Formularios por Enviar</h4>
+  <ion-list *ngIf="offline_forms">
+    <ion-item ion-item *ngFor="let f of offline_forms" (click)="openInstallation(f)">
+      <h2>Medidor {{f.uid}}</h2>
+      <h3>{{f.calle}} {{f.numero}}, {{f.colonia}}. {{f.ciudad}}</h3>
+      <p>{{f.uid | date: 'medium'}}</p>
+    </ion-item>
+  </ion-list>
+  <hr />
+  <h4>Formularios Enviados</h4>
+  <ion-list *ngIf="user && user.forms">
+    <ion-item ion-item *ngFor="let f of user.forms" (click)="openInstallationSent(f.uid)">
+      <h2>Medidor {{f.uid}}</h2>
+      <h3>{{f.calle}} {{f.numero}}, {{f.coloria}}. {{f.ciudad}}</h3>
+      <p>{{f.uid | date: 'medium'}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

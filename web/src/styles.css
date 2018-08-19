@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.center {
+  text-align: center !important;
+  margin: auto;
+}
+.framePicture {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ededed;
+}

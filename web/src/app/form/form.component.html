@@ -1,0 +1,103 @@
+<div class="container" *ngIf="form">
+  <br />
+  <b class="float-right">Enviado: {{form.uid | date: 'd/MM/yyy h:mm a'}}</b>
+  <h3>Formulario #{{form.uid}}</h3>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Dirección: </b> {{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}<br />
+        <b>Serie Optimizador: </b> {{form.serie}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Usuario: </b> {{form.nombre}}<br />
+        <b>RPU: </b> {{form.rpu}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Instaló: </b> {{form.instalo}}<br />
+        <b>Medidor: </b> {{form.medidor}}
+      </div>
+    </div>
+  </div>
+
+  <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b class="center">Resistencia del Sistema de Tierras</b> <hr />
+        Inicial: <b>{{form.tierra_inicial}} OHM</b><br />
+        Final: <b>{{form.tierra_final}} OHM</b>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b class="center">Voltaje</b> <hr />
+        Inicial: <b>{{form.voltaje_inicial}} V</b><br />
+        Final: <b>{{form.voltaje_final}} V</b>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b class="center">Amperaje</b> <hr />
+        Inicial: <b>{{form.amperaje_inicial}} A</b><br />
+        Final: <b>{{form.amperaje_final}} A</b>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h2>Materiales</h2>
+  <b *ngIf="!form.current_materials">No se registraron materiales</b>
+  <table *ngIf="form.current_materials" class="table table-bordered table-hover table-striped table-dark">
+    <tr>
+      <th>Cantidad</th>
+      <th>Unidad</th>
+      <th>Material</th>
+    </tr>
+    <tr *ngFor="let m of form.current_materials">
+      <td>{{m.quantity}}</td>
+      <td>{{m.material.unidad}}</td>
+      <td>{{m.material.descripcion}}</td>
+    </tr>
+  </table>
+  <hr />
+  <h2>Evidencia</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let p of form.pictures">
+      <img [src]="p" class="framePicture img-fluid" />
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="form.observaciones">
+        <b>Observaciones: </b> {{form.observaciones}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div *ngIf="form.observaciones">
+        <b>Pintura: </b> {{(form.pintura === 'si') ? 'Sí' : 'No'}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div *ngIf="form.observaciones">
+        <b>Obra Civil: </b> {{(form.obra_civil === 'si') ? 'Sí' : 'No'}}
+      </div>
+    </div>
+  </div>
+  <h2>Firmas</h2>
+  <div class="row">
+    <div class="col-md-6 center" *ngIf="form.firmaContratista">
+      <img [src]="form.firmaContratista" class="img-fluid" />
+      <h4>Supervisor Contratista</h4>
+    </div>
+    <div class="col-md-6 center" *ngIf="form.firmaCFE">
+      <img [src]="form.firmaCFE" class="img-fluid" />
+      <h4>Supervisor CFE</h4>
+    </div>
+  </div>
+</div>

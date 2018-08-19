@@ -1,0 +1,258 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Formulario Equipos Optimizadores</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="center">
+    <h3>Fecha: {{today | date:'d/M/yyyy'}}</h3>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button *ngIf="step > 1" ion-button full icon-start (click)="previous()"><ion-icon name="arrow-dropleft-circle"></ion-icon> Atrás</button>
+      </ion-col>
+      <ion-col>
+        <button *ngIf="step !== last_step" ion-button full icon-end (click)="next()">Siguiente <ion-icon name="arrow-dropright-circle"></ion-icon></button>
+        <button *ngIf="step === last_step && !showing" ion-button full icon-end (click)="finish()" color="secondary">Finalizar <ion-icon name="checkmark-circle"></ion-icon></button>
+        <button *ngIf="step === last_step && !showing && !form.guardado_offline" ion-button full icon-end (click)="finishOffline()" color="danger">Guardar Offline <ion-icon name="checkmark-circle"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 1">
+    <ion-row>
+      <ion-col>
+        <h5>Resistencia del Sist. de Tierras</h5>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Inicial (OHM)</ion-label>
+            <ion-input [(ngModel)]="form.tierra_inicial" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Final (OHM)</ion-label>
+            <ion-input [(ngModel)]="form.tierra_final" type="number"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <h5>Voltaje</h5>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Inicial (V)</ion-label>
+            <ion-input [(ngModel)]="form.voltaje_inicial" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Final (V)</ion-label>
+            <ion-input [(ngModel)]="form.voltaje_final" type="number"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h5>Amperaje</h5>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Inicial (A)</ion-label>
+            <ion-input [(ngModel)]="form.amperaje_inicial" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Final (A)</ion-label>
+            <ion-input [(ngModel)]="form.amperaje_final" type="number"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <h5>Optimizador</h5>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Número de Serie</ion-label>
+            <ion-input [(ngModel)]="form.serie" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 2">
+    <h5>Datos del Usuario</h5>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating># de Medidor</ion-label>
+            <ion-input [(ngModel)]="form.medidor" type="number" (keyup.enter)="searchMedidor()"></ion-input>
+            <button clear item-right ion-button (click)="searchMedidor()">
+              Buscar
+            </button>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>RPU</ion-label>
+            <ion-input [(ngModel)]="form.rpu" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Nombre</ion-label>
+            <ion-input [(ngModel)]="form.nombre" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Calle</ion-label>
+            <ion-input [(ngModel)]="form.calle" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Número</ion-label>
+            <ion-input [(ngModel)]="form.numero" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Colonia</ion-label>
+            <ion-input [(ngModel)]="form.colonia" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Ciudad</ion-label>
+            <ion-input [(ngModel)]="form.ciudad" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 3">
+    <h5>Materiales Utilizados</h5>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Instaló</ion-label>
+            <ion-input [(ngModel)]="form.instalo" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Pintura</ion-label>
+            <ion-select [(ngModel)]="form.pintura">
+              <ion-option value="si">Sí</ion-option>
+              <ion-option value="no">No</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Obra Civil</ion-label>
+            <ion-select [(ngModel)]="form.obra_civil">
+              <ion-option value="si">Sí</ion-option>
+              <ion-option value="no">No</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Observaciones</ion-label>
+            <ion-input [(ngModel)]="form.observaciones" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <h5 class="center">Agregar Materiales</h5>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Material</ion-label>
+            <ion-select [(ngModel)]="current_material">
+              <ion-option *ngFor="let m of materials" [value]="m">{{m.descripcion}} ({{m.unidad}})</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Cantidad</ion-label>
+            <ion-input [(ngModel)]="current_quantity" type="number"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <button ion-button full (click)="addMaterial()">Agregar</button>
+      </ion-col>
+    </ion-row>
+    <ion-list *ngIf="materials">
+      <button ion-item *ngFor="let item of current_materials">
+        {{ item.quantity }} {{item.material.unidad}} {{item.material.descripcion}}
+      </button>
+    </ion-list>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 4">
+    <div #map id="map"></div>
+    <b *ngIf="form.geolocation">{{form.geolocation.lat}}, {{form.geolocation.lng}}</b>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 5">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button full icon-end (click)="takePicture('camera')">Tomar Fotografía <ion-icon name="camera"></ion-icon></button>
+        </ion-col>
+        <ion-col>
+          <button ion-button full icon-end (click)="takePicture('album')">Seleccionar de Álbum <ion-icon name="images"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div>
+      <div class="picture" *ngFor="let p of pictures">
+        <img [src]="p">
+      </div>
+    </div>
+  </ion-grid>
+
+  <ion-grid *ngIf="step === 6">
+    <signature-pad [options]="signaturePadOptions"  id="signatureCanvas"></signature-pad>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <button ion-button full color="primary" (click)="firmaContratista()">Firma Contratista</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full color="light" (click)="drawClear()">Limpiar</button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full color="primary" (click)="firmaCFE()">Firma CFE</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="signatureContainer center" *ngIf="form.firmaContratista">
+            <img [src]="form.firmaContratista">
+            <br />
+            <b>Supervisor Contratista</b>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="signatureContainer center" *ngIf="form.firmaCFE">
+            <img [src]="form.firmaCFE">
+            <br />
+            <b>Supervisor CFE</b>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+</ion-content>
