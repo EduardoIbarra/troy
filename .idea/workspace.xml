@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ee035ca-fe9d-4f29-a66a-dfa848272e9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/app/pipes/search.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/app/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/app/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/app/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/pages/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/pages/home/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/pages/home/home.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/pages/home/home.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,7 +17,7 @@
     <session id="414777354">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.opened" value="2" />
@@ -235,7 +217,7 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/mobile" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -392,18 +374,17 @@
       <option name="presentableId" value="Default" />
       <updated>1534467324045</updated>
       <workItem from="1534467327525" duration="4234000" />
-      <workItem from="1534527083268" duration="59340000" />
+      <workItem from="1534527083268" duration="60384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63574000" />
+    <option name="totallyTimeSpent" value="64618000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="1028" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15189873" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15189873" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -416,7 +397,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28311965" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28311965" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
