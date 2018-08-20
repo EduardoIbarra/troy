@@ -85,7 +85,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating># de Medidor</ion-label>
-            <ion-input [(ngModel)]="form.medidor" type="number" (keyup.enter)="searchMedidor()"></ion-input>
+            <ion-input [(ngModel)]="form.medidor" type="text" (keyup.enter)="searchMedidor()"></ion-input>
             <button clear item-right ion-button (click)="searchMedidor()">
               Buscar
             </button>

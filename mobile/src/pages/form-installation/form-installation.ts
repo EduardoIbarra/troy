@@ -160,11 +160,11 @@ export class FormInstallationPage {
   searchMedidor() {
     this.medidorProvider.getById(this.form.medidor).valueChanges().subscribe((data: any) => {
       if(data) {
-        this.form.nombre = data.name;
-        this.form.calle = data.calle;
+        this.form.nombre = data.nombre;
+        this.form.calle = data.Direccion;
         this.form.numero = data.numero;
         this.form.colonia = data.colonia;
-        this.form.ciudad = data.ciudad;
+        this.form.ciudad = data.municipio + ', ' + data.estado;
         this.form.rpu = data.rpu;
         console.log(data);
       }else {

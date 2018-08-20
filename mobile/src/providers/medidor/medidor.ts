@@ -8,16 +8,16 @@ export class MedidorProvider {
   constructor(private angularFireDataBase: AngularFireDatabase, private angularFireStorage: AngularFireStorage) {
   }
   get() {
-    return this.angularFireDataBase.list('medidores/');
+    return this.angularFireDataBase.list('medidores/nest2/');
   }
   getById(uid) {
-    return this.angularFireDataBase.object('medidores/' + uid);
+    return this.angularFireDataBase.object('medidores/nest2/' + uid);
   }
   add(user) {
-    return this.angularFireDataBase.object('/medidores/' + user.uid).set(user);
+    return this.angularFireDataBase.object('/medidores/nest2/' + user.uid).set(user);
   }
   edit(user) {
-    return this.angularFireDataBase.object('/medidores/' + user.uid).set(user);
+    return this.angularFireDataBase.object('/medidores/nest2/' + user.uid).set(user);
   }
 
 }
