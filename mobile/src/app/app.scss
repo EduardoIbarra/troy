@@ -18,3 +18,15 @@
   text-align: center !important;
   margin: auto;
 }
+.header-ios .toolbar-ios:last-child .toolbar-background-ios {
+  border-width: 0 0 0.55px;
+  background: #f12711;
+  background: -webkit-linear-gradient(to right, #f5af19, #f12711);
+  background: linear-gradient(to right, #f5af19, #f12711);
+}
+.toolbar-title-ios {
+  color: white;
+}
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+  color: white;
+}

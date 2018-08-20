@@ -10,6 +10,7 @@
     <div class="col-md-6">
       <div class="center">
         <h3>Iniciar Sesion</h3>
+        <img src="assets/imgs/logo_troy.png" />
       </div>
       <p *ngIf="operation == 'register'">Ya tienes cuenta? Has <a (click)="operation = 'login'">Login</a></p>
       <p *ngIf="operation == 'login'">No tienes cuenta? <a (click)="operation = 'register'">Registrarse</a></p>

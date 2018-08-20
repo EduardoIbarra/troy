@@ -16,6 +16,9 @@ export class HomePage {
   offline_forms: any[];
   constructor(public navCtrl: NavController, private formProvider: FormProvider, private authenticationProvider: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage) {
     this.authenticationProvider.getStatus().subscribe((data) => {
+      if (!data) {
+        return;
+      }
       this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
         if(this.user.forms) {
