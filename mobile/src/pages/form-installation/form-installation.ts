@@ -45,6 +45,7 @@ export class FormInstallationPage {
   public signatureImage : string;
   offline_forms:any [] = [];
   showing = false;
+  employees:any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage) {
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
@@ -97,6 +98,13 @@ export class FormInstallationPage {
       if (!data) {
         return;
       }
+      this.userProvider.getBySupervisor(data.uid).on('value', (data) => {
+        console.log(data);
+        data.forEach((data) => {
+          this.employees.push(data.val());
+        });
+        console.log(this.employees);
+      });
       this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
       }, (error) => {
@@ -162,7 +170,6 @@ export class FormInstallationPage {
       if(data) {
         this.form.nombre = data.nombre;
         this.form.calle = data.Direccion;
-        this.form.numero = data.numero;
         this.form.colonia = data.colonia;
         this.form.ciudad = data.municipio + ', ' + data.estado;
         this.form.rpu = data.rpu;
@@ -193,19 +200,17 @@ export class FormInstallationPage {
           if (of.uid == this.form.uid) {
             this.offline_forms.splice(i, 1);
             this.storage.set('offline_forms', JSON.stringify(this.offline_forms)).then((data) => {
-              loading.dismiss();
             }).catch((error) => {
               console.log(error);
             });
           }
         });
-      }else {
-        loading.dismiss();
       }
       this.step = 1;
       this.form = {};
       this.pictures = [];
       this.current_materials = [];
+      loading.dismiss();
     }).catch((error) => {
       alert('Ocurrió un error mientras se enviaba el formulario:  ' + JSON.stringify(error));
       loading.dismiss();

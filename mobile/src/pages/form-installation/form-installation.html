@@ -107,10 +107,6 @@
             <ion-input [(ngModel)]="form.calle" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label color="primary" floating>Número</ion-label>
-            <ion-input [(ngModel)]="form.numero" type="text"></ion-input>
-          </ion-item>
-          <ion-item>
             <ion-label color="primary" floating>Colonia</ion-label>
             <ion-input [(ngModel)]="form.colonia" type="text"></ion-input>
           </ion-item>
@@ -130,7 +126,9 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Instaló</ion-label>
-            <ion-input [(ngModel)]="form.instalo" type="text"></ion-input>
+            <ion-select [(ngModel)]="form.instalo">
+              <ion-option [value]="e" *ngFor="let e of employees">{{e.name}} {{e.last_name}}</ion-option>
+            </ion-select>
           </ion-item>
         </ion-list>
       </ion-col>

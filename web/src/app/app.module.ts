@@ -17,14 +17,15 @@ import { MedidoresComponent } from './medidores/medidores.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import {SearchPipe} from "./pipes/search";
 import { FormComponent } from './form/form.component';
+import {AuthenticationGuard} from "./authentication.guard";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'medidores', component: MedidoresComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'form/:uid', component: FormComponent}
+  {canActivate: [AuthenticationGuard], path: '', component: HomeComponent},
+  {canActivate: [AuthenticationGuard], path: 'home', component: HomeComponent},
+  {canActivate: [AuthenticationGuard], path: 'medidores', component: MedidoresComponent},
+  {canActivate: [AuthenticationGuard], path: 'usuarios', component: UsuariosComponent},
+  {canActivate: [AuthenticationGuard], path: 'form/:uid', component: FormComponent}
 ];
 
 @NgModule({

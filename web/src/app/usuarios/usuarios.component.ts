@@ -34,7 +34,7 @@ export class UsuariosComponent implements OnInit {
       !this.usuario.telefono ||
       !this.usuario.imss ||
       !this.usuario.is_supervisor ||
-      !this.usuario.supervisor
+      !this.usuario.tipo
     ) {
       alert('Todos los campos son requeridos, favor de llenarlos');
       return;
@@ -44,8 +44,23 @@ export class UsuariosComponent implements OnInit {
       return;
     }
     this.usuario.timestamp = Date.now();
-    this.authService.registerWithEmail(this.usuario.email, this.usuario.password).then( (data) => {
-      this.usuario.uid = data.user.uid;
+    if(this.creating) {
+      this.authService.registerWithEmail(this.usuario.email, this.usuario.password).then( (data) => {
+        this.usuario.uid = data.user.uid;
+        this.usuarioService.add(this.usuario).then((data) => {
+          alert('Guardado con éxito');
+          this.usuario = {};
+          this.creating = false;
+          console.log(data);
+        }).catch((error) => {
+          alert('Ocurrió un error, contactar a soporte');
+          console.log(error);
+        });
+      }).catch((error) => {
+        alert('Ocurrió un error, contactar a soporte');
+        console.log(error);
+      });
+    } else {
       this.usuarioService.add(this.usuario).then((data) => {
         alert('Guardado con éxito');
         this.usuario = {};
@@ -55,10 +70,7 @@ export class UsuariosComponent implements OnInit {
         alert('Ocurrió un error, contactar a soporte');
         console.log(error);
       });
-    }).catch((error) => {
-      alert('Ocurrió un error, contactar a soporte');
-      console.log(error);
-    });
+    }
   }
   select(usuario) {
     this.usuario = usuario;
