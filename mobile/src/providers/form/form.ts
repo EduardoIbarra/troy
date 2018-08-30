@@ -12,6 +12,9 @@ export class FormProvider {
   getById(uid) {
     return this.angularFireDataBase.object('forms/' + uid);
   }
+  getSerieById(uid) {
+    return this.angularFireDataBase.object('series/' + uid);
+  }
   getByUser(uid) {
     return this.angularFireDataBase.list('forms').query.orderByChild('user/uid').equalTo(uid);
   }

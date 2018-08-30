@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="background: none transparent;">
   <div class="center">
     <h3>Fecha: {{today | date:'d/M/yyyy'}}</h3>
   </div>
@@ -71,7 +71,10 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Número de Serie</ion-label>
-            <ion-input [(ngModel)]="form.serie" type="text"></ion-input>
+            <ion-input (keyup.enter)="scanEcowise()" [(ngModel)]="form.serie" type="text"></ion-input>
+            <button clear item-right ion-button (click)="scanEcowise()">
+              Escannear
+            </button>
           </ion-item>
         </ion-list>
       </ion-col>

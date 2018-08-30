@@ -24,10 +24,17 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Inicio', component: HomePage }
     ];
-
+    this.authenticationService.getStatus().subscribe((data) => {
+      if(!data) {
+        this.nav.setRoot(LoginPage);
+      } else {
+        this.nav.setRoot(HomePage);
+      }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   initializeApp() {

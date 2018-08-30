@@ -24,6 +24,8 @@ import { MedidorProvider } from '../providers/medidor/medidor';
 import { FormProvider } from '../providers/form/form';
 import {Camera} from "@ionic-native/camera";
 import {IonicStorageModule} from "@ionic/storage";
+import {QRScanner} from "@ionic-native/qr-scanner";
+import {ScanPage} from "../pages/scan/scan";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
@@ -37,7 +39,8 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ScanPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ScanPage
   ],
   providers: [
     StatusBar,
@@ -68,7 +72,8 @@ export const firebaseConfig = {
     MaterialProvider,
     MedidorProvider,
     FormProvider,
-    Camera
+    Camera,
+    QRScanner
   ]
 })
 export class AppModule {}

@@ -35,3 +35,16 @@ exports.sendNewFormEmail = functions.database.ref('forms/{pushId}').onCreate(eve
         console.log(body)
     });
 });
+
+exports.inyectSerie = functions.database.ref('forms/{pushId}').onCreate(event => {
+    console.log(event.val());
+    admin.initializeApp();
+    if (!admin.apps.length && admin.apps.length === 0) {
+        admin.initializeApp();
+    }
+    var form = event.val();
+    var formData = {
+        serie: form.serie
+    };
+    admin.database().ref('series/'+form.serie).set(formData);
+});

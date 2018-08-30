@@ -30,3 +30,11 @@
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default, .bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
   color: white;
 }
+[app-viewport],
+[overlay-portal],
+[nav-viewport],
+[tab-portal],
+.nav-decor {
+  display: none !important;
+  background: none transparent !important;
+}

@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, LoadingController, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Geolocation} from "@ionic-native/geolocation";
 import {MaterialProvider} from "../../providers/material/material";
 import {SignaturePad} from "angular2-signaturepad/signature-pad";
@@ -10,6 +10,8 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import {UserProvider} from "../../providers/user/user";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
 import { Storage } from '@ionic/storage';
+import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
+import {ScanPage} from "../scan/scan";
 /**
  * Generated class for the FormInstallationPage page.
  *
@@ -46,7 +48,7 @@ export class FormInstallationPage {
   offline_forms:any [] = [];
   showing = false;
   employees:any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage, private qrScanner: QRScanner, public modalController: ModalController) {
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
       this.pictures = this.form.pictures;
@@ -306,5 +308,45 @@ export class FormInstallationPage {
       loading.dismiss();
       console.log(error);
     });
+  }
+  scanEcowise() {
+    this.navCtrl.push(ScanPage, {'data': this.form});
+    // let profileModal = this.modalController.create(ScanPage, this.form);
+    // profileModal.present();
+    /*
+    // Optionally request the permission early
+    console.log('1');
+    this.qrScanner.prepare()
+      .then((status: QRScannerStatus) => {
+        console.log('2');
+        if (status.authorized) {
+          console.log('3');
+          // camera permission was granted
+
+
+          // start scanning
+          this.qrScanner.show();
+          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+            this.qrScanner.hide();
+            console.log('Scanned something', text);
+            this.form.serie = text;
+            const toast = this.toastController.create({message: '¡Equipo con serie ' + text + ' ha sido escanneado con éxito!', duration: 5000, position: 'bottom'});
+            toast.present();
+            this.qrScanner.hide(); // hide camera preview
+            scanSub.unsubscribe(); // stop scanning
+          });
+
+        } else if (status.denied) {
+          console.log('4');
+          // camera permission was permanently denied
+          // you must use QRScanner.openSettings() method to guide the user to the settings page
+          // then they can grant the permission from there
+        } else {
+          console.log('5');
+          // permission was denied, but not permanently. You can ask for permission again at a later time.
+        }
+      })
+      .catch((e: any) => console.log('Error is', e));
+      */
   }
 }
