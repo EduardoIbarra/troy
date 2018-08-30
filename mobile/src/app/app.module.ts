@@ -26,6 +26,8 @@ import {Camera} from "@ionic-native/camera";
 import {IonicStorageModule} from "@ionic/storage";
 import {QRScanner} from "@ionic-native/qr-scanner";
 import {ScanPage} from "../pages/scan/scan";
+import {FallidasPage} from "../pages/fallidas/fallidas";
+import {FallidaPage} from "../pages/fallidas/fallida/fallida";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
@@ -40,7 +42,9 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     ListPage,
-    ScanPage
+    ScanPage,
+    FallidasPage,
+    FallidaPage
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     ListPage,
-    ScanPage
+    ScanPage,
+    FallidasPage,
+    FallidaPage
   ],
   providers: [
     StatusBar,

@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import {LoginPage} from "../pages/login/login";
 import {AuthenticationProvider} from "../providers/authentication/authentication";
 import {FormInstallationPage} from "../pages/form-installation/form-installation";
+import {FallidasPage} from "../pages/fallidas/fallidas";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +25,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inicio', component: HomePage }
+      { title: 'Inicio', component: HomePage },
+      { title: 'Visitas Fallidas', component: FallidasPage }
     ];
     this.authenticationService.getStatus().subscribe((data) => {
       if(!data) {
