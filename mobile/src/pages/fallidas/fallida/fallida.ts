@@ -3,6 +3,9 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 import {SignaturePad} from "angular2-signaturepad/signature-pad";
 import {MedidorProvider} from "../../../providers/medidor/medidor";
 import {FallidaProvider} from "../../../providers/fallida/fallida";
+import {FallidasPage} from "../fallidas";
+import {AuthenticationProvider} from "../../../providers/authentication/authentication";
+import {UserProvider} from "../../../providers/user/user";
 
 @IonicPage()
 @Component({
@@ -18,10 +21,22 @@ export class FallidaPage {
   };
   @ViewChild(SignaturePad) public signaturePad : SignaturePad;
   today: any = Date.now();
+  user: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private medidorProvider: MedidorProvider,
               private toastController: ToastController,
-              public fallidaProvider: FallidaProvider) {
+              public fallidaProvider: FallidaProvider,
+              public authenticationProvider: AuthenticationProvider,
+              public userProvider: UserProvider) {
+    this.authenticationProvider.getStatus().subscribe((data) => {
+      this.userProvider.getById(data.uid).valueChanges().subscribe((data2) => {
+        this.user = data2;
+      }, (error) => {
+        console.log(error);
+      });
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   ionViewDidLoad() {
@@ -67,12 +82,13 @@ export class FallidaPage {
   }
   save() {
     this.fallida.timestamp = Date.now();
-    this.fallidaProvider.add(this.fallida).then((data) => {
+    this.fallidaProvider.add(this.fallida, this.user).then((data) => {
       const toast = this.toastController.create({
           message: 'Información enviada con éxito', duration: 4000, position: 'bottom'
         });
       toast.present();
       this.fallida = {};
+      this.navCtrl.setRoot(FallidasPage);
     }).catch((error) => {
       alert('Ocurrió un error al enviar la información');
       console.log(error);

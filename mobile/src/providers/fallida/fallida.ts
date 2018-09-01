@@ -18,7 +18,8 @@ export class FallidaProvider {
   getByUser(medidor) {
     return this.angularFireDataBase.list('fallidas').query.orderByChild('user/uid').equalTo(medidor);
   }
-  add(fallida) {
+  add(fallida, user) {
+    this.angularFireDataBase.object('/fallidas/' + fallida.medidor + '/user/').set(user);
     return this.angularFireDataBase.object('/fallidas/' + fallida.medidor + '/visitas/' + fallida.timestamp).set(fallida);
   }
   edit(fallida) {

@@ -48,3 +48,14 @@ exports.inyectSerie = functions.database.ref('forms/{pushId}').onCreate(event =>
     };
     admin.database().ref('series/'+form.serie).set(formData);
 });
+
+exports.inyectFallida = functions.database.ref('fallidas/{pushId}').onWrite(event => {
+    console.log(event.after.val());
+    admin.initializeApp();
+    if (!admin.apps.length && admin.apps.length === 0) {
+        admin.initializeApp();
+    }
+    var form = event.after.val();
+    var key = event.after.key;
+    admin.database().ref('users/'+form.user.uid+'/fallidas/'+key).set(form);
+});
