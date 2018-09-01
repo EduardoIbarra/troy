@@ -2,13 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {SignaturePad} from "angular2-signaturepad/signature-pad";
 import {MedidorProvider} from "../../../providers/medidor/medidor";
-
-/**
- * Generated class for the FallidaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {FallidaProvider} from "../../../providers/fallida/fallida";
 
 @IonicPage()
 @Component({
@@ -16,7 +10,7 @@ import {MedidorProvider} from "../../../providers/medidor/medidor";
   templateUrl: 'fallida.html',
 })
 export class FallidaPage {
-  form: any = {};
+  fallida: any = {};
   public signaturePadOptions : Object = {
     'minWidth': 2,
     'canvasWidth': 340,
@@ -26,7 +20,8 @@ export class FallidaPage {
   today: any = Date.now();
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private medidorProvider: MedidorProvider,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              public fallidaProvider: FallidaProvider) {
   }
 
   ionViewDidLoad() {
@@ -40,21 +35,21 @@ export class FallidaPage {
     this.signaturePad.clear();
   }
   firmaContratista() {
-    this.form.firmaContratista = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+    this.fallida.firmaContratista = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
   firmaCFE() {
-    this.form.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+    this.fallida.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
   searchMedidor() {
-    this.medidorProvider.getById(this.form.medidor).valueChanges().subscribe((data: any) => {
+    this.medidorProvider.getById(this.fallida.medidor).valueChanges().subscribe((data: any) => {
       if(data) {
-        this.form.nombre = data.nombre;
-        this.form.calle = data.Direccion;
-        this.form.colonia = data.colonia;
-        this.form.ciudad = data.municipio + ', ' + data.estado;
-        this.form.rpu = data.rpu;
+        this.fallida.nombre = data.nombre;
+        this.fallida.calle = data.Direccion;
+        this.fallida.colonia = data.colonia;
+        this.fallida.ciudad = data.municipio + ', ' + data.estado;
+        this.fallida.rpu = data.rpu;
         console.log(data);
       }else {
         const toast = this.toastController.create({message: 'Medidor no encontrado', duration: 4000, position: 'bottom'});
@@ -69,5 +64,18 @@ export class FallidaPage {
     this.signaturePad.set('minWidth', 1);
     this.signaturePad.set('canvasWidth', canvas.offsetWidth);
     this.signaturePad.set('canvasHeight', canvas.offsetHeight);
+  }
+  save() {
+    this.fallida.timestamp = Date.now();
+    this.fallidaProvider.add(this.fallida).then((data) => {
+      const toast = this.toastController.create({
+          message: 'Información enviada con éxito', duration: 4000, position: 'bottom'
+        });
+      toast.present();
+      this.fallida = {};
+    }).catch((error) => {
+      alert('Ocurrió un error al enviar la información');
+      console.log(error);
+    });
   }
 }

@@ -25,18 +25,18 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating># de Medidor</ion-label>
-            <ion-input [(ngModel)]="form.medidor" type="text" (keyup.enter)="searchMedidor()"></ion-input>
+            <ion-input [(ngModel)]="fallida.medidor" type="text" (keyup.enter)="searchMedidor()"></ion-input>
             <button clear item-right ion-button (click)="searchMedidor()">
               Buscar
             </button>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>RPU</ion-label>
-            <ion-input [(ngModel)]="form.rpu" type="text"></ion-input>
+            <ion-input [(ngModel)]="fallida.rpu" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Nombre</ion-label>
-            <ion-input [(ngModel)]="form.nombre" type="text"></ion-input>
+            <ion-input [(ngModel)]="fallida.nombre" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -44,19 +44,23 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Calle</ion-label>
-            <ion-input [(ngModel)]="form.calle" type="text"></ion-input>
+            <ion-input [(ngModel)]="fallida.calle" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Colonia</ion-label>
-            <ion-input [(ngModel)]="form.colonia" type="text"></ion-input>
+            <ion-input [(ngModel)]="fallida.colonia" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Ciudad</ion-label>
-            <ion-input [(ngModel)]="form.ciudad" type="text"></ion-input>
+            <ion-input [(ngModel)]="fallida.ciudad" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
+    <ion-item>
+      <ion-label color="primary" floating>Observaciones</ion-label>
+      <ion-textarea [(ngModel)]="fallida.observaciones"></ion-textarea>
+    </ion-item>
   </ion-grid>
 
   <ion-grid>
@@ -77,15 +81,15 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div class="signatureContainer center" *ngIf="form.firmaContratista">
-            <img [src]="form.firmaContratista">
+          <div class="signatureContainer center" *ngIf="fallida.firmaContratista">
+            <img [src]="fallida.firmaContratista">
             <br />
             <b>Supervisor Contratista</b>
           </div>
         </ion-col>
         <ion-col>
-          <div class="signatureContainer center" *ngIf="form.firmaCFE">
-            <img [src]="form.firmaCFE">
+          <div class="signatureContainer center" *ngIf="fallida.firmaCFE">
+            <img [src]="fallida.firmaCFE">
             <br />
             <b>Supervisor CFE</b>
           </div>
@@ -93,4 +97,6 @@
       </ion-row>
     </ion-grid>
   </ion-grid>
+  <hr />
+  <button full color="primary" ion-button (click)="save()">Enviar</button>
 </ion-content>

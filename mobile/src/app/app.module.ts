@@ -28,6 +28,7 @@ import {QRScanner} from "@ionic-native/qr-scanner";
 import {ScanPage} from "../pages/scan/scan";
 import {FallidasPage} from "../pages/fallidas/fallidas";
 import {FallidaPage} from "../pages/fallidas/fallida/fallida";
+import { FallidaProvider } from '../providers/fallida/fallida';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
@@ -79,7 +80,8 @@ export const firebaseConfig = {
     MedidorProvider,
     FormProvider,
     Camera,
-    QRScanner
+    QRScanner,
+    FallidaProvider
   ]
 })
 export class AppModule {}
