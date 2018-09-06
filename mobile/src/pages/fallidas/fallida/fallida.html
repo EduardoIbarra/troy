@@ -98,5 +98,6 @@
     </ion-grid>
   </ion-grid>
   <hr />
-  <button *ngIf="!showing" full color="primary" ion-button (click)="save()">Enviar</button>
+  <button *ngIf="!showing || isOffline" ion-button full icon-end (click)="save()" color="secondary">Finalizar <ion-icon name="checkmark-circle"></ion-icon></button>
+  <button *ngIf="!showing && fallida.guardado_offline !== true" ion-button full icon-end (click)="finishOffline()" color="danger">Guardar Offline <ion-icon name="checkmark-circle"></ion-icon></button>
 </ion-content>
