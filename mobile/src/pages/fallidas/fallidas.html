@@ -31,10 +31,10 @@
   <hr />
   <h4>Visitas Fallidas Enviadas</h4>
   <ion-list *ngIf="user && user.fallidas">
-    <ion-item color="dark" ion-item *ngFor="let f of user.fallidas" (click)="openInstallationSent(f.uid)">
-      <h2>Medidor {{f.uid}}</h2>
-      <h3>{{f.calle}} {{f.numero}}, {{f.coloria}}. {{f.ciudad}}</h3>
-      <p>{{f.uid | date: 'medium'}}</p>
+    <ion-item color="dark" ion-item *ngFor="let f of user.fallidas" (click)="openVisits(f)">
+      <h1>Medidor {{f.visitas[0].medidor}}</h1>
+      <h3>{{f.visitas[0].calle}} {{f.visitas[0].numero}}, {{f.visitas[0].coloria}}. {{f.visitas[0].ciudad}}</h3>
+      <p>{{f.visitas.length}} Visita(s)</p>
     </ion-item>
   </ion-list>
 </ion-content>

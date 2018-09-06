@@ -29,6 +29,7 @@ import {ScanPage} from "../pages/scan/scan";
 import {FallidasPage} from "../pages/fallidas/fallidas";
 import {FallidaPage} from "../pages/fallidas/fallida/fallida";
 import { FallidaProvider } from '../providers/fallida/fallida';
+import {VisitsPage} from "../pages/visits/visits";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
@@ -45,7 +46,8 @@ export const firebaseConfig = {
     ListPage,
     ScanPage,
     FallidasPage,
-    FallidaPage
+    FallidaPage,
+    VisitsPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ export const firebaseConfig = {
     ListPage,
     ScanPage,
     FallidasPage,
-    FallidaPage
+    FallidaPage,
+    VisitsPage
   ],
   providers: [
     StatusBar,

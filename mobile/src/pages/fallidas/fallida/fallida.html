@@ -64,8 +64,8 @@
   </ion-grid>
 
   <ion-grid>
-    <signature-pad [options]="signaturePadOptions"  id="signatureCanvas"></signature-pad>
-    <ion-grid>
+    <signature-pad *ngIf="!showing" [options]="signaturePadOptions"  id="signatureCanvas"></signature-pad>
+    <ion-grid *ngIf="!showing">
       <ion-row>
         <ion-col col-4>
           <button ion-button full color="primary" (click)="firmaContratista()">Firma Contratista</button>
@@ -98,5 +98,5 @@
     </ion-grid>
   </ion-grid>
   <hr />
-  <button full color="primary" ion-button (click)="save()">Enviar</button>
+  <button *ngIf="!showing" full color="primary" ion-button (click)="save()">Enviar</button>
 </ion-content>

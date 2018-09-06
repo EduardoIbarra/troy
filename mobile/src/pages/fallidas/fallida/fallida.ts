@@ -22,6 +22,7 @@ export class FallidaPage {
   @ViewChild(SignaturePad) public signaturePad : SignaturePad;
   today: any = Date.now();
   user: any;
+  showing = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private medidorProvider: MedidorProvider,
               private toastController: ToastController,
@@ -37,11 +38,19 @@ export class FallidaPage {
     }, (error) => {
       console.log(error);
     });
+    if (this.navParams.get('visit')) {
+      this.fallida = this.navParams.get('visit');
+      console.log(this.fallida);
+      this.showing = true;
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FallidaPage');
     window.setTimeout(() => {
+      if (this.showing) {
+        return;
+      }
       this.signaturePad.clear();
       this.canvasResize();
     }, 800);
