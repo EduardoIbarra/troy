@@ -1,0 +1,47 @@
+<div class="container" *ngIf="fallida">
+  <br />
+  <b class="float-right">Última Visita: {{fallida.visitas[fallida.visitas.length-1].timestamp | date: 'd/MM/yyy h:mm a'}}</b>
+  <h3>Medidor #{{fallida.visitas[0].medidor}}</h3>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Dirección: </b> {{fallida.visitas[0].calle}} {{fallida.visitas[0].numero}}, {{fallida.visitas[0].colonia}}, {{fallida.visitas[0].ciudad}}<br />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Usuario: </b> {{fallida.visitas[0].nombre}}<br />
+        <b>RPU: </b> {{fallida.visitas[0].rpu}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="shadow-sm p-3 mb-5 bg-white rounded">
+        <b>Supervisó: </b> {{fallida.user.name}} {{fallida.user.last_name}}<br />
+        <b>Medidor: </b> {{fallida.visitas[0].medidor}}
+      </div>
+    </div>
+  </div>
+  <hr />
+  <h2>{{fallida.visitas.length}} Visitas:</h2>
+  <div class="shadow-sm p-3 mb-5 bg-white rounded" *ngFor="let visita of fallida.visitas">
+    <div class="row">
+      <div class="col-md-4">
+        <div *ngIf="visita.observaciones">
+          <b>Observaciones: </b> {{visita.observaciones}}
+        </div>
+        <div *ngIf="visita.observaciones">
+          <b>Fecha y Hora: </b> {{visita.timestamp | date: 'd/MM/yyy h:mm a'}}
+        </div>
+      </div>
+      <div class="col-md-4 center" *ngIf="visita.firmaContratista">
+        <img [src]="visita.firmaContratista" class="img-fluid" />
+        <h4>Supervisor Troy</h4>
+      </div>
+      <div class="col-md-4 center" *ngIf="visita.firmaCFE">
+        <img [src]="visita.firmaCFE" class="img-fluid" />
+        <h4>Supervisor CFE</h4>
+      </div>
+    </div>
+  </div>
+</div>

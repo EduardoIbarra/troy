@@ -1,0 +1,38 @@
+<div class="container">
+  <br />
+  <h3>Visitas Fallidas</h3>
+  <hr />
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-hover table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col"># de Medidor</th>
+      <th scope="col">Usuario App</th>
+      <th scope="col"># de Visitas</th>
+      <th scope="col">Dirección</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let fallida of fallidas | search: query">
+      <th>{{fallida.visitas[0].medidor}}</th>
+      <td scope="row">{{fallida.user.name}} {{fallida.user.last_name}}</td>
+      <td>{{fallida.visitas.length}}</td>
+      <td>{{fallida.visitas[0].calle}} {{fallida.visitas[0].numero}}, {{fallida.visitas[0].colonia}}, {{fallida.visitas[0].ciudad}}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/fallida/{{fallida.visitas[0].medidor}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
