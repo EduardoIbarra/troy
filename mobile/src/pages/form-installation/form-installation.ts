@@ -12,6 +12,7 @@ import {AuthenticationProvider} from "../../providers/authentication/authenticat
 import { Storage } from '@ionic/storage';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 import {ScanPage} from "../scan/scan";
+import {GeneralProvider} from "../../providers/general/general";
 /**
  * Generated class for the FormInstallationPage page.
  *
@@ -48,7 +49,9 @@ export class FormInstallationPage {
   offline_forms:any [] = [];
   showing = false;
   employees:any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage, private qrScanner: QRScanner, public modalController: ModalController) {
+  firmaCFE:string;
+  firmaTroy:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage, private qrScanner: QRScanner, public modalController: ModalController, private generalProvider: GeneralProvider) {
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
       this.pictures = this.form.pictures;
@@ -159,12 +162,12 @@ export class FormInstallationPage {
   drawClear() {
     this.signaturePad.clear();
   }
-  firmaContratista() {
-    this.form.firmaContratista = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+  getFirmaTroy() {
+    this.firmaTroy = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
-  firmaCFE() {
-    this.form.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+  getFirmaCFE() {
+    this.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
   searchMedidor() {
@@ -184,19 +187,57 @@ export class FormInstallationPage {
       console.log(error);
     });
   }
+  uploadPictures(formUid) {
+    if (this.firmaCFE) {
+      const firmaCFEId = Date.now();
+      this.generalProvider.uploadPicture('firmas/cfe/' + firmaCFEId + '.jpg', this.firmaCFE).then(() => {
+        this.generalProvider.getDownloadURL('firmas/cfe/' + firmaCFEId + '.jpg').subscribe((url) => {
+          console.log('forms/' + formUid + '/firmaCFE', url);
+          this.generalProvider.freeUpdate('forms/' + formUid + '/firmaCFE', url);
+        });
+      }).catch(() => {
+        console.log('Falla al subir la FirmaCFE');
+      });
+    }
+    if (this.firmaTroy) {
+      const firmaTroyId = Date.now();
+      this.generalProvider.uploadPicture('firmas/troy/' + firmaTroyId + '.jpg', this.firmaTroy).then(() => {
+        this.generalProvider.getDownloadURL('firmas/troy/' + firmaTroyId + '.jpg').subscribe((url) => {
+          console.log('forms/' + formUid + '/firmaTroy', url);
+          this.generalProvider.freeUpdate('forms/' + formUid + '/firmaTroy', url);
+        });
+      }).catch(() => {
+        console.log('Falla al subir la FirmaTroy');
+      });
+    }
+
+    if (this.pictures && this.pictures.length > 0) {
+      this.pictures.forEach((picture) => {
+        const thisPictureId = Date.now();
+        this.generalProvider.uploadPicture('instalaciones/' + thisPictureId + '.jpg', picture).then(() => {
+          this.generalProvider.getDownloadURL('instalaciones/' + thisPictureId + '.jpg').subscribe((url) => {
+            this.generalProvider.freeUpdate('forms/' + formUid + '/pictures/' + thisPictureId, url);
+          });
+        }).catch(() => {
+          console.log('Falla al subir fotografía');
+        });
+      })
+    }
+  }
   finish() {
     let loading = this.loadingCtrl.create({
       content: 'Por favor espera mientras se envía el formulario...'
     });
     loading.present();
     this.form.uid = (this.form.uid) ? this.form.uid : Date.now();
-    this.form.pictures = this.pictures;
+    // this.form.pictures = this.pictures;
     this.form.user = this.user;
     this.form.current_materials = this.current_materials;
     this.form.guardado_online = this.form.uid;
     this.formProvider.add(this.form).then((data) => {
       const toast = this.toastController.create({message: '¡Formulario enviado con éxito!', duration: 4000, position: 'bottom'});
       toast.present();
+      this.uploadPictures(this.form.uid);
       if (this.offline_forms) {
         this.offline_forms.forEach((of, i) => {
           if (of.uid == this.form.uid) {

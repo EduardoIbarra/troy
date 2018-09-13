@@ -30,6 +30,7 @@ import {FallidasPage} from "../pages/fallidas/fallidas";
 import {FallidaPage} from "../pages/fallidas/fallida/fallida";
 import { FallidaProvider } from '../providers/fallida/fallida';
 import {VisitsPage} from "../pages/visits/visits";
+import { GeneralProvider } from '../providers/general/general';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
@@ -84,7 +85,8 @@ export const firebaseConfig = {
     FormProvider,
     Camera,
     QRScanner,
-    FallidaProvider
+    FallidaProvider,
+    GeneralProvider
   ]
 })
 export class AppModule {}

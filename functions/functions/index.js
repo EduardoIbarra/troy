@@ -1,8 +1,30 @@
 var functions = require('firebase-functions');
-var mailgun = require('mailgun-js')({apiKey: '4e869d235f34af00f2258d0ec231ec9f-6b60e603-c1913bf0', domain: 'troy.eduardoibarra.com'});
 var admin = require('firebase-admin');
 admin.initializeApp();
-exports.sendNewFormEmail = functions.database.ref('forms/{pushId}').onCreate(event => {
+exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(event => {
+    if (!admin.apps.length) {
+        admin.initializeApp();
+    }
+    return admin.database().ref('series/'+event.val()+'/serie').set(event.val());
+});
+/*exports.inyectForm = functions.database.ref('forms/{pushId}').onCreate(event => {
+    if (!admin.apps.length) {
+        admin.initializeApp();
+    }
+    var form = event.val();
+    var formData = {
+        calle: form.calle,
+        numero: form.numero,
+        coloria: form.colonia,
+        ciudad: form.ciudad,
+        uid: form.uid,
+        nombre: form.nombre,
+        medidor: form.medidor,
+        rpu: form.rpu
+    };
+    return admin.database().ref('users/'+form.user.uid+'/forms/'+formData.uid).set(formData);
+});*/
+/*exports.sendNewFormEmail = functions.database.ref('forms/{pushId}').onCreate(event => {
     if (!admin.apps.length) {
         admin.initializeApp();
     }
@@ -51,4 +73,4 @@ exports.inyectFallida = functions.database.ref('fallidas/{pushId}').onWrite(even
     var form = event.after.val();
     var key = event.after.key;
     admin.database().ref('users/'+form.user.uid+'/fallidas/'+key).set(form);
-});
+});*/

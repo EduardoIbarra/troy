@@ -20,9 +20,20 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.loginWithEmail(this.email, this.password).then( (data) => {
-      alert('Loggeado correctamente');
-      console.log(data);
-      this.router.navigate(['home']);
+      this.authService.getStatus().subscribe((status) => {
+        this.userService.getById(status.uid).valueChanges().subscribe((user:any) => {
+          if(user.admin) {
+            console.log(data);
+            this.router.navigate(['home']);
+          } else {
+            alert('Usted no tiene acceso al administrador web');
+          }
+        }, (error) => {
+          console.log(error);
+        });
+      }, (error) => {
+        console.log(error);
+      });
     }).catch((error) => {
       alert('Ocurrioo un error');
       console.log(error);

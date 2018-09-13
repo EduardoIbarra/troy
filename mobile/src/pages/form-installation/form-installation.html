@@ -227,28 +227,28 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <button ion-button full color="primary" (click)="firmaContratista()">Firma Contratista</button>
+          <button ion-button full color="primary" (click)="getFirmaTroy()">Firma Contratista</button>
         </ion-col>
         <ion-col col-4>
           <button ion-button full color="light" (click)="drawClear()">Limpiar</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button full color="primary" (click)="firmaCFE()">Firma CFE</button>
+          <button ion-button full color="primary" (click)="getFirmaCFE()">Firma CFE</button>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div class="signatureContainer center" *ngIf="form.firmaContratista">
-            <img [src]="form.firmaContratista">
+          <div class="signatureContainer center" *ngIf="firmaTroy">
+            <img [src]="firmaTroy">
             <br />
-            <b>Supervisor Contratista</b>
+            <b>Supervisor Troy</b>
           </div>
         </ion-col>
         <ion-col>
-          <div class="signatureContainer center" *ngIf="form.firmaCFE">
-            <img [src]="form.firmaCFE">
+          <div class="signatureContainer center" *ngIf="firmaCFE">
+            <img [src]="firmaCFE">
             <br />
             <b>Supervisor CFE</b>
           </div>

@@ -18,14 +18,14 @@
     </div>
     <div class="col-md-3">
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
-        <b>Instaló: </b> {{form.instalo.name}} {{form.instalo.last_name}}<br />
+        <span *ngIf="form.instalo"><b>Instaló: </b> {{form.instalo.name}} {{form.instalo.last_name}}</span><br />
         <b>Supervisó: </b> {{form.user.name}} {{form.user.last_name}}<br />
         <b>Medidor: </b> {{form.medidor}}
       </div>
     </div>
   </div>
 
-  <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <iframe *ngIf="form.geolocation" [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
 
   <div class="row">
     <div class="col-md-4">
@@ -92,9 +92,9 @@
   </div>
   <h2>Firmas</h2>
   <div class="row">
-    <div class="col-md-6 center" *ngIf="form.firmaContratista">
-      <img [src]="form.firmaContratista" class="img-fluid" />
-      <h4>Supervisor Contratista</h4>
+    <div class="col-md-6 center" *ngIf="form.firmaTroy">
+      <img [src]="form.firmaTroy" class="img-fluid" />
+      <h4>Supervisor Troy</h4>
     </div>
     <div class="col-md-6 center" *ngIf="form.firmaCFE">
       <img [src]="form.firmaCFE" class="img-fluid" />

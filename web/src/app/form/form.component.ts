@@ -14,6 +14,9 @@ export class FormComponent implements OnInit {
     this.formService.getById(this.activatedRoute.snapshot.params['uid']).valueChanges().subscribe((data) => {
       this.form = data;
       console.log(this.form);
+      if (this.form.pictures && this.form.pictures.constructor !== Array) {
+        this.form.pictures =  Object.values(this.form.pictures);
+      }
     }, (error) => {
       console.log(error);
     });
