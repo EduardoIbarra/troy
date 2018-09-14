@@ -34,8 +34,8 @@
           <b>Fecha y Hora: </b> {{visita.timestamp | date: 'd/MM/yyy h:mm a'}}
         </div>
       </div>
-      <div class="col-md-4 center" *ngIf="visita.firmaContratista">
-        <img [src]="visita.firmaContratista" class="img-fluid" />
+      <div class="col-md-4 center" *ngIf="visita.firmaTroy">
+        <img [src]="visita.firmaTroy" class="img-fluid" />
         <h4>Supervisor Troy</h4>
       </div>
       <div class="col-md-4 center" *ngIf="visita.firmaCFE">

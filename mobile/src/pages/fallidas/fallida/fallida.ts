@@ -7,6 +7,7 @@ import {FallidasPage} from "../fallidas";
 import {AuthenticationProvider} from "../../../providers/authentication/authentication";
 import {UserProvider} from "../../../providers/user/user";
 import {Storage} from "@ionic/storage";
+import {GeneralProvider} from "../../../providers/general/general";
 
 @IonicPage()
 @Component({
@@ -26,6 +27,8 @@ export class FallidaPage {
   showing = false;
   offline_fallidas:any [] = [];
   isOffline = false;
+  firmaCFE:string;
+  firmaTroy:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private medidorProvider: MedidorProvider,
               private toastController: ToastController,
@@ -33,7 +36,8 @@ export class FallidaPage {
               public authenticationProvider: AuthenticationProvider,
               public userProvider: UserProvider,
               private loadingCtrl: LoadingController,
-              private storage: Storage) {
+              private storage: Storage,
+              private generalProvider: GeneralProvider) {
     this.authenticationProvider.getStatus().subscribe((data) => {
       this.userProvider.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
@@ -72,12 +76,12 @@ export class FallidaPage {
   drawClear() {
     this.signaturePad.clear();
   }
-  firmaContratista() {
-    this.fallida.firmaContratista = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+  getFirmaTroy() {
+    this.firmaTroy = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
-  firmaCFE() {
-    this.fallida.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
+  getFirmaCFE() {
+    this.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
   searchMedidor() {
@@ -103,12 +107,37 @@ export class FallidaPage {
     this.signaturePad.set('canvasWidth', canvas.offsetWidth);
     this.signaturePad.set('canvasHeight', canvas.offsetHeight);
   }
+  uploadPictures(fallida) {
+    if (this.firmaCFE) {
+      const firmaCFEId = Date.now();
+      this.generalProvider.uploadPicture('firmas/cfe/' + firmaCFEId + '.jpg', this.firmaCFE).then(() => {
+        this.generalProvider.getDownloadURL('firmas/cfe/' + firmaCFEId + '.jpg').subscribe((url) => {
+          this.generalProvider.freeUpdate('/fallidas/' + fallida.medidor + '/visitas/' + fallida.timestamp + '/firmaCFE', url);
+        });
+      }).catch(() => {
+        console.log('Falla al subir la FirmaCFE');
+      });
+    }
+    if (this.firmaTroy) {
+      const firmaTroyId = Date.now();
+      this.generalProvider.uploadPicture('firmas/troy/' + firmaTroyId + '.jpg', this.firmaTroy).then(() => {
+        this.generalProvider.getDownloadURL('firmas/troy/' + firmaTroyId + '.jpg').subscribe((url) => {
+          this.generalProvider.freeUpdate('/fallidas/' + fallida.medidor + '/visitas/' + fallida.timestamp + '/firmaTroy', url);
+        });
+      }).catch(() => {
+        console.log('Falla al subir la FirmaTroy');
+      });
+    }
+  }
   save() {
     this.fallida.timestamp = (this.fallida.timestamp) ? this.fallida.timestamp : Date.now();
-    this.fallidaProvider.add(this.fallida, this.user).then((data) => {
+    const user = {uid: this.user.uid, name: this.user.name, last_name: this.user.last_name};
+    console.log(this.fallida);
+    this.fallidaProvider.add(this.fallida, user).then((data) => {
       const toast = this.toastController.create({
           message: 'Información enviada con éxito', duration: 4000, position: 'bottom'
         });
+      this.uploadPictures(this.fallida);
       toast.present();
       if (this.isOffline) {
         if (this.offline_fallidas) {

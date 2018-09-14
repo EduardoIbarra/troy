@@ -20,6 +20,7 @@ export class FallidaProvider {
   }
   add(fallida, user) {
     this.angularFireDataBase.object('/fallidas/' + fallida.medidor + '/user/').set(user);
+
     return this.angularFireDataBase.object('/fallidas/' + fallida.medidor + '/visitas/' + fallida.timestamp).set(fallida);
   }
   edit(fallida) {

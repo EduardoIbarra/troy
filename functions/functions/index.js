@@ -7,14 +7,13 @@ exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(ev
     }
     return admin.database().ref('series/'+event.val()+'/serie').set(event.val());
 });
-/*exports.inyectForm = functions.database.ref('forms/{pushId}').onCreate(event => {
+exports.inyectForm = functions.database.ref('forms/{pushId}').onCreate(event => {
     if (!admin.apps.length) {
         admin.initializeApp();
     }
     var form = event.val();
     var formData = {
         calle: form.calle,
-        numero: form.numero,
         coloria: form.colonia,
         ciudad: form.ciudad,
         uid: form.uid,
@@ -23,7 +22,15 @@ exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(ev
         rpu: form.rpu
     };
     return admin.database().ref('users/'+form.user.uid+'/forms/'+formData.uid).set(formData);
-});*/
+});
+exports.inyectFallida = functions.database.ref('fallidas/{pushId}').onWrite(event => {
+    if (!admin.apps.length) {
+        admin.initializeApp();
+    }
+    var form = event.after.val();
+    var key = event.after.key;
+    admin.database().ref('users/'+form.user.uid+'/fallidas/'+key).set(form);
+});
 /*exports.sendNewFormEmail = functions.database.ref('forms/{pushId}').onCreate(event => {
     if (!admin.apps.length) {
         admin.initializeApp();

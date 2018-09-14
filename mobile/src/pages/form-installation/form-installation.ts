@@ -238,6 +238,8 @@ export class FormInstallationPage {
       const toast = this.toastController.create({message: '¡Formulario enviado con éxito!', duration: 4000, position: 'bottom'});
       toast.present();
       this.uploadPictures(this.form.uid);
+      const toast2 = this.toastController.create({message: 'Estamos subiendo las imágenes en estos momentos...', duration: 8000, position: 'top'});
+      toast2.present();
       if (this.offline_forms) {
         this.offline_forms.forEach((of, i) => {
           if (of.uid == this.form.uid) {
