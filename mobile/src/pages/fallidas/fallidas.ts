@@ -30,7 +30,9 @@ export class FallidasPage {
         if(this.user.fallidas) {
           this.user.fallidas = Object.keys(this.user.fallidas).map(key => this.user.fallidas[key]);
           this.user.fallidas.forEach((f) => {
-            f.visitas = Object.keys(f.visitas).map(key => f.visitas[key]);
+            if (f.visitas) {
+              f.visitas = Object.keys(f.visitas).map(key => f.visitas[key]);
+            }
           });
         }
         console.log(this.user);

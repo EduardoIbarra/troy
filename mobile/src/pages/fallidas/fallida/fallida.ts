@@ -130,33 +130,46 @@ export class FallidaPage {
     }
   }
   save() {
-    this.fallida.timestamp = (this.fallida.timestamp) ? this.fallida.timestamp : Date.now();
-    const user = {uid: this.user.uid, name: this.user.name, last_name: this.user.last_name};
-    console.log(this.fallida);
-    this.fallidaProvider.add(this.fallida, user).then((data) => {
-      const toast = this.toastController.create({
-          message: 'Información enviada con éxito', duration: 4000, position: 'bottom'
-        });
-      this.uploadPictures(this.fallida);
-      toast.present();
-      if (this.isOffline) {
-        if (this.offline_fallidas) {
-          this.offline_fallidas.forEach((of, i) => {
-            if (of.timestamp == this.fallida.timestamp) {
-              this.offline_fallidas.splice(i, 1);
-              this.storage.set('offline_fallidas', JSON.stringify(this.offline_fallidas)).then((data) => {
-              }).catch((error) => {
-                console.log(error);
+    let fallida = this.fallidaProvider.getById(this.fallida.medidor).valueChanges().subscribe((data: any) => {
+      fallida.unsubscribe();
+      if (data) {
+        data.visitas = Object.keys(data.visitas);
+      }
+      if (data && data.visitas && data.visitas.length >= 3) {
+        alert('Este medidor ya tiene registradas 3 o más visitas fallidas');
+      } else {
+        this.fallida.timestamp = (this.fallida.timestamp) ? this.fallida.timestamp : Date.now();
+        const user = {uid: this.user.uid, name: this.user.name, last_name: this.user.last_name};
+        console.log(this.fallida);
+        this.fallidaProvider.add(this.fallida, user).then((data) => {
+          const toast = this.toastController.create({
+            message: 'Información enviada con éxito', duration: 4000, position: 'bottom'
+          });
+          this.uploadPictures(this.fallida);
+          toast.present();
+          if (this.isOffline) {
+            if (this.offline_fallidas) {
+              this.offline_fallidas.forEach((of, i) => {
+                if (of.timestamp == this.fallida.timestamp) {
+                  this.offline_fallidas.splice(i, 1);
+                  this.storage.set('offline_fallidas', JSON.stringify(this.offline_fallidas)).then((data) => {
+                  }).catch((error) => {
+                    console.log(error);
+                  });
+                }
               });
             }
-          });
-        }
+          }
+          this.fallida = {};
+          this.navCtrl.setRoot(FallidasPage);
+        }).catch((error) => {
+          alert('Ocurrió un error al enviar la información');
+          console.log(error);
+        });
       }
-      this.fallida = {};
-      this.navCtrl.setRoot(FallidasPage);
-    }).catch((error) => {
-      alert('Ocurrió un error al enviar la información');
-      console.log(error);
+    }, (e) => {
+      alert('Ocurrió un error al verificar el medidor o no está conectado a internet');
+      console.log(e);
     });
   }
   finishOffline() {

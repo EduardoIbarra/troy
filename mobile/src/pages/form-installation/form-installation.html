@@ -135,6 +135,8 @@
           </ion-item>
         </ion-list>
       </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col>
         <ion-list>
           <ion-item>
@@ -157,6 +159,17 @@
           </ion-item>
         </ion-list>
       </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Varilla a Tierra</ion-label>
+            <ion-select [(ngModel)]="form.varilla">
+              <ion-option value="si">Sí</ion-option>
+              <ion-option value="no">No</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
@@ -169,34 +182,10 @@
       </ion-col>
     </ion-row>
     <h5 class="center">Agregar Materiales</h5>
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-label color="primary" floating>Material</ion-label>
-            <ion-select [(ngModel)]="current_material">
-              <ion-option *ngFor="let m of materials" [value]="m">{{m.descripcion}} ({{m.unidad}})</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <ion-label color="primary" floating>Cantidad</ion-label>
-            <ion-input [(ngModel)]="current_quantity" type="number"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-      <ion-col>
-        <button ion-button full (click)="addMaterial()">Agregar</button>
-      </ion-col>
+    <ion-row *ngFor="let m of materials">
+      <ion-col><ion-input [(ngModel)]="m.current_quantity" type="number"></ion-input></ion-col>
+      <ion-col col-8>({{m.unidad}}) {{m.descripcion}}</ion-col>
     </ion-row>
-    <ion-list *ngIf="materials">
-      <button ion-item *ngFor="let item of current_materials">
-        {{ item.quantity }} {{item.material.unidad}} {{item.material.descripcion}}
-      </button>
-    </ion-list>
   </ion-grid>
 
   <ion-grid *ngIf="step === 4">

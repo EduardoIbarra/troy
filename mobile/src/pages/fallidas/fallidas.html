@@ -32,9 +32,11 @@
   <h4>Visitas Fallidas Enviadas</h4>
   <ion-list *ngIf="user && user.fallidas">
     <ion-item color="dark" ion-item *ngFor="let f of user.fallidas" (click)="openVisits(f)">
-      <h1>Medidor {{f.visitas[0].medidor}}</h1>
-      <h3>{{f.visitas[0].calle}} {{f.visitas[0].numero}}, {{f.visitas[0].coloria}}. {{f.visitas[0].ciudad}}</h3>
-      <p>{{f.visitas.length}} Visita(s)</p>
+      <ng-container *ngIf="f.visitas && f.visitas[0]">
+        <h1>Medidor {{f.visitas[0].medidor}}</h1>
+        <h3>{{f.visitas[0].calle}} {{f.visitas[0].numero}}, {{f.visitas[0].coloria}}. {{f.visitas[0].ciudad}}</h3>
+        <p>{{f.visitas.length}} Visita(s)</p>
+      </ng-container>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -59,11 +59,13 @@
       <th>Unidad</th>
       <th>Material</th>
     </tr>
-    <tr *ngFor="let m of form.current_materials">
-      <td>{{m.quantity}}</td>
-      <td>{{m.material.unidad}}</td>
-      <td>{{m.material.descripcion}}</td>
-    </tr>
+    <ng-container *ngFor="let m of form.current_materials">
+      <tr *ngIf="m.current_quantity != 0">
+        <td>{{m.current_quantity}}</td>
+        <td>{{m.unidad}}</td>
+        <td>{{m.descripcion}}</td>
+      </tr>
+    </ng-container>
   </table>
   <hr />
   <h2>Evidencia</h2>
@@ -74,19 +76,24 @@
   </div>
   <hr />
   <div class="row">
-    <div class="col-md-6">
-      <div *ngIf="form.observaciones">
+    <div class="col-md-3" *ngIf="form.observaciones">
+      <div>
         <b>Observaciones: </b> {{form.observaciones}}
       </div>
     </div>
-    <div class="col-md-3">
-      <div *ngIf="form.observaciones">
+    <div class="col-md-3" *ngIf="form.pintura">
+      <div>
         <b>Pintura: </b> {{(form.pintura === 'si') ? 'Sí' : 'No'}}
       </div>
     </div>
-    <div class="col-md-3">
-      <div *ngIf="form.observaciones">
+    <div class="col-md-3" *ngIf="form.obra_civil">
+      <div>
         <b>Obra Civil: </b> {{(form.obra_civil === 'si') ? 'Sí' : 'No'}}
+      </div>
+    </div>
+    <div class="col-md-3" *ngIf="form.varilla">
+      <div>
+        <b>Varilla a Tierra: </b> {{(form.varilla === 'si') ? 'Sí' : 'No'}}
       </div>
     </div>
   </div>

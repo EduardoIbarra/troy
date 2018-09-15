@@ -10,12 +10,14 @@ import {UserService} from "./services/user.service";
 })
 export class AppComponent {
   user: any;
+  userSubscription: any;
   constructor(public router: Router, public authService: AuthService, private userService: UserService) {
     this.authService.getStatus().subscribe((data) => {
       if (!data) { return; }
-      this.userService.getById(data.uid).valueChanges().subscribe((data) => {
+      this.userSubscription = this.userService.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
         console.log(this.user);
+        this.userSubscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });

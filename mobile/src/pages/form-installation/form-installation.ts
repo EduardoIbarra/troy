@@ -95,7 +95,9 @@ export class FormInstallationPage {
     });
     this.materialProvider.get().valueChanges().subscribe((data) => {
       this.materials = data;
-      console.log(this.materials);
+      this.materials.forEach((m) => {
+        m.current_quantity = 0;
+      });
     }, (error) => {
       console.log(error);
     });
@@ -224,7 +226,7 @@ export class FormInstallationPage {
       })
     }
   }
-  finish() {
+  finishFinish() {
     let loading = this.loadingCtrl.create({
       content: 'Por favor espera mientras se envía el formulario...'
     });
@@ -232,7 +234,7 @@ export class FormInstallationPage {
     this.form.uid = (this.form.uid) ? this.form.uid : Date.now();
     // this.form.pictures = this.pictures;
     this.form.user = this.user;
-    this.form.current_materials = this.current_materials;
+    this.form.current_materials = this.materials;
     this.form.guardado_online = this.form.uid;
     this.formProvider.add(this.form).then((data) => {
       const toast = this.toastController.create({message: '¡Formulario enviado con éxito!', duration: 4000, position: 'bottom'});
@@ -255,10 +257,34 @@ export class FormInstallationPage {
       this.form = {};
       this.pictures = [];
       this.current_materials = [];
+      this.materials.forEach((m) => {
+        m.current_quantity = 0;
+      });
       loading.dismiss();
     }).catch((error) => {
       alert('Ocurrió un error mientras se enviaba el formulario:  ' + JSON.stringify(error));
       loading.dismiss();
+      console.log(error);
+    });
+  }
+  finish() {
+    this.formProvider.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
+      if(data) {
+        alert('Este optimizador ya ha sido instalado. Verifique nuevamente la serie.');
+      }else {
+        this.formProvider.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
+          if(data) {
+            alert('Este medidor ya ha cuenta con instalación. Verifique nuevamente el número.');
+          }else {
+            this.finishFinish();
+          }
+        }, (error) => {
+          alert('Ocurrió un error o no se cuenta con acceso a internet para verificar el número del medidor');
+          console.log(error);
+        });
+      }
+    }, (error) => {
+      alert('Ocurrió un error o no se cuenta con acceso a internet para verificar la serie del aparato ingresado');
       console.log(error);
     });
   }
@@ -335,7 +361,7 @@ export class FormInstallationPage {
     this.form.uid = Date.now();
     this.form.pictures = this.pictures;
     this.form.user = this.user;
-    this.form.current_materials = this.current_materials;
+    this.form.current_materials = this.materials;
     this.form.guardado_offline = Date.now();
     this.offline_forms.push(this.form);
     this.storage.set('offline_forms', JSON.stringify(this.offline_forms)).then((data) => {
@@ -346,6 +372,9 @@ export class FormInstallationPage {
       this.form = {};
       this.pictures = [];
       this.current_materials = [];
+      this.materials.forEach((m) => {
+        m.current_quantity = 0;
+      });
     }).catch((error) => {
       alert('Ocurrió un error mientras se guardaba el formulario:  ' + JSON.stringify(error));
       loading.dismiss();

@@ -15,6 +15,7 @@
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col"># de Medidor</th>
+      <th scope="col"># de Optimizador</th>
       <th scope="col">Georreferencia</th>
       <th scope="col">Dirección</th>
       <th></th>
@@ -24,6 +25,7 @@
     <tr *ngFor="let form of forms | search: query">
       <th scope="row">{{form.user.name}} {{form.user.last_name}}</th>
       <td>{{form.medidor}}</td>
+      <td>{{form.serie}}</td>
       <td>
         <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
           Ver en Mapa <i class="fas fa-map-marker-alt"></i>

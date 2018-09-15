@@ -15,6 +15,9 @@ export class FormProvider {
   getSerieById(uid) {
     return this.angularFireDataBase.object('series/' + uid);
   }
+  getMedidorById(uid) {
+    return this.angularFireDataBase.object('medidores_usados/' + uid);
+  }
   getByUser(uid) {
     return this.angularFireDataBase.list('forms').query.orderByChild('user/uid').equalTo(uid);
   }

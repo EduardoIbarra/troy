@@ -7,6 +7,12 @@ exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(ev
     }
     return admin.database().ref('series/'+event.val()+'/serie').set(event.val());
 });
+exports.inyectMedidor = functions.database.ref('forms/{pushId}/medidor').onCreate(event => {
+    if (!admin.apps.length) {
+        admin.initializeApp();
+    }
+    return admin.database().ref('medidores_usados/'+event.val()+'/medidor').set(event.val());
+});
 exports.inyectForm = functions.database.ref('forms/{pushId}').onCreate(event => {
     if (!admin.apps.length) {
         admin.initializeApp();
