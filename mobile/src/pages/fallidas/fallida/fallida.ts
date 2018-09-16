@@ -29,6 +29,14 @@ export class FallidaPage {
   isOffline = false;
   firmaCFE:string;
   firmaTroy:string;
+  reasons: any = [
+    'Predio abandonado',
+    'Cliente agresivo',
+    'Uso ilícito',
+    'No convencido',
+    'Ausente',
+    'Otra'
+  ];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private medidorProvider: MedidorProvider,
               private toastController: ToastController,
@@ -130,6 +138,10 @@ export class FallidaPage {
     }
   }
   save() {
+    if (this.fallida.reason && this.fallida.reason === 'Otra' && !this.fallida.observaciones) {
+      alert('Debe ingresar observaciones para continuar');
+      return;
+    }
     let fallida = this.fallidaProvider.getById(this.fallida.medidor).valueChanges().subscribe((data: any) => {
       fallida.unsubscribe();
       if (data) {

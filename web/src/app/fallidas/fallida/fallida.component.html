@@ -27,6 +27,9 @@
   <div class="shadow-sm p-3 mb-5 bg-white rounded" *ngFor="let visita of fallida.visitas">
     <div class="row">
       <div class="col-md-4">
+        <div *ngIf="visita.reason">
+          <b>Razón: </b> {{visita.reason}}
+        </div>
         <div *ngIf="visita.observaciones">
           <b>Observaciones: </b> {{visita.observaciones}}
         </div>

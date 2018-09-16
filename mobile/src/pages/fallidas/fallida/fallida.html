@@ -57,10 +57,22 @@
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-item>
-      <ion-label color="primary" floating>Observaciones</ion-label>
-      <ion-textarea [(ngModel)]="fallida.observaciones"></ion-textarea>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary" floating>Razón visita fallida</ion-label>
+          <ion-select [(ngModel)]="fallida.reason">
+            <ion-option *ngFor="let r of reasons" [value]="r">{{r}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-7>
+        <ion-item>
+          <ion-label color="primary" floating>Observaciones</ion-label>
+          <ion-textarea [(ngModel)]="fallida.observaciones"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <ion-grid>
