@@ -96,7 +96,7 @@ export class FormInstallationPage {
     this.materialProvider.get().valueChanges().subscribe((data) => {
       this.materials = data;
       this.materials.forEach((m) => {
-        m.current_quantity = 0;
+        m.current_quantity = null;
       });
     }, (error) => {
       console.log(error);
@@ -258,7 +258,7 @@ export class FormInstallationPage {
       this.pictures = [];
       this.current_materials = [];
       this.materials.forEach((m) => {
-        m.current_quantity = 0;
+        m.current_quantity = null;
       });
       loading.dismiss();
       this.navCtrl.pop();
@@ -376,7 +376,7 @@ export class FormInstallationPage {
       this.pictures = [];
       this.current_materials = [];
       this.materials.forEach((m) => {
-        m.current_quantity = 0;
+        m.current_quantity = null;
       });
     }).catch((error) => {
       alert('Ocurrió un error mientras se guardaba el formulario:  ' + JSON.stringify(error));

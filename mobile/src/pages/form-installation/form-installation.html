@@ -183,7 +183,7 @@
     </ion-row>
     <h5 class="center">Agregar Materiales</h5>
     <ion-row *ngFor="let m of materials">
-      <ion-col><ion-input [(ngModel)]="m.current_quantity" type="number"></ion-input></ion-col>
+      <ion-col><ion-input placeholder="0" [(ngModel)]="m.current_quantity" type="number"></ion-input></ion-col>
       <ion-col col-8>({{m.unidad}}) {{m.descripcion}}</ion-col>
     </ion-row>
   </ion-grid>

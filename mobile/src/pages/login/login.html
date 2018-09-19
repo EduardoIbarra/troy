@@ -9,7 +9,7 @@
     </ion-item>
     <ion-item>
       <ion-label fixed>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password" (keyup.enter)="loginWithEmail()"></ion-input>
     </ion-item>
   </ion-list>
   <div padding>
