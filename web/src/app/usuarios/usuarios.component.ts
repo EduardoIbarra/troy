@@ -57,7 +57,7 @@ export class UsuariosComponent implements OnInit {
           console.log(error);
         });
       }).catch((error) => {
-        alert('Ocurrió un error, contactar a soporte');
+        alert('Ocurrió un error, contactar a soporte: ' + error.message);
         console.log(error);
       });
     } else {
@@ -87,6 +87,16 @@ export class UsuariosComponent implements OnInit {
       alert('Eliminado con éxito');
     }).catch((error) => {
       alert('No se pudo eliminar, contactar a soporte');
+      console.log(error);
+    });
+  }
+  reset(usuario) {
+    if (!confirm('Seguro que deseas enviar el m;email para cambiar el password de ' + usuario.name + '?')) {
+      return;
+    }
+    this.authService.resetPassword(usuario.email).then((data) => {
+      alert('Email para cambiar password enviado con éxito');
+    }).catch((error) => {
       console.log(error);
     });
   }

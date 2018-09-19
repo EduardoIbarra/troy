@@ -261,6 +261,7 @@ export class FormInstallationPage {
         m.current_quantity = 0;
       });
       loading.dismiss();
+      this.navCtrl.pop();
     }).catch((error) => {
       alert('Ocurrió un error mientras se enviaba el formulario:  ' + JSON.stringify(error));
       loading.dismiss();
@@ -271,10 +272,12 @@ export class FormInstallationPage {
     this.formProvider.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
       if(data) {
         alert('Este optimizador ya ha sido instalado. Verifique nuevamente la serie.');
+        return;
       }else {
         this.formProvider.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
           if(data) {
-            alert('Este medidor ya ha cuenta con instalación. Verifique nuevamente el número.');
+            alert('Este medidor ya cuenta con instalación. Verifique nuevamente el número.');
+            return;
           }else {
             this.finishFinish();
           }
