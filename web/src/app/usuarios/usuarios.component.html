@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row" *ngIf="(usuario && usuario.uid) || creating">
+    <br />
     <div class="col-md-6">
       <div class="form-group">
         <label for="exampleInputEmail1">Nombre(s)</label>
@@ -55,6 +56,10 @@
         <select class="form-control" id="exampleInput6" [(ngModel)]="usuario.supervisor">
           <option *ngFor="let u of usuarios" value="{{u.uid}}">{{u.name}} {{u.last_name}}</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInput11">Es Admin?</label>
+        <input type="checkbox" id="exampleInput11" [(ngModel)]="usuario.admin" />
       </div>
       <hr />
       <button class="btn btn-primary" (click)="save()">Guardar</button>

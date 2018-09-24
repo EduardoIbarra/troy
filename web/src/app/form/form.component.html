@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-3">
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
-        <span *ngIf="form.instalo"><b>Instaló: </b> {{form.instalo.name}} {{form.instalo.last_name}}</span><br />
+        <span *ngIf="form.instalo"><b>Instaló: </b> {{form.instalo.nombre || form.instalo.name + ' ' + form.instalo.last_name}}</span><br />
         <b>Supervisó: </b> {{form.user.name}} {{form.user.last_name}}<br />
         <b>Medidor: </b> {{form.medidor}}
       </div>
@@ -106,6 +106,8 @@
     <div class="col-md-6 center" *ngIf="form.firmaCFE">
       <img [src]="form.firmaCFE" class="img-fluid" />
       <h4>Supervisor CFE</h4>
+      Nombre: <b *ngIf="form.CFENombre">{{form.CFENombre}}</b> <br />
+      RPE/RTT: <b *ngIf="form.CFERpe">{{form.CFERpe}}</b>
     </div>
   </div>
 </div>

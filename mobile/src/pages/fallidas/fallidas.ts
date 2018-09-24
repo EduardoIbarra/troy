@@ -6,6 +6,7 @@ import {AuthenticationProvider} from "../../providers/authentication/authenticat
 import {UserProvider} from "../../providers/user/user";
 import {VisitsPage} from "../visits/visits";
 import {Storage} from "@ionic/storage";
+import {GeneralProvider} from "../../providers/general/general";
 
 @IonicPage()
 @Component({
@@ -20,7 +21,8 @@ export class FallidasPage {
               public fallidaProvider: FallidaProvider,
               private authenticationProvider: AuthenticationProvider,
               private userProvider: UserProvider,
-              private storage: Storage) {
+              private storage: Storage,
+              private generalProvider: GeneralProvider) {
     this.authenticationProvider.getStatus().subscribe((data) => {
       if (!data) {
         return;

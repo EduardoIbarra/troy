@@ -130,7 +130,7 @@
           <ion-item>
             <ion-label color="primary" floating>Instaló</ion-label>
             <ion-select [(ngModel)]="form.instalo">
-              <ion-option [value]="e" *ngFor="let e of employees">{{e.name}} {{e.last_name}}</ion-option>
+              <ion-option [value]="e" *ngFor="let e of employees">({{e.ciudad}}) {{e.nombre}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>
@@ -243,6 +243,21 @@
             <br />
             <b>Supervisor CFE</b>
           </div>
+        </ion-col>
+      </ion-row>
+      <h3>Para Supervisor CFE:</h3>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label color="primary" floating>Nombre</ion-label>
+            <ion-input [(ngModel)]="form.CFENombre" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label color="primary" floating>RPE/RTT</ion-label>
+            <ion-input [(ngModel)]="form.CFERpe" type="text"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>

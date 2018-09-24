@@ -30,4 +30,7 @@ export class UserService {
   delete(user) {
     return this.angularFireDataBase.object('/users/' + user.uid).remove();
   }
+  getBySupervisor(supervisor) {
+    return this.angularFireDataBase.database.ref().child('users/').orderByChild('supervisor').equalTo(supervisor);
+  }
 }

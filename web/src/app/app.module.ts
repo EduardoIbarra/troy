@@ -20,6 +20,7 @@ import { FormComponent } from './form/form.component';
 import {AuthenticationGuard} from "./authentication.guard";
 import { FallidasComponent } from './fallidas/fallidas.component';
 import { FallidaComponent } from './fallidas/fallida/fallida.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
   {canActivate: [AuthenticationGuard], path: 'usuarios', component: UsuariosComponent},
   {canActivate: [AuthenticationGuard], path: 'form/:uid', component: FormComponent},
   {canActivate: [AuthenticationGuard], path: 'fallidas', component: FallidasComponent},
-  {canActivate: [AuthenticationGuard], path: 'fallida/:medidor', component: FallidaComponent}
+  {canActivate: [AuthenticationGuard], path: 'fallida/:medidor', component: FallidaComponent},
+  {canActivate: [AuthenticationGuard], path: 'reports', component: ReportsComponent}
 ];
 
 @NgModule({
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     SearchPipe,
     FormComponent,
     FallidasComponent,
-    FallidaComponent
+    FallidaComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

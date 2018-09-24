@@ -105,18 +105,24 @@ export class FormInstallationPage {
       if (!data) {
         return;
       }
-      this.userProvider.getBySupervisor(data.uid).on('value', (data) => {
+      /*this.userProvider.getBySupervisor(data.uid).on('value', (data) => {
         console.log(data);
         data.forEach((data) => {
           this.employees.push(data.val());
         });
         console.log(this.employees);
-      });
+      });*/
       this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
       }, (error) => {
         console.log(error);
       });
+    }, (error) => {
+      console.log(error);
+    });
+    this.userProvider.getSubcontratistas().valueChanges().subscribe((data) => {
+      this.employees = data;
+      console.log(this.employees);
     }, (error) => {
       console.log(error);
     });
@@ -137,6 +143,10 @@ export class FormInstallationPage {
     this.step--;
   }
   next() {
+    if (this.step === 2 && !this.form.medidor) {
+      alert('Debe ingresar un número de medidor para continuar');
+      return;
+    }
     this.step++;
     console.log(this.form);
     if(this.step == 4) {
@@ -269,12 +279,16 @@ export class FormInstallationPage {
     });
   }
   finish() {
-    this.formProvider.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
+    let promiseMedidor:any;
+    let promiseSerie:any;
+    promiseSerie = this.formProvider.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
+      promiseSerie.unsubscribe();
       if(data) {
         alert('Este optimizador ya ha sido instalado. Verifique nuevamente la serie.');
         return;
       }else {
-        this.formProvider.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
+        promiseMedidor = this.formProvider.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
+          promiseMedidor.unsubscribe();
           if(data) {
             alert('Este medidor ya cuenta con instalación. Verifique nuevamente el número.');
             return;

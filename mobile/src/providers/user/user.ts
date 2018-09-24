@@ -10,6 +10,9 @@ export class UserProvider {
   get() {
     return this.angularFireDataBase.list('users/');
   }
+  getSubcontratistas() {
+    return this.angularFireDataBase.list('subcontratistas/');
+  }
   getById(uid) {
     return this.angularFireDataBase.object('users/' + uid);
   }
