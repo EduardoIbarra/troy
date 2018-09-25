@@ -242,9 +242,9 @@ export class FormInstallationPage {
     });
     loading.present();
     this.form.uid = (this.form.uid) ? this.form.uid : Date.now();
-    // this.form.pictures = this.pictures;
+    delete this.form.pictures;
     this.form.user = this.user;
-    this.form.current_materials = this.materials;
+    this.form.current_materials = (this.form.guardado_offline) ? this.form.current_materials : this.materials;
     this.form.guardado_online = this.form.uid;
     this.formProvider.add(this.form).then((data) => {
       const toast = this.toastController.create({message: '¡Formulario enviado con éxito!', duration: 4000, position: 'bottom'});

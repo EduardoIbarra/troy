@@ -30,11 +30,11 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Inicial (OHM)</ion-label>
-            <ion-input [(ngModel)]="form.tierra_inicial" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.tierra_inicial" type="number"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Final (OHM)</ion-label>
-            <ion-input [(ngModel)]="form.tierra_final" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.tierra_final" type="number"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -43,11 +43,11 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Inicial (V)</ion-label>
-            <ion-input [(ngModel)]="form.voltaje_inicial" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.voltaje_inicial" type="number"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Final (V)</ion-label>
-            <ion-input [(ngModel)]="form.voltaje_final" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.voltaje_final" type="number"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -58,11 +58,11 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Inicial (A)</ion-label>
-            <ion-input [(ngModel)]="form.amperaje_inicial" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.amperaje_inicial" type="number"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Final (A)</ion-label>
-            <ion-input [(ngModel)]="form.amperaje_final" type="number"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.amperaje_final" type="number"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -71,8 +71,8 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Número de Serie</ion-label>
-            <ion-input (keyup.enter)="scanEcowise()" [(ngModel)]="form.serie" type="text"></ion-input>
-            <button clear item-right ion-button (click)="scanEcowise()">
+            <ion-input [disabled]="showing" (keyup.enter)="scanEcowise()" [(ngModel)]="form.serie" type="text"></ion-input>
+            <button [disabled]="showing" clear item-right ion-button (click)="scanEcowise()">
               Escannear
             </button>
           </ion-item>
@@ -88,18 +88,18 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating># de Medidor</ion-label>
-            <ion-input [(ngModel)]="form.medidor" type="text" (keyup.enter)="searchMedidor()"></ion-input>
-            <button clear item-right ion-button (click)="searchMedidor()">
+            <ion-input [disabled]="showing" [(ngModel)]="form.medidor" type="text" (keyup.enter)="searchMedidor()"></ion-input>
+            <button [disabled]="showing" clear item-right ion-button (click)="searchMedidor()">
               Buscar
             </button>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>RPU</ion-label>
-            <ion-input [(ngModel)]="form.rpu" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.rpu" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Nombre</ion-label>
-            <ion-input [(ngModel)]="form.nombre" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.nombre" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -107,15 +107,15 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Calle</ion-label>
-            <ion-input [(ngModel)]="form.calle" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.calle" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Colonia</ion-label>
-            <ion-input [(ngModel)]="form.colonia" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.colonia" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label color="primary" floating>Ciudad</ion-label>
-            <ion-input [(ngModel)]="form.ciudad" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.ciudad" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -129,7 +129,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Instaló</ion-label>
-            <ion-select [(ngModel)]="form.instalo">
+            <ion-select [disabled]="showing" [(ngModel)]="form.instalo">
               <ion-option [value]="e" *ngFor="let e of employees">({{e.ciudad}}) {{e.nombre}}</ion-option>
             </ion-select>
           </ion-item>
@@ -141,7 +141,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Pintura</ion-label>
-            <ion-select [(ngModel)]="form.pintura">
+            <ion-select [disabled]="showing" [(ngModel)]="form.pintura">
               <ion-option value="si">Sí</ion-option>
               <ion-option value="no">No</ion-option>
             </ion-select>
@@ -152,7 +152,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Obra Civil</ion-label>
-            <ion-select [(ngModel)]="form.obra_civil">
+            <ion-select [disabled]="showing" [(ngModel)]="form.obra_civil">
               <ion-option value="si">Sí</ion-option>
               <ion-option value="no">No</ion-option>
             </ion-select>
@@ -163,7 +163,7 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Varilla a Tierra</ion-label>
-            <ion-select [(ngModel)]="form.varilla">
+            <ion-select [disabled]="showing" [(ngModel)]="form.varilla">
               <ion-option value="si">Sí</ion-option>
               <ion-option value="no">No</ion-option>
             </ion-select>
@@ -176,15 +176,15 @@
         <ion-list>
           <ion-item>
             <ion-label color="primary" floating>Observaciones</ion-label>
-            <ion-input [(ngModel)]="form.observaciones" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.observaciones" type="text"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
     <h5 class="center">Agregar Materiales</h5>
     <div id="materialList">
-      <ion-row *ngFor="let m of materials">
-        <ion-col><ion-input placeholder="0" class="materialInput2" [(ngModel)]="m.current_quantity" type="number"></ion-input></ion-col>
+      <ion-row *ngFor="let m of form.current_materials || materials">
+        <ion-col><ion-input [disabled]="showing" placeholder="0" class="materialInput2" [(ngModel)]="m.current_quantity" type="number"></ion-input></ion-col>
         <ion-col col-8>({{m.unidad}}) {{m.descripcion}}</ion-col>
       </ion-row>
     </div>
@@ -199,10 +199,10 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button ion-button full icon-end (click)="takePicture('camera')">Tomar Fotografía <ion-icon name="camera"></ion-icon></button>
+          <button [disabled]="showing" ion-button full icon-end (click)="takePicture('camera')">Tomar Fotografía <ion-icon name="camera"></ion-icon></button>
         </ion-col>
         <ion-col>
-          <button ion-button full icon-end (click)="takePicture('album')">Seleccionar de Álbum <ion-icon name="images"></ion-icon></button>
+          <button [disabled]="showing" ion-button full icon-end (click)="takePicture('album')">Seleccionar de Álbum <ion-icon name="images"></ion-icon></button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -218,13 +218,13 @@
     <ion-grid>
       <ion-row>
         <ion-col col-4>
-          <button ion-button full color="primary" (click)="getFirmaTroy()">Firma Troy</button>
+          <button [disabled]="showing" ion-button full color="primary" (click)="getFirmaTroy()">Firma Troy</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button full color="light" (click)="drawClear()">Limpiar</button>
+          <button [disabled]="showing" ion-button full color="light" (click)="drawClear()">Limpiar</button>
         </ion-col>
         <ion-col col-4>
-          <button ion-button full color="primary" (click)="getFirmaCFE()">Firma CFE</button>
+          <button [disabled]="showing" ion-button full color="primary" (click)="getFirmaCFE()">Firma CFE</button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -250,13 +250,13 @@
         <ion-col>
           <ion-item>
             <ion-label color="primary" floating>Nombre</ion-label>
-            <ion-input [(ngModel)]="form.CFENombre" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.CFENombre" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
             <ion-label color="primary" floating>RPE/RTT</ion-label>
-            <ion-input [(ngModel)]="form.CFERpe" type="text"></ion-input>
+            <ion-input [disabled]="showing" [(ngModel)]="form.CFERpe" type="text"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
