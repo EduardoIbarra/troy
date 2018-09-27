@@ -135,6 +135,16 @@
           </ion-item>
         </ion-list>
       </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-label color="primary" floating>Supervisó</ion-label>
+            <ion-select [disabled]="showing" [(ngModel)]="form.superviso">
+              <ion-option [value]="s" *ngFor="let s of supervisores">{{s.name}} {{s.last_name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
@@ -234,14 +244,16 @@
           <div class="signatureContainer center" *ngIf="firmaTroy">
             <img [src]="firmaTroy">
             <br />
-            <b>Supervisor Troy</b>
+            <b *ngIf="form.superviso">{{form.superviso.name}} {{form.superviso.last_name}}</b><br />
+            <span>Supervisor Troy</span>
           </div>
         </ion-col>
         <ion-col>
           <div class="signatureContainer center" *ngIf="firmaCFE">
             <img [src]="firmaCFE">
             <br />
-            <b>Supervisor CFE</b>
+            <b *ngIf="form.CFENombre">{{form.CFENombre}}</b><br />
+            <span>Supervisor CFE</span>
           </div>
         </ion-col>
       </ion-row>

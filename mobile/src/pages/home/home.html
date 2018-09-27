@@ -16,7 +16,7 @@
   <h4>Formularios por Enviar</h4>
   <ion-list *ngIf="offline_forms">
     <ion-item color="dark" ion-item *ngFor="let f of offline_forms" (click)="openInstallation(f)">
-      <h2>Medidor {{f.uid}}</h2>
+      <h2>Medidor {{f.medidor}}</h2>
       <h3>{{f.calle}} {{f.numero}}, {{f.colonia}}. {{f.ciudad}}</h3>
       <p>{{f.uid | date: 'medium'}}</p>
     </ion-item>
@@ -25,7 +25,7 @@
   <h4>Formularios Enviados</h4>
   <ion-list *ngIf="user && user.forms">
     <ion-item color="dark" ion-item *ngFor="let f of user.forms" (click)="openInstallationSent(f.uid)">
-      <h2>Medidor {{f.uid}}</h2>
+      <h2>Medidor {{f.medidor}}</h2>
       <h3>{{f.calle}} {{f.numero}}, {{f.coloria}}. {{f.ciudad}}</h3>
       <p>{{f.uid | date: 'medium'}}</p>
     </ion-item>

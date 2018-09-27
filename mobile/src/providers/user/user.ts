@@ -19,6 +19,9 @@ export class UserProvider {
   getBySupervisor(supervisor) {
     return this.angularFireDataBase.database.ref().child('users/').orderByChild('supervisor').equalTo(supervisor);
   }
+  getSupervisors() {
+    return this.angularFireDataBase.database.ref().child('users/').orderByChild('is_supervisor').equalTo('si');
+  }
   add(user) {
     return this.angularFireDataBase.object('/users/' + user.uid).set(user);
   }

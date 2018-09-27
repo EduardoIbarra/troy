@@ -4,7 +4,7 @@
   <h3>Formulario #{{form.uid}}</h3>
   <hr />
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
         <b>Dirección: </b> {{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}<br />
         <b>Serie Optimizador: </b> {{form.serie}}
@@ -14,13 +14,14 @@
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
         <b>Usuario: </b> {{form.nombre}}<br />
         <b>RPU: </b> {{form.rpu}}
+        <b>Medidor: </b> {{form.medidor}}
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
         <span *ngIf="form.instalo"><b>Instaló: </b> {{form.instalo.nombre || form.instalo.name + ' ' + form.instalo.last_name}}</span><br />
-        <b>Supervisó: </b> {{form.user.name}} {{form.user.last_name}}<br />
-        <b>Medidor: </b> {{form.medidor}}
+        <b>Usuario App: </b> {{form.user.name}} {{form.user.last_name}}<br />
+        <div *ngIf="form.superviso"><b>Supervisó: </b> {{form.superviso.name}} {{form.superviso.last_name}}</div>
       </div>
     </div>
   </div>
@@ -101,12 +102,13 @@
   <div class="row">
     <div class="col-md-6 center" *ngIf="form.firmaTroy">
       <img [src]="form.firmaTroy" class="img-fluid" />
-      <h4>Supervisor Troy</h4>
+      <h4 *ngIf="form.superviso">{{form.superviso.name}} {{form.superviso.last_name}}</h4>
+      <b>Supervisor Troy</b>
     </div>
     <div class="col-md-6 center" *ngIf="form.firmaCFE">
       <img [src]="form.firmaCFE" class="img-fluid" />
-      <h4>Supervisor CFE</h4>
-      Nombre: <b *ngIf="form.CFENombre">{{form.CFENombre}}</b> <br />
+      <h4 *ngIf="form.CFENombre">{{form.CFENombre}}</h4>
+      <b>Supervisor CFE</b> <br />
       RPE/RTT: <b *ngIf="form.CFERpe">{{form.CFERpe}}</b>
     </div>
   </div>

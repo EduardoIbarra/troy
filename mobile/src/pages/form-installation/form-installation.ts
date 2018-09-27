@@ -51,12 +51,18 @@ export class FormInstallationPage {
   employees:any[] = [];
   firmaCFE:string;
   firmaTroy:string;
+  supervisores:any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage, private qrScanner: QRScanner, public modalController: ModalController, private generalProvider: GeneralProvider) {
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
       this.pictures = this.form.pictures;
       this.user = this.form.user;
       this.current_materials = this.form.current_materials;
+      this.firmaCFE = this.form.firmaCFE;
+      this.firmaTroy = this.form.firmaTroy;
+      delete this.form.pictures;
+      delete this.form.firmaCFE;
+      delete this.form.firmaTroy;
     }
     if (this.navParams.get('form_id')) {
       this.showing = true;
@@ -125,6 +131,19 @@ export class FormInstallationPage {
       console.log(this.employees);
     }, (error) => {
       console.log(error);
+    });
+    this.userProvider.getSupervisors().on('value', (data) => {
+      this.supervisores = [];
+      data.forEach((data) => {
+        const supervisor = data.val();
+        this.supervisores.push({
+          name: supervisor.name,
+          last_name: supervisor.last_name,
+          uid: supervisor.uid,
+          tipo: supervisor.tipo
+        });
+      });
+      console.log(this.supervisores);
     });
   }
 
@@ -380,6 +399,8 @@ export class FormInstallationPage {
     this.form.user = this.user;
     this.form.current_materials = this.materials;
     this.form.guardado_offline = Date.now();
+    this.form.firmaCFE = this.firmaCFE;
+    this.form.firmaTroy = this.firmaTroy;
     this.offline_forms.push(this.form);
     this.storage.set('offline_forms', JSON.stringify(this.offline_forms)).then((data) => {
       loading.dismiss();
