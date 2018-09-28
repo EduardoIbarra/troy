@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         this.userService.getById(status.uid).valueChanges().subscribe((user:any) => {
           if(user.admin) {
             console.log(data);
-            this.router.navigate(['home']);
+            this.router.navigate(['reports']);
           } else {
             alert('Usted no tiene acceso al administrador web');
           }

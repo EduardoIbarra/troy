@@ -24,7 +24,7 @@ import { ReportsComponent } from './reports/reports.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {canActivate: [AuthenticationGuard], path: '', component: HomeComponent},
+  {canActivate: [AuthenticationGuard], path: '', component: ReportsComponent},
   {canActivate: [AuthenticationGuard], path: 'home', component: HomeComponent},
   {canActivate: [AuthenticationGuard], path: 'medidores', component: MedidoresComponent},
   {canActivate: [AuthenticationGuard], path: 'usuarios', component: UsuariosComponent},

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <br />
   <div class="row">
     <div class="col-md-4">
@@ -46,29 +46,45 @@
       </span>
     </div>
   </div>
-  <table class="table table-bordered table-hover table-striped">
+  <table class="table table-bordered table-hover table-striped table-sm">
     <thead class="thead-dark">
     <tr>
+      <th scope="col">Consecutivo</th>
       <th scope="col">Nombre</th>
+      <th scope="col"># Serie Optimizador</th>
       <th scope="col"># de Medidor</th>
-      <th scope="col"># de Optimizador</th>
       <th scope="col">Mapa</th>
-      <th scope="col">Dirección</th>
+      <th scope="col">Calle, Número</th>
+      <th scope="col">Colonia</th>
+      <th scope="col">Punto X</th>
+      <th scope="col">Punto Y</th>
+      <th scope="col">Sistema de Tierra</th>
+      <th scope="col">Subcontratista</th>
+      <th scope="col">Supervisor Troy</th>
+      <th scope="col">Supervisor CFE</th>
       <th scope="col">Fecha</th>
       <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let form of filteredForms | search: query">
+    <tr *ngFor="let form of filteredForms | search: query; let i = index">
+      <th>{{i+1}}</th>
       <th scope="row">{{form.user.name}} {{form.user.last_name}}</th>
-      <td>{{form.medidor}}</td>
       <td>{{form.serie}}</td>
+      <td>{{form.medidor}}</td>
       <td>
         <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
           <i class="fas fa-map-marker-alt"></i>
         </a>
       </td>
-      <td>{{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}</td>
+      <td>{{form.calle}} {{form.numero}}</td>
+      <td>{{form.colonia}}</td>
+      <td><span *ngIf="form.geolocation">{{form.geolocation.lat}}</span></td>
+      <td><span *ngIf="form.geolocation">{{form.geolocation.lng}}</span></td>
+      <td><span *ngIf="form.varilla === 'si'">Sí</span><span *ngIf="form.varilla !== 'si'">No</span></td>
+      <td><span *ngIf="form.instalo">{{form.instalo.nombre}}</span></td>
+      <td><span *ngIf="form.superviso">{{form.superviso.name}} {{form.superviso.last_name}}</span></td>
+      <td>{{form.CFENombre}}</td>
       <td>
         {{form.uid | date: 'medium'}}
       </td>
