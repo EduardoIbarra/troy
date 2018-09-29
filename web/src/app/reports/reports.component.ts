@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormService} from "../services/form.service";
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-reports',
@@ -29,7 +30,6 @@ export class ReportsComponent implements OnInit {
           this.forms = data;
           this.forms = this.forms.filter((f) => {return this.supervisados.includes(f.user.uid)});
           this.filteredForms = this.forms;
-          console.log(this.supervisados);
         }, (error) => {
           console.log(error);
         });
@@ -65,5 +65,48 @@ export class ReportsComponent implements OnInit {
     const to = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day + ' 23:59:59').getTime();
     console.log(from, to);
     this.filteredForms = this.forms.filter((f) => { return f.uid >= from && f.uid <= to });
+  }
+  generateExcel() {
+    let arrayOfArrays = [];
+    arrayOfArrays.push([
+      'Consecutivo',
+      'Nombre',
+      '# Serie Optimizador',
+      '# de Medidor',
+      'Calle, Número',
+      'Colonia',
+      'Punto X',
+      'Punto Y',
+      'Sistema de Tierra',
+      'Subcontratista',
+      'Supervisor Troy',
+      'Supervisor CFE'
+    ]);
+    this.filteredForms.forEach((aoa, i) => {
+      arrayOfArrays.push([
+        i + 1,
+        (aoa.user) ? aoa.user.name + ' ' + aoa.user.last_name : null,
+        aoa.serie || null,
+        aoa.medidor || null,
+        (aoa.calle + ' ' + aoa.numero) || null,
+        aoa.colonia || null,
+        (aoa.geolocation) ? aoa.geolocation.lat : null,
+        (aoa.geolocation) ? aoa.geolocation.lng : null,
+        (aoa.varilla) ? 'Sí' : 'No',
+        (aoa.instalo) ? aoa.instalo.nombre : null,
+        (aoa.superviso) ? aoa.superviso.name + ' ' + aoa.superviso.last_name : null,
+        aoa.CFENombre || null,
+        'https://troy-da34b.firebaseapp.com//form/' + aoa.uid
+      ]);
+    });
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(arrayOfArrays);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'SheetJS.xlsx');
   }
 }

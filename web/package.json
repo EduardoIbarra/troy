@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "firebase": "5.4.0",
     "rxjs": "^6.0.0",
+    "xlsx": "0.14.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
