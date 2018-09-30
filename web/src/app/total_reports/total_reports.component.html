@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <br />
+  <div class="row">
+    <div class="col-md-4">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <i class="fas fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" [(ngModel)]="toDate" ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                <i class="fas fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-block btn-primary" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="filteredForms.length > 0">
+    <div class="col-md-12">
+      <hr />
+      <button class="btn btn-block btn-secondary" (click)="generateExcel()">Descargar Excel</button>
+    </div>
+  </div>
+  <br />
+  <h3 *ngIf="filteredForms.length > 0">{{filteredForms.length}} Formularios Llenados ({{conVarilla.length}} con varilla a Tierra)</h3>
+  <hr />
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-hover table-striped table-sm">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Consecutivo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col"># Serie Optimizador</th>
+      <th scope="col"># de Medidor</th>
+      <th scope="col">Mapa</th>
+      <th scope="col">Calle, Número</th>
+      <th scope="col">Colonia</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">Sistema de Tierra</th>
+      <th scope="col">Empresa</th>
+      <th scope="col">Supervisor Troy</th>
+      <th scope="col">Supervisor CFE</th>
+      <th scope="col">Fecha</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let form of filteredForms | search: query; let i = index">
+      <th>{{i+1}}</th>
+      <th scope="row"><span *ngIf="form.user">{{form.user.name}} {{form.user.last_name}}</span></th>
+      <td>{{form.serie}}</td>
+      <td>{{form.medidor}}</td>
+      <td>
+        <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
+          <i class="fas fa-map-marker-alt"></i>
+        </a>
+      </td>
+      <td>{{form.calle}} {{form.numero}}</td>
+      <td>{{form.colonia}}</td>
+      <td>{{form.ciudad}}</td>
+      <td><span *ngIf="form.varilla === 'si'">Sí</span><span *ngIf="form.varilla !== 'si'">No</span></td>
+      <td><span *ngIf="form.instalo">{{form.instalo.nombre}}</span></td>
+      <td><span *ngIf="form.superviso">{{form.superviso.name}} {{form.superviso.last_name}}</span></td>
+      <td>{{form.CFENombre}}</td>
+      <td>
+        {{form.uid | date: 'medium'}}
+      </td>
+      <td>
+        <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
+          <i class="fas fa-eye"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -21,6 +21,7 @@ import {AuthenticationGuard} from "./authentication.guard";
 import { FallidasComponent } from './fallidas/fallidas.component';
 import { FallidaComponent } from './fallidas/fallida/fallida.component';
 import { ReportsComponent } from './reports/reports.component';
+import {TotalReportsComponent} from "./total_reports/total_reports.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   {canActivate: [AuthenticationGuard], path: 'form/:uid', component: FormComponent},
   {canActivate: [AuthenticationGuard], path: 'fallidas', component: FallidasComponent},
   {canActivate: [AuthenticationGuard], path: 'fallida/:medidor', component: FallidaComponent},
-  {canActivate: [AuthenticationGuard], path: 'reports', component: ReportsComponent}
+  {canActivate: [AuthenticationGuard], path: 'reports', component: ReportsComponent},
+  {canActivate: [AuthenticationGuard], path: 'total_reports', component: TotalReportsComponent}
 ];
 
 @NgModule({
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     FormComponent,
     FallidasComponent,
     FallidaComponent,
-    ReportsComponent
+    ReportsComponent,
+    TotalReportsComponent
   ],
   imports: [
     BrowserModule,
