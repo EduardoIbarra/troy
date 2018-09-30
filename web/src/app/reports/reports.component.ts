@@ -28,8 +28,8 @@ export class ReportsComponent implements OnInit {
         this.supervisados.push(this.user.uid);
         this.formService.get().valueChanges().subscribe((data) => {
           this.forms = data;
-          this.forms = this.forms.filter((f) => {return this.supervisados.includes(f.user.uid)});
-          this.filteredForms = this.forms;
+          this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
+          // this.filteredForms = this.forms;
         }, (error) => {
           console.log(error);
         });
@@ -67,7 +67,18 @@ export class ReportsComponent implements OnInit {
     this.filteredForms = this.forms.filter((f) => { return f.uid >= from && f.uid <= to });
   }
   generateExcel() {
-    let arrayOfArrays = [];
+    let arrayOfArrays = [[],[],[],[]];
+    const firstForm = this.filteredForms[0];
+    const from = this.fromDate.day + '/' + this.fromDate.month + '/' + this.fromDate.year;
+    const to = this.toDate.day + '/' + this.toDate.month + '/' + this.toDate.year;
+    const conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+    arrayOfArrays.push([null, null, null, null, null, null, 'DCO-001/2018']);
+    arrayOfArrays.push([null, null, 'INSTALACIÓN DE EQUIPOS OPTIMIZADORES DE TENSIÓN EN LOS ESTADOS DE SONORA Y SINALOA DE LOS ESTADOS UNIDOS MEXICANOS']);
+    arrayOfArrays.push([null, null, null, null, null, 'R E S U M E N     D E     E Q U I P O S     I N S T A L A D O S']);
+    arrayOfArrays.push([null, null, null, null, null, null, null, null, 'FORMATO', 'TTD-HMO-ARSUB']);
+    arrayOfArrays.push(['ESTADO', firstForm.ciudad.split(',')[1], null, 'CIUDAD', firstForm.ciudad.split(',')[0], null, null, null, 'PERIODO', from, to]);
+    arrayOfArrays.push([]);
+    arrayOfArrays.push(['SERVICIOS INSTALADOS TOTALES', this.filteredForms.length, null, 'SERVICIOS SIN SISTEMA DE TIERRA', this.filteredForms.length - conVarilla.length, null, 'SERVICIOS CON SISTEMA DE TIERRA', conVarilla.length]);
     arrayOfArrays.push([
       'Consecutivo',
       'Nombre',
@@ -92,19 +103,26 @@ export class ReportsComponent implements OnInit {
         aoa.colonia || null,
         (aoa.geolocation) ? aoa.geolocation.lat : null,
         (aoa.geolocation) ? aoa.geolocation.lng : null,
-        (aoa.varilla) ? 'Sí' : 'No',
+        (aoa.varilla === 'si') ? 'Sí' : 'No',
         (aoa.instalo) ? aoa.instalo.nombre : null,
         (aoa.superviso) ? aoa.superviso.name + ' ' + aoa.superviso.last_name : null,
         aoa.CFENombre || null,
         'https://troy-da34b.firebaseapp.com//form/' + aoa.uid
       ]);
     });
+    arrayOfArrays.push([]);
+    arrayOfArrays.push([]);
+    arrayOfArrays.push([]);
+    arrayOfArrays.push([]);
+    arrayOfArrays.push([]);
+    arrayOfArrays.push([null, null, null, '_________________________', null, null, '_________________________']);
+    arrayOfArrays.push([null, null, null, (firstForm.superviso) ? firstForm.superviso.name + ' ' + firstForm.superviso.last_name : 'Supervisor Troy T&D', null, null, (firstForm.CFENombre) ? firstForm.CFENombre + ' - ' + firstForm.CFERpe : 'Supervisor CFE']);
     /* generate worksheet */
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(arrayOfArrays);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'TTD-HMO-ARSUB');
 
     /* save to file */
     XLSX.writeFile(wb, 'SheetJS.xlsx');

@@ -32,14 +32,17 @@
       </form>
     </div>
     <div class="col-md-4">
-      <button class="btn btn-block btn-primary" (click)="generate()">Generar</button>
+      <button class="btn btn-block btn-primary" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
     </div>
-    <div class="col-md-4">
+  </div>
+  <div class="row" *ngIf="filteredForms.length > 0">
+    <div class="col-md-12">
+      <hr />
       <button class="btn btn-block btn-secondary" (click)="generateExcel()">Descargar Excel</button>
     </div>
   </div>
   <br />
-  <h3>{{filteredForms.length}} Formularios Llenados</h3>
+  <h3 *ngIf="filteredForms.length > 0">{{filteredForms.length}} Formularios Llenados</h3>
   <hr />
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
