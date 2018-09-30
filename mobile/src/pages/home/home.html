@@ -15,11 +15,19 @@
 <ion-content padding>
   <h4>Formularios por Enviar</h4>
   <ion-list *ngIf="offline_forms">
-    <ion-item color="dark" ion-item *ngFor="let f of offline_forms" (click)="openInstallation(f)">
-      <h2>Medidor {{f.medidor}}</h2>
-      <h3>{{f.calle}} {{f.numero}}, {{f.colonia}}. {{f.ciudad}}</h3>
-      <p>{{f.uid | date: 'medium'}}</p>
-    </ion-item>
+    <ion-item-sliding *ngFor="let f of offline_forms">
+      <ion-item color="dark" ion-item (click)="openInstallation(f)">
+        <h2>Medidor {{f.medidor}}</h2>
+        <h3>{{f.calle}} {{f.numero}}, {{f.colonia}}. {{f.ciudad}}</h3>
+        <p>{{f.uid | date: 'medium'}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="delete(f)">
+          <ion-icon name="trash"></ion-icon>
+          Eliminar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <hr />
   <h4>Formularios Enviados</h4>
