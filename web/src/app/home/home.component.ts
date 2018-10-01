@@ -31,13 +31,17 @@ export class HomeComponent implements OnInit {
     this.creating = false;
   }
   remove(form) {
-    if(!confirm('Desea eliminar este registro?')) {
+    if(!confirm('Seguro que desea eliminar este registro?')) {
       return;
     }
-    this.formService.delete(form).then((data) => {
-      alert('Eliminado con éxito');
+    this.formService.deleteforUser(form.user.uid, form.uid).then((data) => {
+      this.formService.delete(form.uid).then((data) => {
+        alert('Eliminado con éxito');
+      }).catch((error) => {
+        alert('No se pudo eliminar, contactar a soporte');
+        console.log(error);
+      });
     }).catch((error) => {
-      alert('No se pudo eliminar, contactar a soporte');
       console.log(error);
     });
   }

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ee035ca-fe9d-4f29-a66a-dfa848272e9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.firebase/hosting.ZGlzdC93ZWI.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web/.firebase/hosting.ZGlzdC93ZWI.cache" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,26 +37,26 @@
         <counts>
           <entry key="css" value="2" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="92" />
+          <entry key="html" value="97" />
           <entry key="js" value="9" />
-          <entry key="json" value="3" />
+          <entry key="json" value="4" />
           <entry key="png" value="6" />
           <entry key="scss" value="12" />
-          <entry key="ts" value="150" />
-          <entry key="xml" value="7" />
+          <entry key="ts" value="163" />
+          <entry key="xml" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="HTML" value="92" />
+          <entry key="HTML" value="97" />
           <entry key="Image" value="6" />
-          <entry key="JSON" value="3" />
+          <entry key="JSON" value="4" />
           <entry key="JavaScript" value="9" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SCSS" value="12" />
-          <entry key="TypeScript" value="150" />
-          <entry key="XML" value="7" />
+          <entry key="TypeScript" value="163" />
+          <entry key="XML" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -72,24 +69,24 @@
         <counts>
           <entry key="css" value="71" />
           <entry key="gitignore" value="84" />
-          <entry key="html" value="7406" />
+          <entry key="html" value="7826" />
           <entry key="js" value="1081" />
           <entry key="json" value="93" />
           <entry key="scss" value="334" />
-          <entry key="ts" value="13992" />
-          <entry key="xml" value="90" />
+          <entry key="ts" value="14749" />
+          <entry key="xml" value="91" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="71" />
-          <entry key="HTML" value="7407" />
+          <entry key="HTML" value="7827" />
           <entry key="JSON" value="93" />
           <entry key="JavaScript" value="1080" />
           <entry key="PLAIN_TEXT" value="84" />
           <entry key="SCSS" value="334" />
-          <entry key="TypeScript" value="13992" />
-          <entry key="XML" value="90" />
+          <entry key="TypeScript" value="14749" />
+          <entry key="XML" value="91" />
         </counts>
       </usages-collector>
     </session>
@@ -97,28 +94,23 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/app.component.html">
+        <entry file="file://$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="22" column="78" lean-forward="true" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/app.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+            <state relative-caret-position="214">
+              <caret line="121" column="53" selection-start-line="121" selection-start-column="53" selection-end-line="121" selection-end-column="53" />
+              <folding>
+                <element signature="n#div#2;n#div#0;n#!!top" />
+                <element signature="n#div#3;n#div#0;n#!!top" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/src/app/reports/reports.component.ts">
+        <entry file="file://$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
+            <state relative-caret-position="362">
+              <caret line="87" column="33" lean-forward="true" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="33" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -127,31 +119,74 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/app.module.ts">
+        <entry file="file://$PROJECT_DIR$/web/src/app/services/user.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="35" column="95" lean-forward="true" selection-start-line="35" selection-start-column="95" selection-end-line="35" selection-end-column="95" />
+            <state relative-caret-position="550">
+              <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.ts">
+        <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="104" column="27" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="418">
+              <caret line="76" column="8" lean-forward="true" selection-start-line="72" selection-start-column="2" selection-end-line="76" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.html">
+        <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="44" column="134" lean-forward="true" selection-start-line="44" selection-start-column="134" selection-end-line="44" selection-end-column="134" />
+            <state relative-caret-position="135">
+              <caret line="12" column="118" lean-forward="true" selection-start-line="12" selection-start-column="88" selection-end-line="12" selection-end-column="118" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="451">
+              <caret line="91" column="82" lean-forward="true" selection-start-line="91" selection-start-column="82" selection-end-line="91" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/providers/user/user.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="21" column="2" lean-forward="true" selection-start-line="21" selection-start-column="2" selection-end-line="23" selection-end-column="3" />
+              <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="14" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -160,19 +195,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Contratista</find>
-      <find>ivil</find>
-      <find>materials =</find>
-      <find>aterial</find>
-      <find>current_materials</find>
-      <find>material</find>
-      <find>Agregar</find>
-      <find>finish</find>
-      <find>series</find>
-      <find>getById</find>
-      <find>Observaciones</find>
-      <find>ormulario enviado</find>
-      <find>= 0</find>
       <find>nstal</find>
       <find>employees</find>
       <find>medidor</find>
@@ -190,10 +212,21 @@
       <find>Sí</find>
       <find>filteredForms</find>
       <find>conVarilla</find>
+      <find>offline_forms.push</find>
+      <find>delete</find>
+      <find>oast</find>
+      <find>ion-</find>
+      <find />
+      <find>&lt;div&gt;</find>
+      <find>type=&quot;number&quot;</find>
+      <find>google</find>
+      <find>Material</find>
+      <find>&lt;select</find>
+      <find>finishFini</find>
+      <find>Instal</find>
+      <find>employees =</find>
     </findStrings>
     <replaceStrings>
-      <replace>name</replace>
-      <replace>Nombre</replace>
       <replace>usuario</replace>
       <replace>Usuario</replace>
       <replace>medidores</replace>
@@ -222,6 +255,8 @@
       <replace>Troy</replace>
       <replace>&lt;button [disabled]=&quot;showing&quot;</replace>
       <replace>this.conVarilla</replace>
+      <replace>type=&quot;number&quot; class=&quot;form-control&quot;</replace>
+      <replace>&lt;select class=&quot;form-control&quot;</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/mobile/src/pages/login</dir>
@@ -238,11 +273,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/src/app/login/login.component.html" />
-        <option value="$PROJECT_DIR$/mobile/src/providers/medidor/medidor.ts" />
-        <option value="$PROJECT_DIR$/web/src/app/authentication.guard.ts" />
-        <option value="$PROJECT_DIR$/web/src/index.html" />
-        <option value="$PROJECT_DIR$/mobile/platforms/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/mobile/src/pages/scan/scan.scss" />
         <option value="$PROJECT_DIR$/mobile/src/app/app.scss" />
         <option value="$PROJECT_DIR$/mobile/src/index.html" />
@@ -261,7 +291,6 @@
         <option value="$PROJECT_DIR$/mobile/src/providers/general/general.ts" />
         <option value="$PROJECT_DIR$/web/src/app/form/form.component.ts" />
         <option value="$PROJECT_DIR$/mobile/src/providers/fallida/fallida.ts" />
-        <option value="$PROJECT_DIR$/web/src/app/home/home.component.html" />
         <option value="$PROJECT_DIR$/functions/functions/index.js" />
         <option value="$PROJECT_DIR$/mobile/src/providers/form/form.ts" />
         <option value="$PROJECT_DIR$/mobile/src/pages/fallidas/fallidas.html" />
@@ -274,21 +303,27 @@
         <option value="$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.scss" />
         <option value="$PROJECT_DIR$/web/src/app/usuarios/usuarios.component.html" />
         <option value="$PROJECT_DIR$/mobile/src/pages/fallidas/fallidas.ts" />
-        <option value="$PROJECT_DIR$/web/src/app/services/user.service.ts" />
-        <option value="$PROJECT_DIR$/mobile/src/pages/home/home.html" />
         <option value="$PROJECT_DIR$/mobile/src/providers/user/user.ts" />
         <option value="$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts" />
         <option value="$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html" />
         <option value="$PROJECT_DIR$/web/src/app/form/form.component.html" />
-        <option value="$PROJECT_DIR$/mobile/config.xml" />
         <option value="$PROJECT_DIR$/web/src/app/login/login.component.ts" />
         <option value="$PROJECT_DIR$/web/src/app/reports/reports.component.html" />
-        <option value="$PROJECT_DIR$/web/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/web/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/web/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.html" />
         <option value="$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.ts" />
         <option value="$PROJECT_DIR$/web/src/app/reports/reports.component.ts" />
+        <option value="$PROJECT_DIR$/mobile/src/pages/home/home.html" />
+        <option value="$PROJECT_DIR$/mobile/src/pages/home/home.ts" />
+        <option value="$PROJECT_DIR$/mobile/config.xml" />
+        <option value="$PROJECT_DIR$/web/src/app/home/home.component.ts" />
+        <option value="$PROJECT_DIR$/web/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/web/src/app/services/form.service.ts" />
+        <option value="$PROJECT_DIR$/web/src/app/home/home.component.html" />
+        <option value="$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.html" />
+        <option value="$PROJECT_DIR$/web/src/app/services/user.service.ts" />
+        <option value="$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.ts" />
       </list>
     </option>
   </component>
@@ -432,6 +467,32 @@
             <path>
               <item name="troy" type="b2602c69:ProjectViewProjectNode" />
               <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="form-installation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -446,6 +507,14 @@
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="edit-form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="troy" type="b2602c69:ProjectViewProjectNode" />
@@ -478,6 +547,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="reports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="troy" type="b2602c69:ProjectViewProjectNode" />
@@ -582,12 +659,12 @@
       <workItem from="1538143907607" duration="615000" />
       <workItem from="1538172421112" duration="3964000" />
       <workItem from="1538256189661" duration="208000" />
-      <workItem from="1538320865041" duration="8709000" />
+      <workItem from="1538320865041" duration="16706000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209706000" />
+    <option name="totallyTimeSpent" value="217703000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -640,27 +717,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobile/src/app/app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/app/app.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="28" column="58" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/fallidas/fallida/fallida.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -717,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/services/form.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="25" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/src/app/services/fallida.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -757,13 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -861,88 +903,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/services/user.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="114" selection-start-line="33" selection-start-column="114" selection-end-line="33" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="42" column="3" selection-start-line="10" selection-start-column="2" selection-end-line="42" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="21" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/providers/form/form.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/home/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/home/home.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="104" column="90" selection-start-line="104" selection-start-column="90" selection-end-line="104" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/providers/user/user.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="89" lean-forward="true" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/src/app/login/login.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="270" column="68" selection-start-line="270" selection-start-column="62" selection-end-line="270" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -956,28 +920,14 @@
     <entry file="file://$PROJECT_DIR$/web/src/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="22" column="78" lean-forward="true" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="35" column="95" lean-forward="true" selection-start-line="35" selection-start-column="95" selection-end-line="35" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/app.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+          <caret line="22" column="78" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/app/total_reports/total_reports.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
-          <caret line="44" column="134" lean-forward="true" selection-start-line="44" selection-start-column="134" selection-end-line="44" selection-end-column="134" />
+          <caret line="44" column="134" selection-start-line="44" selection-start-column="134" selection-end-line="44" selection-end-column="134" />
         </state>
       </provider>
     </entry>
@@ -995,6 +945,143 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/node_modules/ionic-angular/components/item/item-content.metadata.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret column="535" selection-start-column="535" selection-end-column="535" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/pages/home/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="17" column="53" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/pages/home/home.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="58" column="33" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="50" selection-start-line="1" selection-start-column="50" selection-end-line="1" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="33" column="65" lean-forward="true" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/providers/form/form.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="19" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/services/form.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="91" column="82" lean-forward="true" selection-start-line="91" selection-start-column="82" selection-end-line="91" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="76" column="8" lean-forward="true" selection-start-line="72" selection-start-column="2" selection-end-line="76" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="118" lean-forward="true" selection-start-line="12" selection-start-column="88" selection-end-line="12" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="121" column="53" selection-start-line="121" selection-start-column="53" selection-end-line="121" selection-end-column="53" />
+          <folding>
+            <element signature="n#div#2;n#div#0;n#!!top" />
+            <element signature="n#div#3;n#div#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/providers/user/user.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="21" column="2" lean-forward="true" selection-start-line="21" selection-start-column="2" selection-end-line="23" selection-end-column="3" />
+          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="14" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/services/user.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/edit-form/edit-form.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="87" column="33" lean-forward="true" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="33" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

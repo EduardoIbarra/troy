@@ -21,6 +21,15 @@ export class FormService {
     return this.angularFireDataBase.object('/forms/' + form.uid).set(form);
   }
   delete(form) {
-    return this.angularFireDataBase.object('/forms/' + form.uid).remove();
+    return this.angularFireDataBase.object('/forms/' + form).remove();
+  }
+  deleteforUser(user, form) {
+    return this.angularFireDataBase.object('/users/' + user + '/forms/' + form).remove();
+  }
+  getSerieById(uid) {
+    return this.angularFireDataBase.object('series/' + uid);
+  }
+  getMedidorById(uid) {
+    return this.angularFireDataBase.object('medidores_usados/' + uid);
   }
 }

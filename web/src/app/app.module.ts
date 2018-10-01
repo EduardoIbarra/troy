@@ -22,6 +22,7 @@ import { FallidasComponent } from './fallidas/fallidas.component';
 import { FallidaComponent } from './fallidas/fallida/fallida.component';
 import { ReportsComponent } from './reports/reports.component';
 import {TotalReportsComponent} from "./total_reports/total_reports.component";
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   {canActivate: [AuthenticationGuard], path: 'medidores', component: MedidoresComponent},
   {canActivate: [AuthenticationGuard], path: 'usuarios', component: UsuariosComponent},
   {canActivate: [AuthenticationGuard], path: 'form/:uid', component: FormComponent},
+  {canActivate: [AuthenticationGuard], path: 'edit_form/:uid', component: EditFormComponent},
   {canActivate: [AuthenticationGuard], path: 'fallidas', component: FallidasComponent},
   {canActivate: [AuthenticationGuard], path: 'fallida/:medidor', component: FallidaComponent},
   {canActivate: [AuthenticationGuard], path: 'reports', component: ReportsComponent},
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     FallidasComponent,
     FallidaComponent,
     ReportsComponent,
-    TotalReportsComponent
+    TotalReportsComponent,
+    EditFormComponent
   ],
   imports: [
     BrowserModule,

@@ -33,4 +33,10 @@ export class UserService {
   getBySupervisor(supervisor) {
     return this.angularFireDataBase.database.ref().child('users/').orderByChild('supervisor').equalTo(supervisor);
   }
+  getSubcontratistas() {
+    return this.angularFireDataBase.list('subcontratistas/');
+  }
+  getSupervisors() {
+    return this.angularFireDataBase.database.ref().child('users/').orderByChild('is_supervisor').equalTo('si');
+  }
 }
