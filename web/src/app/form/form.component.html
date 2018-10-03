@@ -26,7 +26,10 @@
     </div>
   </div>
 
-  <iframe *ngIf="form.geolocation" [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <!--<iframe *ngIf="form.geolocation" [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+  <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
+    Ver en Google Maps <i class="fas fa-map-marker-alt"></i>
+  </a>
 
   <div class="row">
     <div class="col-md-4">

@@ -33,7 +33,7 @@ export class FormInstallationPage {
   current_materials:any [] = [];
   current_material: any;
   current_quantity: any;
-  last_step = 6;
+  last_step = 5;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   coords: any;
@@ -87,7 +87,7 @@ export class FormInstallationPage {
     }).catch((error) => {
       console.log(error);
     });
-    this.geolocation.getCurrentPosition().then((resp) => {
+    /*this.geolocation.getCurrentPosition().then((resp) => {
       this.form.geolocation = {lat: resp.coords.latitude, lng: resp.coords.longitude};
       console.log(resp.coords);
     }).catch((error) => {
@@ -98,7 +98,7 @@ export class FormInstallationPage {
     watch.subscribe((data) => {
       this.coords = data.coords;
       console.log(data.coords);
-    });
+    });*/
     this.materialProvider.get().valueChanges().subscribe((data) => {
       this.materials = data;
       this.materials.forEach((m) => {
@@ -162,18 +162,22 @@ export class FormInstallationPage {
     this.step--;
   }
   next() {
+    if (this.step === 1 && (!this.form.serie || this.form.serie.length < 9 )) {
+      alert('Debe ingresar la serie del optimizador y esta debe ser de por lo menos 9 dígitos');
+      return;
+    }
     if (this.step === 2 && !this.form.medidor) {
       alert('Debe ingresar un número de medidor para continuar');
       return;
     }
     this.step++;
     console.log(this.form);
-    if(this.step == 4) {
+    if(this.step == 9999) {
       window.setTimeout(() => {
         this.loadMap();
       }, 400)
     }
-    if(this.step == 6) {
+    if(this.step == 5) {
       window.setTimeout(() => {
         this.signaturePad.clear();
         this.canvasResize();
@@ -209,6 +213,7 @@ export class FormInstallationPage {
         this.form.colonia = data.colonia;
         this.form.ciudad = data.municipio + ', ' + data.estado;
         this.form.rpu = data.rpu;
+        this.form.geolocation = {lat: data.lat, lng: data.lng};
         console.log(data);
       }else {
         const toast = this.toastController.create({message: 'Medidor no encontrado', duration: 4000, position: 'bottom'});

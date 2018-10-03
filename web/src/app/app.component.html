@@ -20,7 +20,7 @@
           <a class="nav-link" routerLink="/reports">Reportes</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/total_reports">Reportes Totales</a>
+          <a class="nav-link" *ngIf="user && user.superadmin" routerLink="/total_reports">Reportes Totales</a>
         </li>
       </ul>
 
