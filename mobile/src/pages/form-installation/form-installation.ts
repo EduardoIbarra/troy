@@ -403,10 +403,19 @@ export class FormInstallationPage {
     this.form.pictures = this.pictures;
     this.form.user = this.user;
     this.form.current_materials = this.materials;
-    this.form.guardado_offline = Date.now();
     this.form.firmaCFE = this.firmaCFE;
     this.form.firmaTroy = this.firmaTroy;
-    this.offline_forms.push(this.form);
+    if (!this.form.guardado_offline) {
+      this.form.guardado_offline = Date.now();
+      this.offline_forms.push(this.form);
+    } else {
+      this.offline_forms.forEach((f, i) => {
+        if (f.guardado_offline === this.form.guardado_offline) {
+          this.offline_forms[i] = this.form;
+          console.log(this.offline_forms);
+        }
+      });
+    }
     this.storage.set('offline_forms', JSON.stringify(this.offline_forms)).then((data) => {
       loading.dismiss();
       const toast = this.toastController.create({message: '¡Formulario guardado localmente con éxito!', duration: 5000, position: 'bottom'});

@@ -18,7 +18,7 @@
       <ion-col>
         <button *ngIf="step !== last_step" ion-button full icon-end (click)="next()">Siguiente <ion-icon name="arrow-dropright-circle"></ion-icon></button>
         <button *ngIf="step === last_step && !showing" ion-button full icon-end (click)="finish()" color="secondary">Finalizar <ion-icon name="checkmark-circle"></ion-icon></button>
-        <button *ngIf="step === last_step && !showing && !form.guardado_offline" ion-button full icon-end (click)="finishOffline()" color="danger">Guardar Offline <ion-icon name="checkmark-circle"></ion-icon></button>
+        <button *ngIf="step === last_step && !showing" ion-button full icon-end (click)="finishOffline()" color="danger">Guardar Offline <ion-icon name="checkmark-circle"></ion-icon></button>
       </ion-col>
     </ion-row>
   </ion-grid>
