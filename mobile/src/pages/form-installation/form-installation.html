@@ -128,7 +128,8 @@
       <ion-col>
         <ion-list>
           <ion-item>
-            <ion-label color="primary" floating>Instaló</ion-label>
+            <ion-label color="primary" floating>Instaló <small *ngIf="form && form.instalo"><b> - ({{form.instalo.ciudad}}) {{form.instalo.nombre}}</b></small></ion-label>
+            <small *ngIf="form && form.instalo">({{form.instalo.ciudad}}) {{form.instalo.nombre}}</small>
             <ion-select [disabled]="showing" [(ngModel)]="form.instalo">
               <ion-option [value]="e" *ngFor="let e of employees">({{e.ciudad}}) {{e.nombre}}</ion-option>
             </ion-select>
@@ -138,7 +139,7 @@
       <ion-col>
         <ion-list>
           <ion-item>
-            <ion-label color="primary" floating>Supervisó</ion-label>
+            <ion-label color="primary" floating>Supervisó <small *ngIf="form && form.superviso"><b> - {{form.superviso.name}} {{form.superviso.last_name}}</b></small></ion-label>
             <ion-select [disabled]="showing" [(ngModel)]="form.superviso">
               <ion-option [value]="s" *ngFor="let s of supervisores">{{s.name}} {{s.last_name}}</ion-option>
             </ion-select>

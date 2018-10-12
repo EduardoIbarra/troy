@@ -63,6 +63,7 @@ export class FormInstallationPage {
       delete this.form.pictures;
       delete this.form.firmaCFE;
       delete this.form.firmaTroy;
+      console.log(this.form);
     }
     if (this.navParams.get('form_id')) {
       this.showing = true;
@@ -99,14 +100,18 @@ export class FormInstallationPage {
       this.coords = data.coords;
       console.log(data.coords);
     });*/
-    this.materialProvider.get().valueChanges().subscribe((data) => {
-      this.materials = data;
-      this.materials.forEach((m) => {
-        m.current_quantity = null;
+    if (this.navParams.get('form')) {
+      this.materials = this.form.current_materials;
+    } else {
+      this.materialProvider.get().valueChanges().subscribe((data) => {
+        this.materials = data;
+        this.materials.forEach((m) => {
+          m.current_quantity = null;
+        });
+      }, (error) => {
+        console.log(error);
       });
-    }, (error) => {
-      console.log(error);
-    });
+    }
     this.authService.getStatus().subscribe((data) => {
       if (!data) {
         return;
