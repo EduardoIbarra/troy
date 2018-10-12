@@ -24,6 +24,7 @@
                 <a class="dropdown-item" *ngIf="user && user.superadmin" routerLink="/global">Global</a>
                 <a class="dropdown-item" *ngIf="user && user.superadmin" routerLink="/total_reports">Totales</a>
                 <a class="dropdown-item" routerLink="/reports">Por Supervisor</a>
+                <a class="dropdown-item" *ngIf="user && user.tipo == 'cfe'" routerLink="/reportsCFE">CFE</a>
               </div>
             </div>
           </li>
