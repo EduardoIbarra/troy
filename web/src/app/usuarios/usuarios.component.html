@@ -1,6 +1,6 @@
 <div class="container">
+  <br *ngIf="(usuario && usuario.uid) || creating" />
   <div class="row" *ngIf="(usuario && usuario.uid) || creating">
-    <br />
     <div class="col-md-6">
       <div class="form-group">
         <label for="exampleInputEmail1">Nombre(s)</label>
@@ -26,12 +26,12 @@
         <label for="exampleInput8">Repetir</label>
         <input type="password" class="form-control" id="exampleInput8" [(ngModel)]="usuario.repeat" />
       </div>
-    </div>
-    <div class="col-md-6">
       <div class="form-group">
         <label for="exampleInput3">Teléfono</label>
         <input type="text" class="form-control" id="exampleInput3" [(ngModel)]="usuario.telefono" />
       </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="exampleInput4"># del IMSS</label>
         <input type="text" class="form-control" id="exampleInput4" [(ngModel)]="usuario.imss" />
@@ -43,6 +43,10 @@
           <option value="cfe">CFE</option>
           <option value="troy">Troy T&D</option>
         </select>
+      </div>
+      <div class="form-group" *ngIf="usuario.tipo === 'cfe'">
+        <label for="exampleInput110">RPE/RTT</label>
+        <input type="text" class="form-control" id="exampleInput110" [(ngModel)]="usuario.RPE" />
       </div>
       <div class="form-group">
         <label for="exampleInput5">Es supervisor?</label>
