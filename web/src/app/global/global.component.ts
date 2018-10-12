@@ -22,7 +22,7 @@ export class GlobalComponent implements OnInit {
       this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
         this.forms.forEach((f) => {
-          f.user = this.usuarios.find((u) => { return u.uid = f.user.uid });
+          f.user = this.usuarios.find((u) => { return u.uid === f.user.uid });
         });
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
         this.getSubcontratistas();
@@ -49,6 +49,7 @@ export class GlobalComponent implements OnInit {
       this.subcontratistas.forEach((s) => {
         s.instalaciones = this.forms.filter((f) => {return f.user && f.user.company && f.user.company.id == s.id}).length;
       });
+      this.subcontratistas.sort((a,b) => (a.instalaciones < b.instalaciones) ? 1 : ((b.instalaciones < a.instalaciones) ? -1 : 0));
     }, (error) => {
       console.log(error);
     });
