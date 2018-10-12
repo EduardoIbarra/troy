@@ -51,6 +51,12 @@
           <option value="no">No</option>
         </select>
       </div>
+      <div class="form-group" *ngIf="usuario.is_supervisor === 'si'">
+        <label for="exampleInput51">Compañía <small *ngIf="usuario.company">({{usuario.company.nombre}} - {{usuario.company.ciudad}})</small></label>
+        <select class="form-control" id="exampleInput51" [(ngModel)]="usuario.company">
+          <option *ngFor="let u of subcontratistas" [ngValue]="u">{{u.nombre}} ({{u.ciudad}})</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="exampleInput6">Supervisor</label>
         <select class="form-control" id="exampleInput6" [(ngModel)]="usuario.supervisor">

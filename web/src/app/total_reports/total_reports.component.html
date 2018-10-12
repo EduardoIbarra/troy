@@ -38,7 +38,7 @@
   <div class="row" *ngIf="filteredForms.length > 0">
     <div class="col-md-12">
       <hr />
-      <button class="btn btn-block btn-secondary" (click)="generateExcel()">Descargar Excel</button>
+      <button class="btn btn-block btn-secondary" (click)="generateExcel()" [disabled]="!fromDate || !toDate">Descargar Excel</button>
     </div>
   </div>
   <br />

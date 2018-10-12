@@ -1,0 +1,30 @@
+<div class="container">
+  <br />
+  <h2>Reporte Global</h2>
+  <hr />
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-header">Totales</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span class="badge badge-danger">{{forms.length}}</span> Optimizadores Instalados</li>
+          <li class="list-group-item"><span class="badge badge-danger">{{varillas.length}}</span> Varillas Instaladas</li>
+          <li class="list-group-item"><span class="badge badge-danger">{{fallidas.length}}</span> Visitas Fallidas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <h5 class="card-header">Optimizadores Instalados por Subcontratista</h5>
+        <table class="table table-bordered table-dark table-striped table-hover">
+          <tr *ngFor="let s of subcontratistas">
+            <td><span class="badge badge-warning">{{s.instalaciones}}</span></td>
+            <td>{{s.nombre}}</td>
+            <td>{{s.ciudad}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

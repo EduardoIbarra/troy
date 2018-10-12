@@ -19,27 +19,48 @@ export class ReportsComponent implements OnInit {
   toDate: any;
   user: any;
   supervisados: any[] = [];
+  users: any[] = [];
+  selectedSupervisor: any;
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService) {
+    this.userService.get().valueChanges().subscribe((data) => {
+      this.users = data;
+      console.log(this.users);
+    }, (error) => {
+      console.log(error);
+    });
     this.authService.getStatus().subscribe((data) => {
-      this.user = data;
-      this.userService.getBySupervisor(this.user.uid).on("value", (response) => {
-        this.supervisados = response.val();
-        this.supervisados = Object.keys(this.supervisados);
+      this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
+        this.user = data2;
         this.supervisados.push(this.user.uid);
-        this.formService.get().valueChanges().subscribe((data) => {
-          this.forms = data;
-          this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
-          // this.filteredForms = this.forms;
-        }, (error) => {
-          console.log(error);
+        this.userService.getBySupervisor(this.user.uid).on("value", (response) => {
+          this.supervisados = response.val() || [];
+          if (this.supervisados) {
+            this.supervisados = Object.keys(this.supervisados);
+          }
+          this.supervisados.push(this.user.uid);
+          this.getForms();
         });
+      }, (error) => {
+        console.log(error);
       });
     }, (error) => {
+      this.supervisados.push(this.user.uid);
+      this.getForms();
       console.log(error);
     });
   }
 
   ngOnInit() {
+  }
+
+  getForms() {
+    this.formService.get().valueChanges().subscribe((data) => {
+      this.forms = data;
+      this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
+      this.filteredForms = this.forms;
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   select(form) {
@@ -79,24 +100,22 @@ export class ReportsComponent implements OnInit {
     arrayOfArrays.push([]);
     arrayOfArrays.push(['SERVICIOS INSTALADOS TOTALES', this.filteredForms.length, null, 'SERVICIOS SIN SISTEMA DE TIERRA', this.filteredForms.length - conVarilla.length, null, 'SERVICIOS CON SISTEMA DE TIERRA', conVarilla.length]);
     arrayOfArrays.push([
-      'Consecutivo',
-      'Nombre',
-      '# Serie Optimizador',
-      '# de Medidor',
-      'Calle, Número',
-      'Colonia',
-      'Punto X',
-      'Punto Y',
-      'Sistema de Tierra',
-      'Subcontratista',
-      'Supervisor Troy',
-      'Supervisor CFE'
+      'CONSECUTIVO',
+      'NO. SERIE OPTIMIZADOR',
+      'NÚMERO DE MEDIDOR',
+      'CALLE, NÚMERO',
+      'COLONIA',
+      'PUNTO X',
+      'PUNTO Y',
+      'SISTEMA DE TIERRA',
+      'SUBCONTRATISTA',
+      'SUPERVISOR TROY',
+      'SUPERVISOR CFE'
     ]);
     this.filteredForms.forEach((aoa, i) => {
       arrayOfArrays.push([
         i + 1,
-        (aoa.user) ? aoa.user.name + ' ' + aoa.user.last_name : null,
-        aoa.serie || null,
+        (aoa.serie) ? '9000-0364-' + aoa.serie : null,
         aoa.medidor || null,
         (aoa.calle + ' ' + aoa.numero) || null,
         aoa.colonia || null,
@@ -105,8 +124,7 @@ export class ReportsComponent implements OnInit {
         (aoa.varilla === 'si') ? 'Sí' : 'No',
         (aoa.instalo) ? aoa.instalo.nombre : null,
         (aoa.superviso) ? aoa.superviso.name + ' ' + aoa.superviso.last_name : null,
-        aoa.CFENombre || null,
-        'https://troy-da34b.firebaseapp.com//form/' + aoa.uid
+        aoa.CFENombre || null
       ]);
     });
     arrayOfArrays.push([]);
@@ -115,7 +133,7 @@ export class ReportsComponent implements OnInit {
     arrayOfArrays.push([]);
     arrayOfArrays.push([]);
     arrayOfArrays.push([null, null, null, '_________________________', null, null, '_________________________']);
-    arrayOfArrays.push([null, null, null, (firstForm.superviso) ? firstForm.superviso.name + ' ' + firstForm.superviso.last_name : 'Supervisor Troy T&D', null, null, (firstForm.CFENombre) ? firstForm.CFENombre + ' - ' + firstForm.CFERpe : 'Supervisor CFE']);
+    arrayOfArrays.push([null, null, null, 'SUPERVISIÓN TROY T&D', null, null, 'SUBCONTRATISTA']);
     /* generate worksheet */
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(arrayOfArrays);
 
@@ -125,5 +143,17 @@ export class ReportsComponent implements OnInit {
 
     /* save to file */
     XLSX.writeFile(wb, 'Reporte.xlsx');
+  }
+  generateForSupervisor() {
+    this.supervisados.push(this.selectedSupervisor.uid);
+    this.userService.getBySupervisor(this.selectedSupervisor.uid).on("value", (response) => {
+      this.supervisados = response.val() || [];
+      if (this.supervisados) {
+        this.supervisados = Object.keys(this.supervisados);
+      }
+      this.supervisados.push(this.selectedSupervisor.uid);
+      this.getForms();
+    });
+    console.log(this.selectedSupervisor);
   }
 }

@@ -9,12 +9,18 @@ import {AuthService} from "../services/auth.service";
 })
 export class UsuariosComponent implements OnInit {
   usuario: any = {};
-  usuarios: any = [];
+  usuarios: any[] = [];
   creating: boolean = false;
   query: string;
+  subcontratistas: any[] = [];
   constructor(private usuarioService: UserService, private authService: AuthService) {
     this.usuarioService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
+    }, (error) => {
+      console.log(error);
+    });
+    this.usuarioService.getSubcontratistas().valueChanges().subscribe((data) => {
+      this.subcontratistas = data;
     }, (error) => {
       console.log(error);
     });
