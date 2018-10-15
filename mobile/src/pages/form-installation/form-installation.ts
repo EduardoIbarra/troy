@@ -5,14 +5,16 @@ import {MaterialProvider} from "../../providers/material/material";
 import {SignaturePad} from "angular2-signaturepad/signature-pad";
 import {MedidorProvider} from "../../providers/medidor/medidor";
 import {FormProvider} from "../../providers/form/form";
-import {GoogleMapOptions, GoogleMaps, GoogleMapsEvent, Marker} from "@ionic-native/google-maps";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {UserProvider} from "../../providers/user/user";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 import {ScanPage} from "../scan/scan";
 import {GeneralProvider} from "../../providers/general/general";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+
+
 /**
  * Generated class for the FormInstallationPage page.
  *
@@ -20,6 +22,7 @@ import {GeneralProvider} from "../../providers/general/general";
  * Ionic pages and navigation.
  */
 declare var google;
+
 @IonicPage()
 @Component({
   selector: 'page-form-installation',
@@ -29,8 +32,8 @@ export class FormInstallationPage {
   today = Date.now();
   step = 1;
   form: any = {};
-  materials:any [] = [];
-  current_materials:any [] = [];
+  materials: any [] = [];
+  current_materials: any [] = [];
   current_material: any;
   current_quantity: any;
   last_step = 5;
@@ -39,20 +42,38 @@ export class FormInstallationPage {
   coords: any;
   pictures: any[] = [];
   user: any;
-  @ViewChild(SignaturePad) public signaturePad : SignaturePad;
-  public signaturePadOptions : Object = {
+  @ViewChild(SignaturePad) public signaturePad: SignaturePad;
+  public signaturePadOptions: Object = {
     'minWidth': 2,
     'canvasWidth': 340,
     'canvasHeight': 200
   };
-  public signatureImage : string;
-  offline_forms:any [] = [];
+  public signatureImage: string;
+  offline_forms: any [] = [];
   showing = false;
-  employees:any[] = [];
-  firmaCFE:string;
-  firmaTroy:string;
-  supervisores:any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, private materialProvider: MaterialProvider, private medidorProvider: MedidorProvider, private toastController: ToastController, private formProvider: FormProvider, private loadingCtrl: LoadingController, private camera: Camera, private authService: AuthenticationProvider, private userProvider: UserProvider, private storage: Storage, private qrScanner: QRScanner, public modalController: ModalController, private generalProvider: GeneralProvider) {
+  employees: any[] = [];
+  firmaCFE: string;
+  firmaTroy: string;
+  supervisores: any[] = [];
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private geolocation: Geolocation,
+    private materialProvider: MaterialProvider,
+    private medidorProvider: MedidorProvider,
+    private toastController: ToastController,
+    private formProvider: FormProvider,
+    private loadingCtrl: LoadingController,
+    private camera: Camera,
+    private authService: AuthenticationProvider,
+    private userProvider: UserProvider,
+    private storage: Storage,
+    private qrScanner: QRScanner,
+    public modalController: ModalController,
+    public barcodeScanner: BarcodeScanner,
+    private generalProvider: GeneralProvider) {
+
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
       this.pictures = this.form.pictures;
@@ -166,8 +187,9 @@ export class FormInstallationPage {
   previous() {
     this.step--;
   }
+
   next() {
-    if (this.step === 1 && (!this.form.serie || this.form.serie.length < 9 )) {
+    if (this.step === 1 && (!this.form.serie || this.form.serie.length < 9)) {
       alert('Debe ingresar la serie del optimizador y esta debe ser de por lo menos 9 dígitos');
       return;
     }
@@ -177,42 +199,49 @@ export class FormInstallationPage {
     }
     this.step++;
     console.log(this.form);
-    if(this.step == 9999) {
+    if (this.step == 9999) {
       window.setTimeout(() => {
         this.loadMap();
       }, 400)
     }
-    if(this.step == 5) {
+    if (this.step == 5) {
       window.setTimeout(() => {
         this.signaturePad.clear();
         this.canvasResize();
       }, 800)
     }
   }
+
   addMaterial() {
     this.current_materials.push({material: this.current_material, quantity: this.current_quantity});
   }
+
   drawCancel() {
   }
+
   drawComplete() {
     this.signatureImage = this.signaturePad.toDataURL();
     console.log(this.signatureImage);
     this.drawClear();
   }
+
   drawClear() {
     this.signaturePad.clear();
   }
+
   getFirmaTroy() {
     this.firmaTroy = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
+
   getFirmaCFE() {
     this.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
+
   searchMedidor() {
     this.medidorProvider.getById(this.form.medidor).valueChanges().subscribe((data: any) => {
-      if(data) {
+      if (data) {
         this.form.nombre = data.nombre;
         this.form.calle = data.Direccion;
         this.form.colonia = data.colonia;
@@ -220,7 +249,7 @@ export class FormInstallationPage {
         this.form.rpu = data.rpu;
         this.form.geolocation = {lat: data.lat, lng: data.lng};
         console.log(data);
-      }else {
+      } else {
         const toast = this.toastController.create({message: 'Medidor no encontrado', duration: 4000, position: 'bottom'});
         toast.present();
       }
@@ -228,6 +257,7 @@ export class FormInstallationPage {
       console.log(error);
     });
   }
+
   uploadPictures(formUid) {
     if (this.firmaCFE) {
       const firmaCFEId = Date.now();
@@ -265,6 +295,7 @@ export class FormInstallationPage {
       })
     }
   }
+
   finishFinish() {
     let loading = this.loadingCtrl.create({
       content: 'Por favor espera mientras se envía el formulario...'
@@ -307,21 +338,22 @@ export class FormInstallationPage {
       console.log(error);
     });
   }
+
   finish() {
-    let promiseMedidor:any;
-    let promiseSerie:any;
+    let promiseMedidor: any;
+    let promiseSerie: any;
     promiseSerie = this.formProvider.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
       promiseSerie.unsubscribe();
-      if(data) {
+      if (data) {
         alert('Este optimizador ya ha sido instalado. Verifique nuevamente la serie.');
         return;
-      }else {
+      } else {
         promiseMedidor = this.formProvider.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
           promiseMedidor.unsubscribe();
-          if(data) {
+          if (data) {
             alert('Este medidor ya cuenta con instalación. Verifique nuevamente el número.');
             return;
-          }else {
+          } else {
             this.finishFinish();
           }
         }, (error) => {
@@ -334,50 +366,52 @@ export class FormInstallationPage {
       console.log(error);
     });
   }
+
   loadMap() {
-    if (!this.coords) {
-      return;
-    }
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: this.coords.latitude,
-          lng: this.coords.longitude
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-
-    this.map = GoogleMaps.create('map', mapOptions);
-
-    let marker: Marker = this.map.addMarkerSync({
-      title: 'Dirección del Usuario',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: this.coords.latitude,
-        lng: this.coords.longitude
-      },
-      draggable: true
-    });
-    this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((data) => {
-      console.log(data);
-      console.log(data.target);
-      marker.setPosition({
-        lat: data.target.lat,
-        lng: data.target.lon
-      });
-    });
-    this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((data) => {
-      marker.setPosition(data[0]);
-      this.form.geolocation = data[0];
-      this.form.geolocation_manual = true;
-      const toast = this.toastController.create({message: 'Ubicación cambiada correctamente', duration: 4000, position: 'bottom'});
-      console.log(this.form);
-      toast.present();
-    });
+    // if (!this.coords) {
+    //   return;
+    // }
+    // let mapOptions: GoogleMapOptions = {
+    //   camera: {
+    //     target: {
+    //       lat: this.coords.latitude,
+    //       lng: this.coords.longitude
+    //     },
+    //     zoom: 18,
+    //     tilt: 30
+    //   }
+    // };
+    //
+    // this.map = GoogleMaps.create('map', mapOptions);
+    //
+    // let marker: Marker = this.map.addMarkerSync({
+    //   title: 'Dirección del Usuario',
+    //   icon: 'blue',
+    //   animation: 'DROP',
+    //   position: {
+    //     lat: this.coords.latitude,
+    //     lng: this.coords.longitude
+    //   },
+    //   draggable: true
+    // });
+    // this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((data) => {
+    //   console.log(data);
+    //   console.log(data.target);
+    //   marker.setPosition({
+    //     lat: data.target.lat,
+    //     lng: data.target.lon
+    //   });
+    // });
+    // this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe((data) => {
+    //   marker.setPosition(data[0]);
+    //   this.form.geolocation = data[0];
+    //   this.form.geolocation_manual = true;
+    //   const toast = this.toastController.create({message: 'Ubicación cambiada correctamente', duration: 4000, position: 'bottom'});
+    //   console.log(this.form);
+    //   toast.present();
+    // });
   }
+
   async takePicture(source) {
     try {
       let cameraOptions: CameraOptions = {
@@ -390,7 +424,7 @@ export class FormInstallationPage {
         correctOrientation: true,
         allowEdit: true
       };
-      cameraOptions.sourceType = (source == 'camera') ?  this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
+      cameraOptions.sourceType = (source == 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
       const result = await this.camera.getPicture(cameraOptions);
       const image = `data:image/jpeg;base64,${result}`;
       console.log(image);
@@ -399,6 +433,7 @@ export class FormInstallationPage {
       console.error(e);
     }
   }
+
   finishOffline() {
     let loading = this.loadingCtrl.create({
       content: 'Por favor espera mientras se envía el formulario...'
@@ -438,8 +473,20 @@ export class FormInstallationPage {
       console.log(error);
     });
   }
+
   scanEcowise() {
-    this.navCtrl.push(ScanPage, {'data': this.form});
+
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data: ' + barcodeData.text);
+      if(barcodeData.text){
+        this.form.serie = barcodeData.text
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+
+
+    // this.navCtrl.push(ScanPage, {'data': this.form});
     // let profileModal = this.modalController.create(ScanPage, this.form);
     // profileModal.present();
     /*
