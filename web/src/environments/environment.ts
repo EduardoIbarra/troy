@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "troy-da34b.appspot.com",
     messagingSenderId: "938370155886"
   },
-  apiURL: 'http://eduardoibarra.com/laravel/public/index.php/'
+  apiURL: 'https://eduardoibarra.com/laravel/public/index.php/'
 };
 
 /*
