@@ -25,6 +25,7 @@ import {TotalReportsComponent} from "./total_reports/total_reports.component";
 import { EditFormComponent } from './edit-form/edit-form.component';
 import { GlobalComponent } from './global/global.component';
 import {ReportsCFEComponent} from "./reportsCFE/reportsCFE.component";
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,7 +11,8 @@ export const environment = {
     projectId: "troy-da34b",
     storageBucket: "troy-da34b.appspot.com",
     messagingSenderId: "938370155886"
-  }
+  },
+  apiURL: 'http://eduardoibarra.com/laravel/public/index.php/'
 };
 
 /*

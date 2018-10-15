@@ -3,6 +3,9 @@ import {FormService} from "../services/form.service";
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
 import * as XLSX from 'xlsx';
+import * as $ from 'jquery';
+import { environment } from '../../environments/environment';
+import {ReportsService} from "../services/reports.service";
 
 @Component({
   selector: 'app-reports',
@@ -21,7 +24,10 @@ export class ReportsCFEComponent implements OnInit {
   supervisados: any[] = [];
   users: any[] = [];
   selectedSupervisor: any;
-  constructor(private formService: FormService, private authService: AuthService, private userService: UserService) {
+  env = environment;
+  conVarilla: any[] = [];
+  constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
+              private reportsService: ReportsService) {
     this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
       console.log(this.users);
@@ -51,6 +57,7 @@ export class ReportsCFEComponent implements OnInit {
       this.forms = data;
       this.forms = this.forms.filter((f) => {return f.user && this.user.RPE == f.CFERpe});
       this.filteredForms = this.forms;
+      this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
     }, (error) => {
       console.log(error);
     });
@@ -148,5 +155,44 @@ export class ReportsCFEComponent implements OnInit {
       this.getForms();
     });
     console.log(this.selectedSupervisor);
+  }
+  generateReport() {
+    let arrayOfArrays: any[] = [];
+    const firstForm = this.filteredForms[0];
+    const from = this.fromDate.day + '/' + this.fromDate.month + '/' + this.fromDate.year;
+    const to = this.toDate.day + '/' + this.toDate.month + '/' + this.toDate.year;
+    this.filteredForms.forEach((aoa, i) => {
+      arrayOfArrays.push([
+        i + 1,
+        aoa.serie || null,
+        aoa.medidor || null,
+        (aoa.calle + ' ' + aoa.numero) || null,
+        aoa.colonia || null,
+        (aoa.geolocation) ? aoa.geolocation.lat : null,
+        (aoa.geolocation) ? aoa.geolocation.lng : null,
+        (aoa.varilla === 'si') ? 'Sí' : 'No',
+        (aoa.instalo) ? aoa.instalo.nombre : null,
+        (aoa.superviso) ? aoa.superviso.name + ' ' + aoa.superviso.last_name : null,
+        aoa.CFENombre || null
+      ]);
+    });
+    this.reportsService.generateReport({
+      table: arrayOfArrays,
+      estado: firstForm.ciudad.split(',')[1],
+      ciudad: firstForm.ciudad.split(',')[0],
+      totales: this.filteredForms.length,
+      sinTierra: this.filteredForms.length - this.conVarilla.length,
+      conTierra: this.conVarilla.length,
+      from: from,
+      to: to}).subscribe((data: any) => {
+      var $a = $("<a>");
+      $a.attr("href","http://laravel.eduardoibarra.com/excel/TTD-HMO-ARSUB.xlsx");
+      $("body").append($a);
+      // $a.attr("download","file.xls");
+      $a[0].click();
+      $a.remove();
+    }, (error) => {
+      console.log(error);
+    });
   }
 }
