@@ -26,6 +26,8 @@ import { EditFormComponent } from './edit-form/edit-form.component';
 import { GlobalComponent } from './global/global.component';
 import {ReportsCFEComponent} from "./reportsCFE/reportsCFE.component";
 import {HttpClientModule} from "@angular/common/http";
+import {SubcontratistasComponent} from "./subcontratistas/subcontratistas.component";
+import {AddFormComponent} from "./add-form/add-form.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -40,7 +42,9 @@ const appRoutes: Routes = [
   {canActivate: [AuthenticationGuard], path: 'reports', component: ReportsComponent},
   {canActivate: [AuthenticationGuard], path: 'reportsCFE', component: ReportsCFEComponent},
   {canActivate: [AuthenticationGuard], path: 'total_reports', component: TotalReportsComponent},
-  {canActivate: [AuthenticationGuard], path: 'global', component: GlobalComponent}
+  {canActivate: [AuthenticationGuard], path: 'global', component: GlobalComponent},
+  {canActivate: [AuthenticationGuard], path: 'subcontratistas', component: SubcontratistasComponent},
+  {canActivate: [AuthenticationGuard], path: 'add_form', component: AddFormComponent},
 ];
 
 @NgModule({
@@ -58,7 +62,9 @@ const appRoutes: Routes = [
     TotalReportsComponent,
     EditFormComponent,
     GlobalComponent,
-    ReportsCFEComponent
+    ReportsCFEComponent,
+    SubcontratistasComponent,
+    AddFormComponent
   ],
   imports: [
     BrowserModule,

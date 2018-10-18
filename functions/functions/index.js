@@ -1,6 +1,24 @@
 var functions = require('firebase-functions');
 var admin = require('firebase-admin');
 admin.initializeApp();
+exports.createUser = functions.https.onRequest((req, res) => {
+    admin.auth().createUser({
+        email: req.body.email,
+        emailVerified: false,
+        password: req.body.password,
+        displayName: "John Doe",
+    }).then(function(userRecord) {
+        // See the UserRecord reference doc for the contents of userRecord.
+        console.log("Successfully created new user:", userRecord.uid);
+        var user = req.body;
+        user.uid = userRecord.uid;
+        delete user.password;
+        return admin.database('users/' + user.uid).set(user);
+    })
+    .catch(function(error) {
+        console.log("Error creating new user:", error);
+    });
+});
 exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(event => {
     if (!admin.apps.length) {
         admin.initializeApp();
