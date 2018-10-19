@@ -5,6 +5,7 @@ import {MedidorService} from "../services/medidor.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {UserService} from "../services/user.service";
 import {MaterialService} from "../services/material.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-add-form',
@@ -35,7 +36,17 @@ export class AddFormComponent implements OnInit {
               private medidorService: MedidorService,
               public sanitizer: DomSanitizer,
               public userService: UserService,
+              private authService: AuthService,
               private materialService: MaterialService) {
+    this.authService.getStatus().subscribe((data) => {
+      this.userService.getById(data.uid).valueChanges().subscribe((user) => {
+        this.form.user = user;
+      }, (error) => {
+        console.log(error);
+      });
+    }, (error) => {
+      console.log(error);
+    });
     this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.employees = data;
       console.log(this.employees);
