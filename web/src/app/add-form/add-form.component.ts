@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MedidorService} from "../services/medidor.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {UserService} from "../services/user.service";
+import {MaterialService} from "../services/material.service";
 
 @Component({
   selector: 'app-add-form',
@@ -33,7 +34,8 @@ export class AddFormComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private medidorService: MedidorService,
               public sanitizer: DomSanitizer,
-              public userService: UserService) {
+              public userService: UserService,
+              private materialService: MaterialService) {
     this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.employees = data;
       console.log(this.employees);
@@ -52,6 +54,11 @@ export class AddFormComponent implements OnInit {
         });
       });
       console.log(this.supervisores);
+    });
+    this.materialService.get().valueChanges().subscribe((data) => {
+      this.form.current_materials = data;
+    }, (error) => {
+      console.log(error);
     });
   }
   ngOnInit() { }
@@ -99,7 +106,7 @@ export class AddFormComponent implements OnInit {
         this.form.colonia = data.colonia;
         this.form.ciudad = data.municipio + ', ' + data.estado;
         this.form.rpu = data.rpu;
-        this.form.geolocation = {lat: data.lat, lng: data.lng};
+        this.form.geolocation = {lat: data.lat.slice(0, 2) + "." + data.lat.slice(2), lng: data.lng.slice(0, 4) + "." + data.lng.slice(4)};
         console.log(data);
       }else {
         alert('Medidor no encontrado');

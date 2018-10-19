@@ -2,41 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ee035ca-fe9d-4f29-a66a-dfa848272e9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/app/add-form/add-form.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/add-form/add-form.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/add-form/add-form.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/services/subcontratista.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/subcontratistas/subcontratistas.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/subcontratistas/subcontratistas.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/subcontratistas/subcontratistas.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/app/subcontratistas/subcontratistas.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/app/services/material.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/functions/functions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/ionic.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/ionic.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-hdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-hdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-ldpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-ldpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-mdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-mdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xxxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/icon/drawable-xxxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-land-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/resources/android/splash/drawable-port-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.firebase/hosting.ZGlzdC93ZWI.cache" beforeDir="false" afterPath="$PROJECT_DIR$/web/.firebase/hosting.ZGlzdC93ZWI.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,20 +19,20 @@
     <session id="414777354">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="57" />
+          <entry key="project.closed" value="59" />
           <entry key="project.open.time.1" value="13" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.2" value="8" />
+          <entry key="project.open.time.2" value="9" />
           <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.5" value="10" />
           <entry key="project.open.time.6" value="11" />
-          <entry key="project.open.time.8" value="5" />
+          <entry key="project.open.time.8" value="6" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="58" />
+          <entry key="project.opened" value="60" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -76,7 +44,7 @@
           <entry key="json" value="5" />
           <entry key="png" value="8" />
           <entry key="scss" value="12" />
-          <entry key="ts" value="202" />
+          <entry key="ts" value="204" />
           <entry key="xml" value="14" />
         </counts>
       </usages-collector>
@@ -89,13 +57,13 @@
           <entry key="JavaScript" value="10" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SCSS" value="12" />
-          <entry key="TypeScript" value="202" />
+          <entry key="TypeScript" value="204" />
           <entry key="XML" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="Angular2LanguageService" value="48" />
+          <entry key="Angular2LanguageService" value="49" />
           <entry key="TypeScriptServerServiceImpl" value="2" />
         </counts>
       </usages-collector>
@@ -107,7 +75,7 @@
           <entry key="js" value="1243" />
           <entry key="json" value="94" />
           <entry key="scss" value="334" />
-          <entry key="ts" value="16842" />
+          <entry key="ts" value="16919" />
           <entry key="xml" value="107" />
         </counts>
       </usages-collector>
@@ -119,7 +87,7 @@
           <entry key="JavaScript" value="1242" />
           <entry key="PLAIN_TEXT" value="84" />
           <entry key="SCSS" value="334" />
-          <entry key="TypeScript" value="16842" />
+          <entry key="TypeScript" value="16919" />
           <entry key="XML" value="107" />
         </counts>
       </usages-collector>
@@ -127,11 +95,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="84" column="31" lean-forward="true" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+            <state relative-caret-position="521">
+              <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -140,19 +108,52 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
+        <entry file="file://$PROJECT_DIR$/mobile/src/providers/material/material.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+            <state relative-caret-position="75">
+              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/app/services/material.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2835">
+              <caret line="189" column="59" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1155">
+              <caret line="77" column="35" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/src/styles.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -184,7 +185,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
+            <state relative-caret-position="1200">
               <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="102" selection-end-column="9" />
             </state>
           </provider>
@@ -193,35 +194,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
+            <state relative-caret-position="945">
               <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-782">
-              <caret line="114" column="18" selection-start-line="114" selection-start-column="9" selection-end-line="114" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/app.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/src/app/home/home.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -249,7 +223,6 @@
       <find>permission.CAMERA</find>
       <find>medidores</find>
       <find>Medidores</find>
-      <find>Medidor</find>
       <find>medidor</find>
       <find>edid</find>
       <find>uid</find>
@@ -257,12 +230,12 @@
       <find>this.form.nombre = data.nombre;</find>
       <find>form =</find>
       <find>materials =</find>
-      <find>ateriales</find>
-      <find>materials</find>
       <find>Evidencia</find>
+      <find>Medidor</find>
+      <find>materials</find>
+      <find>ateriales</find>
     </findStrings>
     <replaceStrings>
-      <replace>form</replace>
       <replace>suarios</replace>
       <replace>orms</replace>
       <replace>event</replace>
@@ -291,6 +264,7 @@
       <replace>Subcontratista</replace>
       <replace>subcontratista</replace>
       <replace>id</replace>
+      <replace>Material</replace>
       <replace>add</replace>
     </replaceStrings>
     <dirStrings>
@@ -311,7 +285,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/src/app/form/form.component.ts" />
         <option value="$PROJECT_DIR$/mobile/src/providers/fallida/fallida.ts" />
         <option value="$PROJECT_DIR$/mobile/src/providers/form/form.ts" />
         <option value="$PROJECT_DIR$/mobile/src/pages/fallidas/fallidas.html" />
@@ -360,8 +333,9 @@
         <option value="$PROJECT_DIR$/web/src/app/home/home.component.html" />
         <option value="$PROJECT_DIR$/web/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/web/src/app/services/medidor.service.ts" />
-        <option value="$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts" />
         <option value="$PROJECT_DIR$/web/src/styles.css" />
+        <option value="$PROJECT_DIR$/web/src/app/services/material.service.ts" />
+        <option value="$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts" />
       </list>
     </option>
   </component>
@@ -548,6 +522,14 @@
               <item name="mobile" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="providers" type="462c0819:PsiDirectoryNode" />
+              <item name="material" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="providers" type="462c0819:PsiDirectoryNode" />
               <item name="medidor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -600,6 +582,14 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="troy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="troy" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -617,8 +607,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web/src/app" />
       <recent name="$PROJECT_DIR$/web/src/app/services" />
+      <recent name="$PROJECT_DIR$/web/src/app" />
       <recent name="$PROJECT_DIR$/web/src/assets/imgs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -708,18 +698,19 @@
       <workItem from="1539543444650" duration="10467000" />
       <workItem from="1539637641546" duration="778000" />
       <workItem from="1539643932605" duration="4575000" />
-      <workItem from="1539827094590" duration="2099000" />
+      <workItem from="1539827094590" duration="3199000" />
+      <workItem from="1539894314671" duration="12000" />
+      <workItem from="1539911046058" duration="239000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="271030000" />
+    <option name="totallyTimeSpent" value="272381000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13381556" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13381556" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -732,7 +723,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32945737" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.23743315" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.23743315" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -766,20 +757,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobile/src/pages/fallidas/fallidas.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="52" column="3" selection-start-line="52" selection-start-column="3" selection-end-line="52" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/login/login.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/node_modules/ionic-angular/components/item/item-content.metadata.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -914,9 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -931,9 +905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2055">
           <caret line="143" column="27" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -955,9 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1905">
           <caret line="134" column="77" selection-start-line="134" selection-start-column="77" selection-end-line="134" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -965,9 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
           <caret line="193" column="87" selection-start-line="193" selection-start-column="87" selection-end-line="193" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1024,9 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1065,12 +1027,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/providers/medidor/medidor.ts">
+    <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="521">
+          <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/providers/material/material.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/services/material.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2835">
+          <caret line="189" column="59" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="77" column="35" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/src/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -1085,48 +1089,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/providers/medidor/medidor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
+        <state relative-caret-position="1200">
           <caret line="94" column="6" selection-start-line="94" selection-start-column="6" selection-end-line="102" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/pages/form-installation/form-installation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
+        <state relative-caret-position="945">
           <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-782">
-          <caret line="114" column="18" selection-start-line="114" selection-start-column="9" selection-end-line="114" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/add-form/add-form.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="84" column="31" lean-forward="true" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/app/form/form.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="77" column="35" lean-forward="true" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
