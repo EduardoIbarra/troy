@@ -30,6 +30,7 @@ import {SubcontratistasComponent} from "./subcontratistas/subcontratistas.compon
 import {AddFormComponent} from "./add-form/add-form.component";
 import {MaterialComponent} from "./material/material.component";
 import {SignaturePadModule} from "angular2-signaturepad";
+import {MymaterialComponent} from "./mymaterial/mymaterial.component";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   {canActivate: [AuthenticationGuard], path: 'subcontratistas', component: SubcontratistasComponent},
   {canActivate: [AuthenticationGuard], path: 'add_form', component: AddFormComponent},
   {canActivate: [AuthenticationGuard], path: 'material', component: MaterialComponent},
+  {canActivate: [AuthenticationGuard], path: 'mymaterial', component: MymaterialComponent},
 ];
 
 @NgModule({
@@ -68,7 +70,8 @@ const appRoutes: Routes = [
     ReportsCFEComponent,
     SubcontratistasComponent,
     AddFormComponent,
-    MaterialComponent
+    MaterialComponent,
+    MymaterialComponent
   ],
   imports: [
     BrowserModule,

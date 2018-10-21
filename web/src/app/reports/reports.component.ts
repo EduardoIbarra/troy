@@ -28,7 +28,6 @@ export class ReportsComponent implements OnInit {
               private reportsService: ReportsService) {
     this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
-      console.log(this.users);
     }, (error) => {
       console.log(error);
     });

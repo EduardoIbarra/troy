@@ -22,7 +22,7 @@ export class GlobalComponent implements OnInit {
       this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
         this.forms.forEach((f) => {
-          f.user = this.usuarios.find((u) => { return u.uid === f.user.uid });
+          f.user = this.usuarios.find((u) => { return f.user && u.uid === f.user.uid });
         });
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
         this.getSubcontratistas();
