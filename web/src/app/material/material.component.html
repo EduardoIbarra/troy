@@ -1,0 +1,16 @@
+<div class="container">
+  <br />
+  <h2>Reporte de Materiales</h2>
+  <hr />
+
+  <div class="card">
+    <h5 class="card-header">Optimizadores Instalados por Subcontratista</h5>
+    <table class="table table-bordered table-dark table-striped table-hover">
+      <tr *ngFor="let s of subcontratistas">
+        <td><span class="badge badge-warning">{{s.instalaciones}}</span></td>
+        <td>{{s.nombre}}</td>
+        <td>{{s.ciudad}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -200,7 +200,7 @@
   <div *ngIf="step === 4">
     <div #map id="map"></div>
     <iframe *ngIf="form.geolocation" [src]="sanitizer.bypassSecurityTrustResourceUrl('https://maps.google.com/maps?q='+form.geolocation.lat+','+form.geolocation.lng+'&hl=es;z=14&amp;output=embed')" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
-    <div class="row">
+    <div class="row" *ngIf="form.geolocation">
       <div class="col-md-4">
         <input type="number" class="form-control" [(ngModel)]="form.geolocation.lat" placeholder="Latitud">
       </div>
@@ -211,14 +211,14 @@
   </div>
 
   <div *ngIf="step === 5">
-    <div class="row" *ngIf="form.pictures">
-      <div class="col-md-4" *ngFor="let p of form.pictures">
-        <img [src]="p" class="framePicture img-fluid" />
-      </div>
-    </div>
     <div class="row" *ngIf="!form.pictures">
       <div class="col-md-12">
-        <b>No se pueden cargar imágenes desde web</b>
+        <input type="file" (change)="fileChangeEvent($event)">
+      </div>
+    </div>
+    <div class="row" *ngIf="pictures">
+      <div class="col-md-4" *ngFor="let p of pictures">
+        <img [src]="p" class="framePicture img-fluid" />
       </div>
     </div>
   </div>
@@ -236,6 +236,19 @@
     </div>
     <div>
       <div class="row">
+        <div class="col-md-12">
+          <signature-pad [options]="signaturePadOptions"  id="signatureCanvas"></signature-pad>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-primary btn-block" [disabled]="showing" button full color="primary" (click)="getFirmaTroy()">Firma Troy</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-dark btn-block" [disabled]="showing" button full color="light" (click)="drawClear()">Limpiar</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-primary btn-block" [disabled]="showing" button full color="primary" (click)="getFirmaCFE()">Firma CFE</button>
+        </div>
+
         <div class="col-md-6">
           <div class="signatureContainer center" *ngIf="firmaTroy">
             <img [src]="firmaTroy">

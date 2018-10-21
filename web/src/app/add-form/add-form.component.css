@@ -1,0 +1,11 @@
+canvas {
+  border: dashed 1px #cccccc !important;
+  width: 100% !important;
+  height: 250px !important;
+}
+#signatureCanvas {
+  border-bottom: solid 6px black !important;
+  margin: auto;
+  margin-bottom: 10px;
+  display: table;
+}

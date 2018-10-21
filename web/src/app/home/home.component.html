@@ -24,7 +24,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let form of forms | search: query">
-      <th scope="row">{{form.user.name}} {{form.user.last_name}}</th>
+      <th scope="row"><span *ngIf="form.user">{{form.user.name}} {{form.user.last_name}}</span></th>
       <td>{{form.medidor}}</td>
       <td>{{form.serie}}</td>
       <td>
