@@ -2,14 +2,22 @@
   <br />
   <h2>Reporte de Materiales</h2>
   <hr />
-
+  <select class="form-control" (change)="subcontratistaChanged($event.target.value)" [(ngModel)]="selectedSupervisor">
+    <option value="all">Todos</option>
+    <option *ngFor="let s of subcontratistas" [ngValue]="s">[{{s.instalaciones.length}} instalaciones] ({{s.ciudad}}) {{s.nombre}}</option>
+  </select>
   <div class="card">
-    <h5 class="card-header">Optimizadores Instalados por Subcontratista</h5>
+    <h5 class="card-header">Materiales utilizados totales</h5>
     <table class="table table-bordered table-dark table-striped table-hover">
-      <tr *ngFor="let s of subcontratistas">
-        <td><span class="badge badge-warning">{{s.instalaciones}}</span></td>
-        <td>{{s.nombre}}</td>
-        <td>{{s.ciudad}}</td>
+      <tr>
+        <th>Cantidad</th>
+        <th>Material</th>
+        <th>Unidad</th>
+      </tr>
+      <tr *ngFor="let m of materials">
+        <td><span class="badge badge-warning">{{m.quantity | number: '1.2-2'}}</span></td>
+        <td>{{m.descripcion}}</td>
+        <td>{{m.unidad}}</td>
       </tr>
     </table>
   </div>
