@@ -18,4 +18,10 @@ export class ReportsService {
       data,
       {headers:headers});
   }
+  formReport(data) {
+    const headers = new HttpHeaders({"Content-Type":"application/json"});
+    return this.httpClient.post(this.env.apiURL+'excel/formReport/',
+      data,
+      {headers:headers});
+  }
 }

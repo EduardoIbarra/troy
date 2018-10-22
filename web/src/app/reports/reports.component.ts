@@ -191,6 +191,7 @@ export class ReportsComponent implements OnInit {
       to: to}).subscribe((data: any) => {
       var $a = $("<a>");
       $a.attr("href","https://eduardoibarra.com/laravel/public/excel/TTD-HMO-ARSUB.xlsx");
+      //https://eduardoibarra.com/laravel/public/excel/Formulario.xlsx
       $("body").append($a);
       // $a.attr("download","file.xls");
       $a[0].click();
