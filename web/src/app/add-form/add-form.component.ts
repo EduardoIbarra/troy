@@ -130,7 +130,7 @@ export class AddFormComponent implements OnInit {
     this.firmaCFE = JSON.parse(JSON.stringify(this.signaturePad.toDataURL()));
     this.drawClear();
   }
-  finish() {
+  finishFinish() {
     this.form.uid = Date.now();
     this.formService.add(this.form).then((data) => {
       this.uploadPictures(this.form.uid);
@@ -138,6 +138,33 @@ export class AddFormComponent implements OnInit {
       this.router.navigate(['/home']);
     }).catch((error) => {
       alert('Ocurrió un error mientras se enviaba el formulario:  ' + JSON.stringify(error));
+      console.log(error);
+    });
+  }
+  finish() {
+    let promiseMedidor: any;
+    let promiseSerie: any;
+    promiseSerie = this.formService.getSerieById(this.form.serie).valueChanges().subscribe((data) => {
+      promiseSerie.unsubscribe();
+      if (data) {
+        alert('Este optimizador ya ha sido instalado. Verifique nuevamente la serie.');
+        return;
+      } else {
+        promiseMedidor = this.formService.getMedidorById(this.form.medidor).valueChanges().subscribe((data) => {
+          promiseMedidor.unsubscribe();
+          if (data) {
+            alert('Este medidor ya cuenta con instalación. Verifique nuevamente el número.');
+            return;
+          } else {
+            this.finishFinish();
+          }
+        }, (error) => {
+          alert('Ocurrió un error o no se cuenta con acceso a internet para verificar el número del medidor');
+          console.log(error);
+        });
+      }
+    }, (error) => {
+      alert('Ocurrió un error o no se cuenta con acceso a internet para verificar la serie del aparato ingresado');
       console.log(error);
     });
   }

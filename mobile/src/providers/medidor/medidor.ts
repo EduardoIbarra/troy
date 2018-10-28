@@ -13,6 +13,9 @@ export class MedidorProvider {
   getById(uid) {
     return this.angularFireDataBase.object('medidores/nest2/' + uid);
   }
+  getByRPU(RPU) {
+    return this.angularFireDataBase.database.ref().child('medidores/nest2/').orderByChild('rpu').equalTo(RPU);
+  }
   add(user) {
     return this.angularFireDataBase.object('/medidores/nest2/' + user.uid).set(user);
   }

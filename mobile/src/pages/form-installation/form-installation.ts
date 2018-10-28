@@ -154,7 +154,6 @@ export class FormInstallationPage {
     });
     this.userProvider.getSubcontratistas().valueChanges().subscribe((data) => {
       this.employees = data;
-      console.log(this.employees);
     }, (error) => {
       console.log(error);
     });
@@ -162,12 +161,14 @@ export class FormInstallationPage {
       this.supervisores = [];
       data.forEach((data) => {
         const supervisor = data.val();
-        this.supervisores.push({
-          name: supervisor.name,
-          last_name: supervisor.last_name,
-          uid: supervisor.uid,
-          tipo: supervisor.tipo
-        });
+        if(supervisor.tipo === 'troy') {
+          this.supervisores.push({
+            name: supervisor.name,
+            last_name: supervisor.last_name,
+            uid: supervisor.uid,
+            tipo: supervisor.tipo
+          });
+        }
       });
       console.log(this.supervisores);
     });
@@ -181,7 +182,6 @@ export class FormInstallationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FormInstallationPage');
   }
 
   previous() {
@@ -198,7 +198,6 @@ export class FormInstallationPage {
       return;
     }
     this.step++;
-    console.log(this.form);
     if (this.step == 9999) {
       window.setTimeout(() => {
         this.loadMap();
@@ -255,6 +254,24 @@ export class FormInstallationPage {
       }
     }, (error) => {
       console.log(error);
+    });
+  }
+  
+  searchMedidorByRPU() {
+    this.medidorProvider.getByRPU(this.form.rpu).on("value", (response) => {
+      let data: any;
+      data = response.val();
+      if (data) {
+        this.form.nombre = data.nombre;
+        this.form.calle = data.Direccion;
+        this.form.colonia = data.colonia;
+        this.form.ciudad = data.municipio + ', ' + data.estado;
+        this.form.rpu = data.rpu;
+        this.form.geolocation = {lat: data.lat, lng: data.lng};
+      } else {
+        const toast = this.toastController.create({message: 'Medidor no encontrado por este RPU', duration: 4000, position: 'bottom'});
+        toast.present();
+      }
     });
   }
 

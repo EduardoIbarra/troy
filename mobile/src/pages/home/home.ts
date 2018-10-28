@@ -25,7 +25,6 @@ export class HomePage {
         if(this.user.forms) {
           this.user.forms = Object.keys(this.user.forms).map(key => this.user.forms[key]);
         }
-        console.log(this.user);
       }, (error) => {
         console.log(error);
       });
