@@ -89,7 +89,9 @@ export class MymaterialComponent implements OnInit {
       this.subcontratistas.forEach((s) => {
         s.instalaciones = this.forms.filter((f) => {return f.user && f.user.company && f.user.company.id == s.id});
       });
-      this.calculateMaterials(this.subcontratistas[0].instalaciones);
+      if (this.subcontratistas && this.subcontratistas[0] && this.subcontratistas[0].instalaciones) {
+        this.calculateMaterials(this.subcontratistas[0].instalaciones);
+      }
     }, (error) => {
       console.log(error);
     });

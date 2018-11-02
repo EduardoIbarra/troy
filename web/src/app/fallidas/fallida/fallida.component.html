@@ -22,6 +22,7 @@
       </div>
     </div>
   </div>
+
   <hr />
   <h2>{{fallida.visitas.length}} Visitas:</h2>
   <div class="shadow-sm p-3 mb-5 bg-white rounded" *ngFor="let visita of fallida.visitas">
@@ -45,6 +46,15 @@
         <img [src]="visita.firmaCFE" class="img-fluid" />
         <h4>Supervisor CFE</h4>
       </div>
+    </div>
+    <div *ngIf="visita.pictures">
+      <h2>Evidencia</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let p of visita.pictures">
+          <img [src]="p" class="framePicture img-fluid" />
+        </div>
+      </div>
+      <hr />
     </div>
   </div>
 </div>

@@ -14,6 +14,11 @@ export class FallidaComponent implements OnInit {
     this.fallidaService.getById(this.activatedRoute.snapshot.params['medidor']).valueChanges().subscribe((data) => {
       this.fallida = data;
       this.fallida.visitas = Object.values(this.fallida.visitas);
+      this.fallida.visitas.forEach((v) => {
+        if (v.pictures) {
+          v.pictures = Object.values(v.pictures);
+        }
+      });
       console.log(this.fallida);
     }, (error) => {
       console.log(error);

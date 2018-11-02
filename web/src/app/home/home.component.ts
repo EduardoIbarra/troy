@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormService} from "../services/form.service";
 import {AuthService} from "../services/auth.service";
+import {UserService} from "../services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,9 @@ export class HomeComponent implements OnInit {
   forms: any = [];
   creating: boolean = false;
   query: string;
-  constructor(private formService: FormService, private authService: AuthService) {
+  userSubscription: any;
+  user: any;
+  constructor(private formService: FormService, private authService: AuthService, private userService: UserService, private router: Router) {
     this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
     }, (error) => {
@@ -21,6 +25,20 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getStatus().subscribe((data) => {
+      if (!data) { return; }
+      this.userSubscription = this.userService.getById(data.uid).valueChanges().subscribe((data) => {
+        this.user = data;
+        if (!this.user.superadmin) {
+          this.router.navigate(['reports']);
+        }
+        this.userSubscription.unsubscribe();
+      }, (error) => {
+        console.log(error);
+      });
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   select(form) {

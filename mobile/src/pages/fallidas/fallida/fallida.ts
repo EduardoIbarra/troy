@@ -8,6 +8,7 @@ import {AuthenticationProvider} from "../../../providers/authentication/authenti
 import {UserProvider} from "../../../providers/user/user";
 import {Storage} from "@ionic/storage";
 import {GeneralProvider} from "../../../providers/general/general";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 
 @IonicPage()
 @Component({
@@ -29,6 +30,7 @@ export class FallidaPage {
   isOffline = false;
   firmaCFE:string;
   firmaTroy:string;
+  pictures: any[] = [];
   reasons: any = [
     'Predio abandonado',
     'Cliente agresivo',
@@ -44,6 +46,7 @@ export class FallidaPage {
               public authenticationProvider: AuthenticationProvider,
               public userProvider: UserProvider,
               private loadingCtrl: LoadingController,
+              private camera: Camera,
               private storage: Storage,
               private generalProvider: GeneralProvider) {
     this.authenticationProvider.getStatus().subscribe((data) => {
@@ -136,6 +139,18 @@ export class FallidaPage {
         console.log('Falla al subir la FirmaTroy');
       });
     }
+    if (this.pictures && this.pictures.length > 0) {
+      this.pictures.forEach((picture) => {
+        const thisPictureId = Date.now();
+        this.generalProvider.uploadPicture('instalaciones/' + thisPictureId + '.jpg', picture).then(() => {
+          this.generalProvider.getDownloadURL('instalaciones/' + thisPictureId + '.jpg').subscribe((url) => {
+            this.generalProvider.freeUpdate('/fallidas/' + fallida.medidor + '/visitas/' + fallida.timestamp + '/pictures/' + thisPictureId, url);
+          });
+        }).catch(() => {
+          console.log('Falla al subir fotografía');
+        });
+      })
+    }
   }
   save() {
     if (this.fallida.reason && this.fallida.reason === 'Otra' && !this.fallida.observaciones) {
@@ -203,5 +218,24 @@ export class FallidaPage {
       loading.dismiss();
       console.log(error);
     });
+  }
+  async takePicture(source) {
+    try {
+      let cameraOptions: CameraOptions = {
+        quality: 50,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        allowEdit: true
+      };
+      cameraOptions.sourceType = (source == 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
+      const result = await this.camera.getPicture(cameraOptions);
+      const image = `data:image/jpeg;base64,${result}`;
+      console.log(image);
+      this.pictures.push(image);
+    } catch (e) {
+      console.error(e);
+    }
   }
 }

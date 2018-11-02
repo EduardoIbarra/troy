@@ -76,6 +76,24 @@
   </ion-grid>
 
   <ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button [disabled]="showing" ion-button full icon-end (click)="takePicture('camera')">Tomar Fotografía <ion-icon name="camera"></ion-icon></button>
+        </ion-col>
+        <ion-col>
+          <button [disabled]="showing" ion-button full icon-end (click)="takePicture('album')">Seleccionar de Álbum <ion-icon name="images"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div>
+      <div class="picture" *ngFor="let p of pictures">
+        <img [src]="p">
+      </div>
+    </div>
+  </ion-grid>
+
+  <ion-grid>
     <signature-pad *ngIf="!showing" [options]="signaturePadOptions"  id="signatureCanvas"></signature-pad>
     <ion-grid *ngIf="!showing">
       <ion-row>
