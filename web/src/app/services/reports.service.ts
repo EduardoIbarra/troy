@@ -18,6 +18,12 @@ export class ReportsService {
       data,
       {headers:headers});
   }
+  generateReportMultiple(data) {
+    const headers = new HttpHeaders({"Content-Type":"application/json"});
+    return this.httpClient.post(this.env.apiURL+'excel/formReportMultiple/',
+      data,
+      {headers:headers});
+  }
   formReport(data) {
     const headers = new HttpHeaders({"Content-Type":"application/json"});
     return this.httpClient.post(this.env.apiURL+'excel/formReport/',

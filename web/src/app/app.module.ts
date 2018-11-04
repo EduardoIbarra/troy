@@ -31,6 +31,7 @@ import {AddFormComponent} from "./add-form/add-form.component";
 import {MaterialComponent} from "./material/material.component";
 import {SignaturePadModule} from "angular2-signaturepad";
 import {MymaterialComponent} from "./mymaterial/mymaterial.component";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
     FormsModule,
     NgbModule,
     HttpClientModule,
-    SignaturePadModule
+    SignaturePadModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

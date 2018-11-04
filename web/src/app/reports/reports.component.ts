@@ -5,6 +5,8 @@ import {UserService} from "../services/user.service";
 import * as XLSX from 'xlsx';
 import * as $ from 'jquery';
 import {ReportsService} from "../services/reports.service";
+import {NgxSpinnerService} from "ngx-spinner";
+import {GeneralService} from "../services/general.service";
 
 @Component({
   selector: 'app-reports',
@@ -24,13 +26,22 @@ export class ReportsComponent implements OnInit {
   users: any[] = [];
   selectedSupervisor: any;
   conVarilla: any[] = [];
+  formsSubscription: any;
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
-              private reportsService: ReportsService) {
+              private reportsService: ReportsService,
+              private spinner: NgxSpinnerService,
+              private generalService: GeneralService) {
     this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
     }, (error) => {
       console.log(error);
     });
+  }
+
+  ngOnInit() {
+  }
+
+  showForms() {
     this.authService.getStatus().subscribe((data) => {
       this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
@@ -53,16 +64,22 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   getForms() {
-    this.formService.get().valueChanges().subscribe((data) => {
+    this.spinner.show();
+    this.formsSubscription = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
+      this.spinner.hide();
+      /*this.forms.forEach((f, i) => {
+        if (i > 3200 && i <= 3700) {
+          this.generalService.freeUpdate('forms/' + f.uid + '/user/forms', null);
+        }
+      });*/
       this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
       this.filteredForms = this.forms;
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+      this.formsSubscription.unsubscribe();
     }, (error) => {
+      this.spinner.hide();
       console.log(error);
     });
   }
@@ -199,5 +216,34 @@ export class ReportsComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+  generateReportMultiple() {
+    let forms: any[];
+    forms = this.filteredForms.filter((f) => {return f.selected});
+    if(!forms || forms.length <= 0) {
+      alert('Debe seleccionar por lo menos un formulario para descargarlo');
+      return;
+    }
+    console.log(forms);
+    this.spinner.show();
+    this.reportsService.generateReportMultiple({forms: forms}).subscribe((data: any) => {
+      console.log(data);
+      var $a = $("<a>");
+      $a.attr("href","https://eduardoibarra.com/laravel/public/" + data.path);
+      $("body").append($a);
+      $a[0].click();
+      $a.remove();
+      this.spinner.hide();
+    }, (error) => {
+      alert('Ocurrió un error');
+      console.log(error);
+      this.spinner.hide();
+    });
+    alert('Generando archivo zip, esto puede tardar unos minutos...');
+  }
+
+  toggleAll() {
+    this.filteredForms.forEach((f) => {f.selected = !f.selected});
   }
 }

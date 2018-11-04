@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <br />
   <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-warning btn-block" (click)="showForms()">MOSTRAR FORMULARIOS</button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
     <div class="col-md-4">
       <form class="form-inline">
         <div class="form-group">
@@ -54,6 +60,7 @@
     <div class="col-md-12">
       <hr />
       <button class="btn btn-block btn-secondary" [disabled]="!fromDate || !toDate" (click)="generateReport()">Descargar Excel</button>
+      <button class="btn btn-block btn-secondary" (click)="generateReportMultiple()">Descargar Seleccionados</button>
     </div>
   </div>
   <br />
@@ -70,6 +77,7 @@
   <table class="table table-bordered table-hover table-striped table-sm">
     <thead class="thead-dark">
     <tr>
+      <th><input type="checkbox" (change)="toggleAll()"></th>
       <th scope="col">Consecutivo</th>
       <th scope="col">Nombre</th>
       <th scope="col"># Serie Optimizador</th>
@@ -89,8 +97,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let form of filteredForms | search: query; let i = index">
+      <td>
+        <input type="checkbox" [(ngModel)]="form.selected">
+      </td>
       <th>{{i+1}}</th>
-      <th scope="row">{{form.user.name}} {{form.user.last_name}}</th>
+      <th scope="row" *ngIf="form && form.user">{{form.user.name}} {{form.user.last_name}}</th>
       <td>{{form.serie}}</td>
       <td>{{form.medidor}}</td>
       <td>

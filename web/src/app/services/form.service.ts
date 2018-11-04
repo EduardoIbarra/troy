@@ -11,6 +11,9 @@ export class FormService {
   get() {
     return this.angularFireDataBase.list('forms/');
   }
+  getPaged() {
+    return this.angularFireDataBase.list('forms/');
+  }
   getById(uid) {
     return this.angularFireDataBase.object('forms/' + uid);
   }

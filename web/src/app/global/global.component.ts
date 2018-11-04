@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormService} from "../services/form.service";
 import {UserService} from "../services/user.service";
 import {FallidaService} from "../services/fallida.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-global',
@@ -16,10 +17,13 @@ export class GlobalComponent implements OnInit {
   usuarios: any[] = [];
   constructor(private formService: FormService,
               private userService: UserService,
-              private fallidaService: FallidaService) {
+              private fallidaService: FallidaService,
+              private spinner: NgxSpinnerService) {
     this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
+      this.spinner.show();
       this.formService.get().valueChanges().subscribe((data) => {
+        this.spinner.hide();
         this.forms = data;
         this.forms.forEach((f) => {
           f.user = this.usuarios.find((u) => { return f.user && u.uid === f.user.uid });

@@ -11,6 +11,14 @@
       </span>
     </div>
   </div>
+  <div>
+    <button class="btn btn-warning btn-sm" [disabled]="page <= 1" (click)="prev()">Atrás</button>
+    <b> -- Página {{page}} -- </b>
+    <button class="btn btn-warning btn-sm" (click)="next()">Siguiente</button>
+    <button class="btn btn-secondary btn-sm" (click)="showAll()">Mostrar Todos</button>
+  </div>
+  <small>Mostrando {{pagedForms.length}} registro(s)</small>
+  <hr />
   <table class="table table-bordered table-hover table-striped">
     <thead class="thead-dark">
     <tr>
@@ -23,28 +31,30 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let form of forms | search: query">
-      <th scope="row"><span *ngIf="form.user">{{form.user.name}} {{form.user.last_name}}</span></th>
-      <td>{{form.medidor}}</td>
-      <td>{{form.serie}}</td>
-      <td>
-        <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
-          Ver en Mapa <i class="fas fa-map-marker-alt"></i>
-        </a>
-      </td>
-      <td>{{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}</td>
-      <td>
-        <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
-          <i class="fas fa-eye"></i>
-        </button>
-        <button class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar" (click)="remove(form)">
-          <i class="fas fa-trash"></i>
-        </button>
-      </td>
-    </tr>
+    <ng-container *ngFor="let form of pagedForms | search: query; let i = index">
+      <tr>
+        <th scope="row"><span *ngIf="form.user">{{form.user.name}} {{form.user.last_name}}</span></th>
+        <td>{{form.medidor}}</td>
+        <td>{{form.serie}}</td>
+        <td>
+          <a *ngIf="form.geolocation && form.geolocation.lat && form.geolocation.lng" href="https://www.google.com/maps/search/?api=1&query={{form.geolocation.lat}},{{form.geolocation.lng}}" target="_blank">
+            Ver en Mapa <i class="fas fa-map-marker-alt"></i>
+          </a>
+        </td>
+        <td>{{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
+            <i class="fas fa-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar" (click)="remove(form)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
     </tbody>
   </table>
 </div>

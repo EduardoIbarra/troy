@@ -15,9 +15,26 @@ exports.createUser = functions.https.onRequest((req, res) => {
         delete user.password;
         return admin.database('users/' + user.uid).set(user);
     })
-    .catch(function(error) {
-        console.log("Error creating new user:", error);
-    });
+        .catch(function(error) {
+            console.log("Error creating new user:", error);
+        });
+});
+exports.cleanForms = functions.https.onRequest((req, res) => {
+    const parentRef = admin.database().ref("forms");
+    parentRef.once('value')
+        .then(snapshot => {
+            const promises = [];
+            snapshot.forEach(child => {
+                promises.push(admin.database().ref('forms/'+child.key+'/user/forms').set(null));
+            });
+            return Promise.all(promises)
+                .then(results => {
+                    response.send({result: results.length + ' node(s) deleted'});
+                })
+                .catch(error => {
+                    response.status(500).send(error);
+                });
+        });
 });
 exports.inyectSerie = functions.database.ref('forms/{pushId}/serie').onCreate(event => {
     if (!admin.apps.length) {
@@ -45,6 +62,7 @@ exports.inyectForm = functions.database.ref('forms/{pushId}').onCreate(event => 
         medidor: form.medidor,
         rpu: form.rpu
     };
+    admin.database().ref('forms/'+formData.uid+'/user/forms').set(null);
     return admin.database().ref('users/'+form.user.uid+'/forms/'+formData.uid).set(formData);
 });
 exports.inyectFallida = functions.database.ref('fallidas/{pushId}').onWrite(event => {

@@ -5,6 +5,7 @@ import {UserService} from "../services/user.service";
 import * as XLSX from 'xlsx';
 import * as $ from 'jquery';
 import {ReportsService} from "../services/reports.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-total_reports',
@@ -25,14 +26,17 @@ export class TotalReportsComponent implements OnInit {
   constructor(private formService: FormService,
               private authService: AuthService,
               private userService: UserService,
-              private reportsService: ReportsService) {
+              private reportsService: ReportsService,
+              private spinner: NgxSpinnerService) {
     this.authService.getStatus().subscribe((data) => {
       this.user = data;
     }, (error) => {
       console.log(error);
     });
+    this.spinner.show();
     this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
+      this.spinner.hide();
       this.filteredForms = this.forms;
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
       console.log(this.filteredForms);
