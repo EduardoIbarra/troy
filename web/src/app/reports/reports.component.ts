@@ -45,6 +45,7 @@ export class ReportsComponent implements OnInit {
     this.authService.getStatus().subscribe((data) => {
       this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
+        console.log(this.user);
         this.supervisados.push(this.user.uid);
         this.userService.getBySupervisor(this.user.uid).on("value", (response) => {
           this.supervisados = response.val() || [];
@@ -199,8 +200,8 @@ export class ReportsComponent implements OnInit {
     });
     this.reportsService.generateReport({
       table: arrayOfArrays,
-      estado: firstForm.ciudad.split(',')[1],
-      ciudad: firstForm.ciudad.split(',')[0],
+      estado: (firstForm.ciudad) ? firstForm.ciudad.split(',')[1] : 'N/A',
+      ciudad: (firstForm.ciudad) ? firstForm.ciudad.split(',')[0] : 'N/A',
       totales: this.filteredForms.length,
       sinTierra: this.filteredForms.length - this.conVarilla.length,
       conTierra: this.conVarilla.length,

@@ -59,6 +59,7 @@
   <div class="row" *ngIf="filteredForms.length > 0">
     <div class="col-md-12">
       <hr />
+      <span *ngIf="!fromDate || !toDate">Debe elegir ambas fechas para que se le permita descargar el Excel</span>
       <button class="btn btn-block btn-secondary" [disabled]="!fromDate || !toDate" (click)="generateReport()">Descargar Excel</button>
       <button class="btn btn-block btn-secondary" (click)="generateReportMultiple()">Descargar Seleccionados</button>
     </div>
@@ -123,6 +124,9 @@
       <td>
         <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
           <i class="fas fa-eye"></i>
+        </button>
+        <button *ngIf="user && user.tipo == 'troy'" class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
+          <i class="fas fa-edit"></i>
         </button>
       </td>
     </tr>
