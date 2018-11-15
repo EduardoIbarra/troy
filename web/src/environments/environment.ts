@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAY_Sup07Nhaa6Cauh2rA7jOHi7uPZrgPk",
-    authDomain: "troy-da34b.firebaseapp.com",
-    databaseURL: "https://troy-da34b.firebaseio.com",
-    projectId: "troy-da34b",
-    storageBucket: "troy-da34b.appspot.com",
-    messagingSenderId: "938370155886"
+    apiKey: "AIzaSyDGGTCIdGzF2Q6CXBx3Dric5d7NojLM8Po",
+    authDomain: "trojan-5d25e.firebaseapp.com",
+    databaseURL: "https://trojan-5d25e.firebaseio.com",
+    projectId: "trojan-5d25e",
+    storageBucket: "trojan-5d25e.appspot.com",
+    messagingSenderId: "503655775222"
   },
   apiURL: 'https://eduardoibarra.com/laravel/public/index.php/'
 };
