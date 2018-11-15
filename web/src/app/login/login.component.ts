@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
@@ -13,20 +13,22 @@ export class LoginComponent implements OnInit {
   email: string = null;
   password: string = null;
   name: string = null;
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
+
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) {
+  }
 
   ngOnInit() {
   }
 
   login() {
-    this.authService.loginWithEmail(this.email, this.password).then( (data) => {
+    this.authService.loginWithEmail(this.email, this.password).then((data) => {
       this.authService.getStatus().subscribe((status) => {
-        this.userService.getById(status.uid).valueChanges().subscribe((user:any) => {
-          if(user.admin) {
+        this.userService.getById(status.uid).valueChanges().subscribe((user: any) => {
+          if (user.admin) {
             console.log(data);
             this.router.navigate(['reports']);
           } else {
-            alert('Usted no tiene acceso al administrador web');
+            alert('Usted no tiene acceso al Administrador WEB');
           }
         }, (error) => {
           console.log(error);
@@ -35,13 +37,13 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });
     }).catch((error) => {
-      alert('Ocurrioo un error');
+      alert('Ha ocurrido un error');
       console.log(error);
     });
   }
 
   register() {
-    this.authService.registerWithEmail(this.email, this.password).then( (data) => {
+    this.authService.registerWithEmail(this.email, this.password).then((data) => {
       const user = {
         uid: data.user.uid,
         email: this.email,
@@ -51,11 +53,11 @@ export class LoginComponent implements OnInit {
         alert('Registrado correctamente');
         console.log(data2);
       }).catch((error) => {
-        alert('Ocurrioo un error');
+        alert('Ha ocurrido un error');
         console.log(error);
       });
     }).catch((error) => {
-      alert('Ocurrioo un error');
+      alert('Ha ocurrido un error');
       console.log(error);
     });
   }
