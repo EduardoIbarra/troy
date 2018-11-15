@@ -34,12 +34,13 @@ export class TotalReportsComponent implements OnInit {
       console.log(error);
     });
     this.spinner.show();
-    this.formService.get().valueChanges().subscribe((data) => {
+    const subscription = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
       this.spinner.hide();
       this.filteredForms = this.forms;
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
       console.log(this.filteredForms);
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });

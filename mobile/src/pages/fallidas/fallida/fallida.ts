@@ -227,7 +227,8 @@ export class FallidaPage {
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
         correctOrientation: true,
-        allowEdit: true
+        allowEdit: true,
+        saveToPhotoAlbum: true
       };
       cameraOptions.sourceType = (source == 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
       const result = await this.camera.getPicture(cameraOptions);

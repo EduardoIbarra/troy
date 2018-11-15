@@ -28,17 +28,19 @@ export class ReportsCFEComponent implements OnInit {
   conVarilla: any[] = [];
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
               private reportsService: ReportsService) {
-    this.userService.get().valueChanges().subscribe((data) => {
+    const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
       console.log(this.users);
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
     this.authService.getStatus().subscribe((data) => {
-      this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
+      const subscription2 = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
         this.supervisados.push(this.user.uid);
         this.getForms();
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
@@ -53,11 +55,12 @@ export class ReportsCFEComponent implements OnInit {
   }
 
   getForms() {
-    this.formService.get().valueChanges().subscribe((data) => {
+    const subscription = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
       this.forms = this.forms.filter((f) => {return f.user && this.user.RPE == f.CFERpe});
       this.filteredForms = this.forms;
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });

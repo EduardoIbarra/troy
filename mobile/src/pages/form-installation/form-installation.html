@@ -7,8 +7,14 @@
 
 <ion-content padding style="background: none transparent;">
   <div class="center">
-    <h3>Fecha: {{today | date:'d/M/yyyy'}}</h3>
+    <h3>Fecha: {{form.installation_date | date:'d/M/yyyy'}}</h3>
   </div>
+
+  <ion-item>
+    <ion-label>Fecha de instalación:</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" min="2017" max="2020-10-31" [(ngModel)]="form.installation_date">
+    </ion-datetime>
+  </ion-item>
 
   <ion-grid>
     <ion-row>
@@ -76,6 +82,14 @@
               Escannear
             </button>
           </ion-item>
+          <ion-item>
+            <ion-label color="primary">Sustituye dañado?</ion-label>
+            <ion-checkbox [disabled]="showing" color="dark" checked="false" [(ngModel)]="form.subsitute"></ion-checkbox>
+          </ion-item>
+          <ion-item *ngIf="form.subsitute">
+            <ion-label color="primary" floating>Serie sustituido</ion-label>
+            <ion-input [disabled]="showing" [(ngModel)]="form.subsitute_serie" type="text"></ion-input>
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -128,10 +142,13 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item>
+          <ion-item *ngIf="hasInstaller">
+            <ion-label><b>Instaló: </b> ({{form.instalo.ciudad}}) {{form.instalo.nombre}}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="!hasInstaller">
             <ion-label color="primary" floating>Instaló <small *ngIf="form && form.instalo"><b> - ({{form.instalo.ciudad}}) {{form.instalo.nombre}}</b></small></ion-label>
             <small *ngIf="form && form.instalo">({{form.instalo.ciudad}}) {{form.instalo.nombre}}</small>
-            <ion-select [disabled]="showing" [(ngModel)]="form.instalo">
+            <ion-select [disabled]="showing" [(ngModel)]="form.instalo" >
               <ion-option [value]="e" *ngFor="let e of employees">({{e.ciudad}}) {{e.nombre}}</ion-option>
             </ion-select>
           </ion-item>
@@ -191,6 +208,18 @@
             <ion-input [disabled]="showing" [(ngModel)]="form.observaciones" type="text"></ion-input>
           </ion-item>
         </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button full (click)="instBasica()">
+          Inst. Básica
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button full (click)="instUnicanal()">
+          Inst. Unicanal
+        </button>
       </ion-col>
     </ion-row>
     <h5 class="center">Agregar Materiales</h5>

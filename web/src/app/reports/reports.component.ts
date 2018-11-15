@@ -27,12 +27,32 @@ export class ReportsComponent implements OnInit {
   selectedSupervisor: any;
   conVarilla: any[] = [];
   formsSubscription: any;
+  usersSupervised: any[] = [];
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
               private reportsService: ReportsService,
               private spinner: NgxSpinnerService,
               private generalService: GeneralService) {
-    this.userService.get().valueChanges().subscribe((data) => {
+    const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
+      subscription.unsubscribe();
+      this.authService.getStatus().subscribe((data) => {
+        const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
+          this.user = data2;
+          subscription.unsubscribe();
+          this.userService.getBySupervisor(this.user.uid).on("value", (response) => {
+            this.supervisados = response.val() || [];
+            if (this.supervisados) {
+              this.supervisados = Object.keys(this.supervisados);
+            }
+            this.supervisados.push(this.user.uid);
+            if (!this.user.superadmin) {
+              this.usersSupervised = this.users.filter((u) => {return this.supervisados.includes(u.uid)});
+            } else {
+              this.usersSupervised = this.users;
+            }
+          });
+        });
+      });
     }, (error) => {
       console.log(error);
     });
@@ -43,9 +63,8 @@ export class ReportsComponent implements OnInit {
 
   showForms() {
     this.authService.getStatus().subscribe((data) => {
-      this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
+      const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
-        console.log(this.user);
         this.supervisados.push(this.user.uid);
         this.userService.getBySupervisor(this.user.uid).on("value", (response) => {
           this.supervisados = response.val() || [];
@@ -53,8 +72,12 @@ export class ReportsComponent implements OnInit {
             this.supervisados = Object.keys(this.supervisados);
           }
           this.supervisados.push(this.user.uid);
+          if (!this.user.superadmin) {
+            this.users = this.users.filter((u) => {return this.supervisados.includes(u.uid)});
+          }
           this.getForms();
         });
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
@@ -106,7 +129,6 @@ export class ReportsComponent implements OnInit {
   generate() {
     const from = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day + ' 00:00:00').getTime();
     const to = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day + ' 23:59:59').getTime();
-    console.log(from, to);
     this.filteredForms = this.forms.filter((f) => { return f.uid >= from && f.uid <= to });
   }
   generateExcel() {
@@ -167,6 +189,7 @@ export class ReportsComponent implements OnInit {
     XLSX.writeFile(wb, 'Reporte.xlsx');
   }
   generateForSupervisor() {
+    this.spinner.show();
     this.supervisados.push(this.selectedSupervisor.uid);
     this.userService.getBySupervisor(this.selectedSupervisor.uid).on("value", (response) => {
       this.supervisados = response.val() || [];
@@ -174,9 +197,9 @@ export class ReportsComponent implements OnInit {
         this.supervisados = Object.keys(this.supervisados);
       }
       this.supervisados.push(this.selectedSupervisor.uid);
+      this.spinner.hide();
       this.getForms();
     });
-    console.log(this.selectedSupervisor);
   }
   generateReport() {
     let arrayOfArrays: any[] = [];
@@ -226,10 +249,8 @@ export class ReportsComponent implements OnInit {
       alert('Debe seleccionar por lo menos un formulario para descargarlo');
       return;
     }
-    console.log(forms);
     this.spinner.show();
     this.reportsService.generateReportMultiple({forms: forms}).subscribe((data: any) => {
-      console.log(data);
       var $a = $("<a>");
       $a.attr("href","https://eduardoibarra.com/laravel/public/" + data.path);
       $("body").append($a);

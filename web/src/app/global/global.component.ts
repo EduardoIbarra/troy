@@ -19,10 +19,10 @@ export class GlobalComponent implements OnInit {
               private userService: UserService,
               private fallidaService: FallidaService,
               private spinner: NgxSpinnerService) {
-    this.userService.get().valueChanges().subscribe((data) => {
+    const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
       this.spinner.show();
-      this.formService.get().valueChanges().subscribe((data) => {
+      const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
         this.spinner.hide();
         this.forms = data;
         this.forms.forEach((f) => {
@@ -30,15 +30,18 @@ export class GlobalComponent implements OnInit {
         });
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
         this.getSubcontratistas();
+        subscription2.unsubscribe();
       }, (error) => {
         console.log(error);
       });
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
-    this.fallidaService.get().valueChanges().subscribe((data) => {
+    const subscription3 = this.fallidaService.get().valueChanges().subscribe((data) => {
       this.fallidas = data;
       console.log(data);
+      subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
     });

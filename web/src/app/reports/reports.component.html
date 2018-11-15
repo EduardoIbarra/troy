@@ -41,17 +41,18 @@
       <button class="btn btn-block btn-primary" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
     </div>
   </div>
-  <br *ngIf="user && user.superadmin" />
-  <div class="row" *ngIf="user && user.superadmin">
+  <br *ngIf="user && usersSupervised && usersSupervised.length > 0" />
+  <div class="row" *ngIf="user && usersSupervised && usersSupervised.length > 0">
     <div class="col-md-4">
       <select class="form-control" [(ngModel)]="selectedSupervisor">
-        <option *ngFor="let u of users" [ngValue]="u">
+        <option *ngFor="let u of usersSupervised" [ngValue]="u">
           <span *ngIf="u.company">({{u.company.nombre}}) </span>
           {{u.name}} {{u.last_name}}
         </option>
       </select>
     </div>
     <div class="col-md-3">
+      <small *ngIf="!fromDate || !toDate">Debe elegir ambas fechas para que se le permita generar para supervisor</small>
       <button class="btn btn-primary btn-block" (click)="generateForSupervisor()" [disabled]="!fromDate || !toDate || !selectedSupervisor">Generar para Supervisor</button>
     </div>
   </div>

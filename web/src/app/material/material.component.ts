@@ -21,30 +21,34 @@ export class MaterialComponent implements OnInit {
               private userService: UserService,
               private fallidaService: FallidaService,
               private materialService: MaterialService) {
-    this.userService.get().valueChanges().subscribe((data) => {
+    const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
-      this.formService.get().valueChanges().subscribe((data) => {
+      const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
         this.getMaterials();
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
         this.getSubcontratistas();
+        subscription2.unsubscribe();
       }, (error) => {
         console.log(error);
       });
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
-    this.fallidaService.get().valueChanges().subscribe((data) => {
+    const subscription3 = this.fallidaService.get().valueChanges().subscribe((data) => {
       this.fallidas = data;
+      subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
     });
   }
 
   getMaterials() {
-    this.materialService.get().valueChanges().subscribe((data) => {
+    const subscription = this.materialService.get().valueChanges().subscribe((data) => {
       this.materials = data;
       this.calculateMaterials(this.forms);
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
@@ -67,11 +71,12 @@ export class MaterialComponent implements OnInit {
   }
 
   getSubcontratistas() {
-    this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
+    const subscription = this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.subcontratistas = data;
       this.subcontratistas.forEach((s) => {
         s.instalaciones = this.forms.filter((f) => {return f.user && f.user.company && f.user.company.id == s.id});
       });
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });

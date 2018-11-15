@@ -42,6 +42,7 @@ export class FormInstallationPage {
   coords: any;
   pictures: any[] = [];
   user: any;
+  hasInstaller = false;
   @ViewChild(SignaturePad) public signaturePad: SignaturePad;
   public signaturePadOptions: Object = {
     'minWidth': 2,
@@ -55,7 +56,37 @@ export class FormInstallationPage {
   firmaCFE: string;
   firmaTroy: string;
   supervisores: any[] = [];
-
+  instBasicaMateriales = [
+    { id: 17, amount: 5 },
+    { id: 16, amount: 5 },
+    { id: 11, amount: 1 },
+    { id: 3, amount: 1 },
+    { id: 19, amount: 1 },
+    { id: 26, amount: 1 },
+    { id: 7, amount: 2.4 },
+    { id: 2, amount: 1.2 },
+    { id: 6, amount: 1.2 },
+    { id: 8, amount: 1.2 },
+    { id: 23, amount: 1.2 }
+  ];
+  instUnicanalMateriales = [
+    { id: 17, amount: 5 },
+    { id: 16, amount: 5 },
+    { id: 11, amount: 1 },
+    { id: 3, amount: 1 },
+    { id: 19, amount: 1 },
+    { id: 26, amount: 1 },
+    { id: 7, amount: 2.4 },
+    { id: 2, amount: 1.2 },
+    { id: 6, amount: 1.2 },
+    { id: 8, amount: 1.2 },
+    { id: 23, amount: 1.2 },
+    { id: 24, amount: .60 },
+    { id: 30, amount: 4 },
+    { id: 21, amount: 4 },
+    { id: 20, amount: 4 },
+    { id: 22, amount: 4 }
+  ];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -73,7 +104,7 @@ export class FormInstallationPage {
     public modalController: ModalController,
     public barcodeScanner: BarcodeScanner,
     private generalProvider: GeneralProvider) {
-
+    this.form.installation_date = Date.now();
     if (this.navParams.get('form')) {
       this.form = this.navParams.get('form');
       this.pictures = this.form.pictures;
@@ -92,12 +123,13 @@ export class FormInstallationPage {
         content: 'Por favor espera mientras se carga el formulario...'
       });
       loading.present();
-      this.formProvider.getById(this.navParams.get('form_id')).valueChanges().subscribe((data) => {
+      const subscription = this.formProvider.getById(this.navParams.get('form_id')).valueChanges().subscribe((data) => {
         this.form = data;
         this.pictures = this.form.pictures;
         this.user = this.form.user;
         this.current_materials = this.form.current_materials;
         loading.dismiss();
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
@@ -124,11 +156,12 @@ export class FormInstallationPage {
     if (this.navParams.get('form')) {
       this.materials = this.form.current_materials;
     } else {
-      this.materialProvider.get().valueChanges().subscribe((data) => {
+      const subscription = this.materialProvider.get().valueChanges().subscribe((data) => {
         this.materials = data;
         this.materials.forEach((m) => {
           m.current_quantity = null;
         });
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
@@ -144,19 +177,35 @@ export class FormInstallationPage {
         });
         console.log(this.employees);
       });*/
-      this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
+      const subscription  =this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
+        if (this.user && this.user.company) {
+          this.form.instalo = this.user.company;
+          this.hasInstaller = true;
+        }
+        console.log(this.user);
+        this.getSupervisorn();
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
     }, (error) => {
       console.log(error);
     });
-    this.userProvider.getSubcontratistas().valueChanges().subscribe((data) => {
+    const subscription = this.userProvider.getSubcontratistas().valueChanges().subscribe((data) => {
       this.employees = data;
+      console.log(this.employees);
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
+  }
+
+  getSupervisorn() {
+    let loading = this.loadingCtrl.create({
+      content: 'Cargando supervisores...'
+    });
+    loading.present();
     this.userProvider.getSupervisors().on('value', (data) => {
       this.supervisores = [];
       data.forEach((data) => {
@@ -166,11 +215,17 @@ export class FormInstallationPage {
             name: supervisor.name,
             last_name: supervisor.last_name,
             uid: supervisor.uid,
-            tipo: supervisor.tipo
+            tipo: supervisor.tipo,
+            company: supervisor.company
           });
         }
       });
       console.log(this.supervisores);
+      this.supervisores = this.supervisores.filter((s) => { return s.company && this.user && this.user.company && s.company.ciudad === this.user.company.ciudad });
+      console.log(this.supervisores);
+      loading.dismiss();
+    }, (error) => {
+      loading.dismiss();
     });
   }
 
@@ -202,6 +257,15 @@ export class FormInstallationPage {
       window.setTimeout(() => {
         this.loadMap();
       }, 400)
+    }
+    if (this.step == 4) {
+      const checkMaterials = this.materials.filter((cm) => { return cm.id == 2 || cm.id == 23 });
+      if (checkMaterials && checkMaterials.length >= 2 && checkMaterials[0].current_quantity && checkMaterials[1].current_quantity) {
+        if (!confirm('Detectamos que cargó materiales en Cable de CU Forrado AWG Cal.10 Verde y Cable de CU Desnudo AWG Cal. 10. Está seguro de esto? Si no, arregle las cantidades.')) {
+          this.step = 3;
+          return;
+        }
+      }
     }
     if (this.step == 5) {
       window.setTimeout(() => {
@@ -239,7 +303,7 @@ export class FormInstallationPage {
   }
 
   searchMedidor() {
-    this.medidorProvider.getById(this.form.medidor).valueChanges().subscribe((data: any) => {
+    const subscription = this.medidorProvider.getById(this.form.medidor).valueChanges().subscribe((data: any) => {
       if (data) {
         this.form.nombre = data.nombre;
         this.form.calle = data.Direccion;
@@ -252,6 +316,7 @@ export class FormInstallationPage {
         const toast = this.toastController.create({message: 'Medidor no encontrado', duration: 4000, position: 'bottom'});
         toast.present();
       }
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
@@ -439,7 +504,8 @@ export class FormInstallationPage {
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
         correctOrientation: true,
-        allowEdit: true
+        allowEdit: true,
+        saveToPhotoAlbum: true
       };
       cameraOptions.sourceType = (source == 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
       const result = await this.camera.getPicture(cameraOptions);
@@ -541,5 +607,32 @@ export class FormInstallationPage {
       })
       .catch((e: any) => console.log('Error is', e));
       */
+  }
+  // 2 23
+  instBasica() {
+    const thisMaterials = (this.form && this.form.current_materials) ? this.form.current_materials : this.materials;
+    if(thisMaterials) {
+      thisMaterials.forEach((m) => {
+        m.current_quantity = null;
+        this.instBasicaMateriales.forEach((i) => {
+          if (m.id === i.id) {
+            m.current_quantity = i.amount;
+          }
+        });
+      });
+    }
+  }
+  instUnicanal() {
+    const thisMaterials = (this.form && this.form.current_materials) ? this.form.current_materials : this.materials;
+    if(thisMaterials) {
+      thisMaterials.forEach((m) => {
+        m.current_quantity = null;
+        this.instUnicanalMateriales.forEach((i) => {
+          if (m.id === i.id) {
+            m.current_quantity = i.amount;
+          }
+        });
+      });
+    }
   }
 }

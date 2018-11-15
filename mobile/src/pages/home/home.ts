@@ -20,11 +20,12 @@ export class HomePage {
       if (!data) {
         return;
       }
-      this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
+      const subscription = this.userProvider.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
         if(this.user.forms) {
           this.user.forms = Object.keys(this.user.forms).map(key => this.user.forms[key]);
         }
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });

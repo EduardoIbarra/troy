@@ -25,9 +25,10 @@ export class MymaterialComponent implements OnInit {
               private fallidaService: FallidaService,
               private materialService: MaterialService) {
     this.authService.getStatus().subscribe((data) => {
-      this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
+      const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
         this.continueNow();
+        subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
@@ -37,30 +38,34 @@ export class MymaterialComponent implements OnInit {
   }
 
   continueNow() {
-    this.userService.get().valueChanges().subscribe((data) => {
+    const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
-      this.formService.get().valueChanges().subscribe((data) => {
+      const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
         this.getMaterials();
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
         this.getSubcontratistas();
+        subscription2.unsubscribe();
       }, (error) => {
         console.log(error);
       });
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
-    this.fallidaService.get().valueChanges().subscribe((data) => {
+    const subscription3 = this.fallidaService.get().valueChanges().subscribe((data) => {
       this.fallidas = data;
+      subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
     });
   }
 
   getMaterials() {
-    this.materialService.get().valueChanges().subscribe((data) => {
+    const subscription = this.materialService.get().valueChanges().subscribe((data) => {
       this.materials = data;
       // this.calculateMaterials(this.forms);
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
@@ -83,7 +88,7 @@ export class MymaterialComponent implements OnInit {
   }
 
   getSubcontratistas() {
-    this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
+    const subscription = this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.subcontratistas = data;
       this.subcontratistas = this.subcontratistas.filter((sc) => { return sc.id === this.user.company.id});
       this.subcontratistas.forEach((s) => {
@@ -92,6 +97,7 @@ export class MymaterialComponent implements OnInit {
       if (this.subcontratistas && this.subcontratistas[0] && this.subcontratistas[0].instalaciones) {
         this.calculateMaterials(this.subcontratistas[0].instalaciones);
       }
+      subscription.unsubscribe();
     }, (error) => {
       console.log(error);
     });
