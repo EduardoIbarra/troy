@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import {ReportsService} from "../services/reports.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GeneralService} from "../services/general.service";
+import {concat} from "rxjs";
 
 @Component({
   selector: 'app-reports',
@@ -89,15 +90,15 @@ export class ReportsComponent implements OnInit {
   }
 
   getForms() {
-    this.spinner.show();
-    this.formsSubscription = this.formService.get().valueChanges().subscribe((data) => {
+    // this.spinner.show();
+    /*this.formsSubscription = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
       this.spinner.hide();
-      /*this.forms.forEach((f, i) => {
+      /!*this.forms.forEach((f, i) => {
         if (i > 3200 && i <= 3700) {
           this.generalService.freeUpdate('forms/' + f.uid + '/user/forms', null);
         }
-      });*/
+      });*!/
       this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
       this.filteredForms = this.forms;
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
@@ -105,6 +106,30 @@ export class ReportsComponent implements OnInit {
     }, (error) => {
       this.spinner.hide();
       console.log(error);
+    });*/
+
+
+    /*this.formService.get().on("value", (response) => {
+      this.forms = response.val() || [];
+      this.spinner.hide();
+      if(this.forms) {
+        this.forms = Object.keys(this.forms).map(key => { return this.forms[key]; });
+      }
+      console.info(this.forms);
+      this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
+
+      this.filteredForms = this.forms;
+      this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+    });*/
+
+    this.supervisados.forEach((s) => {
+      this.formService.getForSupervisor(s).on("value", (response) => {
+        console.info(response.val());
+        if (response.val()) {
+          this.filteredForms = this.forms.concat(Object.keys(response.val()).map(key => { return response.val()[key]; }));
+          this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+        }
+      });
     });
   }
 
@@ -189,7 +214,6 @@ export class ReportsComponent implements OnInit {
     XLSX.writeFile(wb, 'Reporte.xlsx');
   }
   generateForSupervisor() {
-    this.spinner.show();
     this.supervisados.push(this.selectedSupervisor.uid);
     this.userService.getBySupervisor(this.selectedSupervisor.uid).on("value", (response) => {
       this.supervisados = response.val() || [];
@@ -197,7 +221,6 @@ export class ReportsComponent implements OnInit {
         this.supervisados = Object.keys(this.supervisados);
       }
       this.supervisados.push(this.selectedSupervisor.uid);
-      this.spinner.hide();
       this.getForms();
     });
   }
