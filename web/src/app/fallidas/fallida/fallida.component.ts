@@ -6,7 +6,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-fallida',
   templateUrl: './fallida.component.html',
-  styleUrls: ['./fallida.component.css']
+  styleUrls: ['./fallida.component.scss']
 })
 export class FallidaComponent implements OnInit {
   fallida: any;

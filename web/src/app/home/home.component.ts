@@ -9,14 +9,17 @@ import * as _ from "lodash";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   form: any = {};
   forms: any[] = [];
   creating: boolean = false;
   query: string;
-  queryType: any;
+  queryType: any = {
+    value: null,
+    text: null
+  };
   userSubscription: any;
   user: any;
   page: number = 1;
@@ -42,7 +45,6 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     // this.spinner.show();
-
     /*this.spinner.show();
 
     this.formsPromise = this.formService.get().valueChanges().subscribe((data) => {
@@ -149,6 +151,8 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
+    if (!this.queryType.value || this.query) return;
+
     this.spinner.show();
     this.formService.search(this.queryType.value, this.query).then((res) => {
       if (!res.val()) return;

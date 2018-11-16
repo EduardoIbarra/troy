@@ -10,7 +10,7 @@ import {ReportsService} from "../services/reports.service";
 @Component({
   selector: 'app-reports',
   templateUrl: './reportsCFE.component.html',
-  styleUrls: ['./reportsCFE.component.css']
+  styleUrls: ['./reportsCFE.component.scss']
 })
 export class ReportsCFEComponent implements OnInit {
   form: any = {};

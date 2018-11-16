@@ -4,7 +4,7 @@ import {MedidorService} from "../services/medidor.service";
 @Component({
   selector: 'app-medidores',
   templateUrl: './medidores.component.html',
-  styleUrls: ['./medidores.component.css']
+  styleUrls: ['./medidores.component.scss']
 })
 export class MedidoresComponent implements OnInit {
   medidor: any = {};
