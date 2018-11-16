@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormService} from "../services/form.service";
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
@@ -15,14 +15,28 @@ export class HomeComponent implements OnInit {
   forms: any[] = [];
   creating: boolean = false;
   query: string;
+  queryType: any;
   userSubscription: any;
   user: any;
   offset: number = 15;
   page: number = 1;
   pagedForms: any[] = [];
   formsPromise: any;
-  constructor(private formService: FormService, private authService: AuthService, private userService: UserService, private router: Router,
-              private spinner: NgxSpinnerService) {
+
+  searchQueryChild: any = [
+    {text: 'RPU', value: 'rpu'},
+    {text: 'Medidor', value: 'medidor'},
+    {text: 'Optimizador', value: 'serie'},
+    {text: 'Nombre', value: 'nombre'},
+  ];
+
+  constructor(
+    private formService: FormService,
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {
     this.spinner.show();
     this.formsPromise = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
@@ -38,7 +52,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getStatus().subscribe((data) => {
-      if (!data) { return; }
+      if (!data) {
+        return;
+      }
       this.userSubscription = this.userService.getById(data.uid).valueChanges().subscribe((data) => {
         this.user = data;
         if (!this.user.superadmin) {
@@ -53,17 +69,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  next () {
+  next() {
     this.page++;
     this.pagedForms = this.forms.slice((this.page * this.offset), (this.page * this.offset) + this.offset);
   }
 
-  prev () {
+  prev() {
     this.page--;
     this.pagedForms = this.forms.slice((this.page * this.offset), (this.page * this.offset) + this.offset);
   }
 
-  showAll () {
+  showAll() {
     this.page = 0;
     this.pagedForms = this.forms;
   }
@@ -71,12 +87,14 @@ export class HomeComponent implements OnInit {
   select(form) {
     this.form = form;
   }
+
   cancel() {
     this.form = {};
     this.creating = false;
   }
+
   remove(form) {
-    if(!confirm('Seguro que desea eliminar este registro?')) {
+    if (!confirm('Seguro que desea eliminar este registro?')) {
       return;
     }
     this.formService.deleteforUser(form.user.uid, form.uid).then((data) => {
@@ -89,5 +107,23 @@ export class HomeComponent implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+  search() {
+    this.spinner.show();
+    this.formService.search(this.queryType.value, this.query).then((res) => {
+      if (!res.val()) return;
+      console.log(res.val());
+      let forms = res.val();
+      let keys = Object.keys(res.val());
+      this.pagedForms = [];
+      for (let key of keys) {
+        this.pagedForms.push(forms[key])
+      }
+    }).catch((error) => {
+      console.log(error);
+    }).then(() => {
+      this.spinner.hide();
+    })
   }
 }

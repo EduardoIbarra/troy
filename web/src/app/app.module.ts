@@ -1,29 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {AngularFireModule} from "angularfire2";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireStorageModule} from "angularfire2/storage";
 import {AngularFirestoreModule} from "angularfire2/firestore";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "angularfire2/database";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import { MedidoresComponent } from './medidores/medidores.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
+import {MedidoresComponent} from './medidores/medidores.component';
+import {UsuariosComponent} from './usuarios/usuarios.component';
 import {SearchPipe} from "./pipes/search";
-import { FormComponent } from './form/form.component';
+import {FormComponent} from './form/form.component';
 import {AuthenticationGuard} from "./authentication.guard";
-import { FallidasComponent } from './fallidas/fallidas.component';
-import { FallidaComponent } from './fallidas/fallida/fallida.component';
+import {FallidasComponent} from './fallidas/fallidas.component';
+import {FallidaComponent} from './fallidas/fallida/fallida.component';
 import {ReportsComponent} from './reports/reports.component';
 import {TotalReportsComponent} from "./total_reports/total_reports.component";
-import { EditFormComponent } from './edit-form/edit-form.component';
-import { GlobalComponent } from './global/global.component';
+import {EditFormComponent} from './edit-form/edit-form.component';
+import {GlobalComponent} from './global/global.component';
 import {ReportsCFEComponent} from "./reportsCFE/reportsCFE.component";
 import {HttpClientModule} from "@angular/common/http";
 import {SubcontratistasComponent} from "./subcontratistas/subcontratistas.component";
@@ -83,7 +83,7 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    NgbModule,
+    NgbModule.forRoot(),
     HttpClientModule,
     SignaturePadModule,
     NgxSpinnerModule
@@ -91,4 +91,5 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
