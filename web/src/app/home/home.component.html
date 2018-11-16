@@ -55,15 +55,18 @@
         </td>
         <td>{{form.calle}} {{form.numero}}, {{form.colonia}}, {{form.ciudad}}</td>
         <td>
-          <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
-            <i class="fas fa-eye"></i>
-          </button>
-          <button class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar" (click)="remove(form)">
-            <i class="fas fa-trash"></i>
-          </button>
+          <div class="action-button-group">
+            <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" ngbTooltip="Eliminar" (click)="remove(form)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+
         </td>
       </tr>
     </ng-container>

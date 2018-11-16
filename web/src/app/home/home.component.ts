@@ -9,7 +9,7 @@ import * as _ from "lodash";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   form: any = {};
@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService
   ) {
-    this.spinner.show();
 
     /*this.spinner.show();
 

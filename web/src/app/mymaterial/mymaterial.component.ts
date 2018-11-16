@@ -8,7 +8,7 @@ import {AuthService} from "../services/auth.service";
 @Component({
   selector: 'app-mymaterial',
   templateUrl: './mymaterial.component.html',
-  styleUrls: ['./mymaterial.component.css']
+  styleUrls: ['./mymaterial.component.scss']
 })
 export class MymaterialComponent implements OnInit {
   forms: any[] = [];

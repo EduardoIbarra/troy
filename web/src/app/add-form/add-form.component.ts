@@ -12,7 +12,7 @@ import {SignaturePad} from "angular2-signaturepad/signature-pad";
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.css']
+  styleUrls: ['./add-form.component.scss']
 })
 export class AddFormComponent implements OnInit {
   today = Date.now();

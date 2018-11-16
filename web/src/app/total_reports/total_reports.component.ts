@@ -10,7 +10,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 @Component({
   selector: 'app-total_reports',
   templateUrl: './total_reports.component.html',
-  styleUrls: ['./total_reports.component.css']
+  styleUrls: ['./total_reports.component.scss']
 })
 export class TotalReportsComponent implements OnInit {
   form: any = {};

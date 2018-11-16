@@ -5,7 +5,7 @@ import {AuthService} from "../services/auth.service";
 @Component({
   selector: 'app-fallidas',
   templateUrl: './fallidas.component.html',
-  styleUrls: ['./fallidas.component.css']
+  styleUrls: ['./fallidas.component.scss']
 })
 export class FallidasComponent implements OnInit {
 

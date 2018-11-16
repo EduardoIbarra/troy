@@ -7,7 +7,7 @@ import {MaterialService} from "../services/material.service";
 @Component({
   selector: 'app-material',
   templateUrl: './material.component.html',
-  styleUrls: ['./material.component.css']
+  styleUrls: ['./material.component.scss']
 })
 export class MaterialComponent implements OnInit {
   forms: any[] = [];

@@ -4,7 +4,7 @@ import {SubcontratistaService} from "../services/subcontratista.service";
 @Component({
   selector: 'app-subcontratistas',
   templateUrl: './subcontratistas.component.html',
-  styleUrls: ['./subcontratistas.component.css']
+  styleUrls: ['./subcontratistas.component.scss']
 })
 export class SubcontratistasComponent implements OnInit {
   subcontratista: any = {};

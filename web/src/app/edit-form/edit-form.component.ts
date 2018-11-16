@@ -8,7 +8,7 @@ import {UserService} from "../services/user.service";
 @Component({
   selector: 'app-edit-form',
   templateUrl: './edit-form.component.html',
-  styleUrls: ['./edit-form.component.css']
+  styleUrls: ['./edit-form.component.scss']
 })
 export class EditFormComponent implements OnInit {
   today = Date.now();
