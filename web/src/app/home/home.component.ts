@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
   forms: any[] = [];
   creating: boolean = false;
   query: string;
-  queryType: any;
+  queryType: any = {
+    value: null,
+    text: null
+  };
   userSubscription: any;
   user: any;
   page: number = 1;
@@ -148,6 +151,8 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
+    if (!this.queryType.value || this.query) return;
+
     this.spinner.show();
     this.formService.search(this.queryType.value, this.query).then((res) => {
       if (!res.val()) return;
