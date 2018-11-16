@@ -4,8 +4,8 @@
       <div class="center">
         <img src="assets/imgs/logo_troy.png" />
       </div>
-      <p *ngIf="operation == 'register'">Ya tienes cuenta? Has <a (click)="operation = 'login'">Login</a></p>
-      <p *ngIf="operation == 'login'">No tienes cuenta? <a (click)="operation = 'register'">Registrarse</a></p>
+      <p *ngIf="operation == 'register'">¿Ya tienes cuenta? Has <a (click)="operation = 'login'">Login</a></p>
+      <p *ngIf="operation == 'login'">¿No tienes cuenta? <a (click)="operation = 'register'">Registrarse</a></p>
       <div class="boreredContainer">
         <input [(ngModel)]="email" class="form-control marbo15" type="email" placeholder="Ingrese Email" />
         <input [(ngModel)]="password" class="form-control marbo15" type="password" placeholder="Ingrese Contrasenna" />
@@ -13,7 +13,7 @@
       </div>
       <hr />
       <div class="center marto15">
-        <button (click)="login()" *ngIf="operation == 'login'" class="btn btn-primary btn-block">Iniciar Sesioon</button>
+        <button (click)="login()" *ngIf="operation == 'login'" class="btn btn-primary btn-block">Iniciar Sesión</button>
         <button (click)="register()" *ngIf="operation == 'register'" class="btn btn-primary btn-block">Registrarme</button>
       </div>
     </div>
