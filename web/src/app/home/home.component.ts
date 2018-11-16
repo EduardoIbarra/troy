@@ -4,6 +4,7 @@ import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-home',
@@ -18,11 +19,14 @@ export class HomeComponent implements OnInit {
   queryType: any;
   userSubscription: any;
   user: any;
-  offset: number = 15;
   page: number = 1;
   pagedForms: any[] = [];
   formsPromise: any;
 
+  offset: number = 15;
+  nextKey: any; // for next button
+  prevKeys: any[] = []; // for prev button
+  subscription: any;
   searchQueryChild: any = [
     {text: 'RPU', value: 'rpu'},
     {text: 'Medidor', value: 'medidor'},
@@ -38,6 +42,9 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     this.spinner.show();
+
+    /*this.spinner.show();
+
     this.formsPromise = this.formService.get().valueChanges().subscribe((data) => {
       this.forms = data;
       this.pagedForms = this.forms.slice((this.page * this.offset), (this.page * this.offset) + this.offset);
@@ -47,10 +54,14 @@ export class HomeComponent implements OnInit {
     }, (error) => {
       this.spinner.hide();
       console.log(error);
-    });
+    });*/
   }
 
   ngOnInit() {
+    this.getComments();
+    window.setTimeout(() => {
+      this.getComments();
+    }, 1200);
     this.authService.getStatus().subscribe((data) => {
       if (!data) {
         return;
@@ -107,6 +118,34 @@ export class HomeComponent implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+
+  private getComments(key?) {
+
+    this.formService.getPaged(this.offset, key).on("value", (response) => {
+      console.info(response.val());
+      if (response.val()) {
+        this.pagedForms = this.forms.concat(Object.keys(response.val()).map(key => {
+          return response.val()[key];
+        }));
+        this.pagedForms = _.slice(this.pagedForms, 0, this.offset);
+        this.nextKey = _.get(this.pagedForms[this.offset - 1], 'uid');
+        console.log(this.nextKey);
+      }
+    });
+  }
+
+  nextPage() {
+    this.prevKeys.push(_.first(this.pagedForms)['uid']); // set current key as pointer for previous page
+    this.getComments(this.nextKey)
+  }
+
+  prevPage() {
+    const prevKey = _.last(this.prevKeys); // use last key in array
+    this.prevKeys = _.dropRight(this.prevKeys); // then remove the last key in the array
+
+    this.getComments(prevKey)
   }
 
   search() {

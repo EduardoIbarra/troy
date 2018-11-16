@@ -24,7 +24,9 @@ export class MymaterialComponent implements OnInit {
               private userService: UserService,
               private fallidaService: FallidaService,
               private materialService: MaterialService) {
-    this.authService.getStatus().subscribe((data) => {
+    alert('Estamos optimizando el sitio, disculpe las molestias');
+    return;
+    /*this.authService.getStatus().subscribe((data) => {
       const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
         this.continueNow();
@@ -34,7 +36,7 @@ export class MymaterialComponent implements OnInit {
       });
     }, (error) => {
       console.log(error);
-    });
+    });*/
   }
 
   continueNow() {

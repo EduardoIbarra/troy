@@ -19,7 +19,9 @@ export class GlobalComponent implements OnInit {
               private userService: UserService,
               private fallidaService: FallidaService,
               private spinner: NgxSpinnerService) {
-    const subscription = this.userService.get().valueChanges().subscribe((data) => {
+    alert('Estamos optimizando el sitio, disculpe las molestias');
+    return;
+    /*const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
       this.spinner.show();
       const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
@@ -44,7 +46,7 @@ export class GlobalComponent implements OnInit {
       subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
-    });
+    });*/
   }
 
   ngOnInit() {

@@ -28,7 +28,9 @@ export class TotalReportsComponent implements OnInit {
               private userService: UserService,
               private reportsService: ReportsService,
               private spinner: NgxSpinnerService) {
-    this.authService.getStatus().subscribe((data) => {
+    alert('Estamos optimizando el sitio, disculpe las molestias');
+    return;
+    /*this.authService.getStatus().subscribe((data) => {
       this.user = data;
     }, (error) => {
       console.log(error);
@@ -43,7 +45,7 @@ export class TotalReportsComponent implements OnInit {
       subscription.unsubscribe();
     }, (error) => {
       console.log(error);
-    });
+    });*/
   }
 
   ngOnInit() {

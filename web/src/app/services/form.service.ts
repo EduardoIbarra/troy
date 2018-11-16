@@ -14,12 +14,17 @@ export class FormService {
     return this.angularFireDataBase.list('forms/');
   }
 
-  getPaged() {
+  get2(offset = 20, startKey = '1542151974732') {
+    return this.angularFireDataBase.database.ref().child('forms/').orderByKey().startAt(startKey).limitToFirst(offset + 1);
+  }
+
+  getPaged2() {
     return this.angularFireDataBase.list('forms/');
   }
 
-  get2(offset = 20, startKey = '1542151974732') {
-    return this.angularFireDataBase.database.ref().child('forms/').orderByKey().startAt(startKey).limitToFirst(offset + 1);
+  getPaged(offset = 20, startKey?) {
+    startKey = (startKey) ? startKey.toString() : '1542151974732';
+    return this.angularFireDataBase.database.ref().child('forms/').orderByKey().startAt(startKey.toString()).limitToFirst(offset + 1);
   }
 
   getForSupervisor(supervisor) {
