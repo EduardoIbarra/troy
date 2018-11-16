@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService
   ) {
-    this.spinner.show();
+    // this.spinner.show();
 
     /*this.spinner.show();
 
