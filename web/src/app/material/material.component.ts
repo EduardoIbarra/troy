@@ -21,7 +21,9 @@ export class MaterialComponent implements OnInit {
               private userService: UserService,
               private fallidaService: FallidaService,
               private materialService: MaterialService) {
-    const subscription = this.userService.get().valueChanges().subscribe((data) => {
+    alert('Estamos optimizando el sitio, disculpe las molestias');
+    return;
+    /*const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
       const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
@@ -41,7 +43,7 @@ export class MaterialComponent implements OnInit {
       subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
-    });
+    });*/
   }
 
   getMaterials() {

@@ -12,10 +12,15 @@
     </div>
   </div>
   <div>
-    <button class="btn btn-warning btn-sm" [disabled]="page <= 1" (click)="prev()">Atrás</button>
-    <b> -- Página {{page}} -- </b>
+    <button (click)="prevPage()" [disabled]="!prevKeys?.length">Anterior</button>
+    <button (click)="nextPage()" [disabled]="false && !nextKey">Siguiente</button>
+
+
+
+    <!--<button class="btn btn-warning btn-sm" [disabled]="page <= 1" (click)="prev()">Atrás</button>
+    <b> &#45;&#45; Página {{page}} &#45;&#45; </b>
     <button class="btn btn-warning btn-sm" (click)="next()">Siguiente</button>
-    <button class="btn btn-secondary btn-sm" (click)="showAll()">Mostrar Todos</button>
+    <button class="btn btn-secondary btn-sm" (click)="showAll()">Mostrar Todos</button>-->
   </div>
   <small>Mostrando {{pagedForms.length}} registro(s)</small>
   <hr />

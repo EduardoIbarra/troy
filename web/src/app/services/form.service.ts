@@ -9,14 +9,15 @@ export class FormService {
 
   constructor(private angularFireDataBase: AngularFireDatabase) {
   }
-  get2() {
+  get() {
     return this.angularFireDataBase.list('forms/');
   }
-  getPaged() {
+  getPaged2() {
     return this.angularFireDataBase.list('forms/');
   }
-  get(offset = 20, startKey = '1542151974732'){
-    return this.angularFireDataBase.database.ref().child('forms/').orderByKey().startAt(startKey).limitToFirst(offset+1);
+  getPaged(offset = 20, startKey?){
+    startKey = (startKey) ? startKey.toString() : '1542151974732';
+    return this.angularFireDataBase.database.ref().child('forms/').orderByKey().startAt(startKey.toString()).limitToFirst(offset+1);
   }
   getForSupervisor(supervisor) {
     return this.angularFireDataBase.database.ref().child('forms/').orderByChild('user/uid').equalTo(supervisor);
