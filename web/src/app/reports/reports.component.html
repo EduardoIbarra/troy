@@ -1,10 +1,5 @@
+<div *ngIf="spinnerFlag" _ngcontent-c1="" class="black-overlay" ng-reflect-ng-style="[object Object]" style="background-color: rgba(51, 51, 51, 0.8);"><div _ngcontent-c1="" class="la-ball-atom " style="color: rgb(255, 255, 255);"><div _ngcontent-c1=""></div><div _ngcontent-c1=""></div><div _ngcontent-c1=""></div><div _ngcontent-c1=""></div></div></div>
 <div class="container-fluid">
-  <br />
-  <div class="row">
-    <div class="col-md-12">
-      <button class="btn btn-warning btn-block" (click)="showForms()">MOSTRAR FORMULARIOS</button>
-    </div>
-  </div>
   <br />
   <div class="row">
     <div class="col-md-4">
@@ -38,7 +33,7 @@
       </form>
     </div>
     <div class="col-md-4">
-      <button class="btn btn-block btn-primary" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
+      <button class="btn btn-block btn-warning" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
     </div>
   </div>
   <br *ngIf="user && usersSupervised && usersSupervised.length > 0" />

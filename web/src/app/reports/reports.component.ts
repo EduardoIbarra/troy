@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormService} from "../services/form.service";
 import {AuthService} from "../services/auth.service";
 import {UserService} from "../services/user.service";
@@ -29,10 +29,12 @@ export class ReportsComponent implements OnInit {
   conVarilla: any[] = [];
   formsSubscription: any;
   usersSupervised: any[] = [];
+  spinnerFlag = false;
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
               private reportsService: ReportsService,
               private spinner: NgxSpinnerService,
-              private generalService: GeneralService) {
+              private generalService: GeneralService,
+              private changeDetectorRef: ChangeDetectorRef) {
     const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
       subscription.unsubscribe();
@@ -123,17 +125,29 @@ export class ReportsComponent implements OnInit {
       this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
     });*/
 
-    this.supervisados.forEach((s) => {
+    if (!this.fromDate || !this.toDate) {
+      alert('Por favor escoja fechas de inicio Y fin');
+      return;
+    }
+    this.supervisados.forEach((s, i) => {
+      this.spinnerFlag = true;
       this.formService.getForSupervisor(s).on("value", (response) => {
-        console.info(response.val());
         if (response.val()) {
-          this.filteredForms = this.forms.concat(Object.keys(response.val()).map(key => { return response.val()[key]; }));
+
+          const from = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day + ' 00:00:00').getTime();
+          const to = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day + ' 23:59:59').getTime();
+
+          let formsArray = Object.keys(response.val()).map(key => { return response.val()[key]; });
+          formsArray = formsArray.filter((f) => { return f.uid >= from && f.uid <= to });
+          this.filteredForms = this.forms.concat(formsArray);
           this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+          this.spinnerFlag = false;
         }
+        console.info(this.filteredForms);
+        this.changeDetectorRef.detectChanges();
       });
     });
   }
-
   select(form) {
     this.form = form;
   }
@@ -153,9 +167,10 @@ export class ReportsComponent implements OnInit {
     });
   }
   generate() {
-    const from = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day + ' 00:00:00').getTime();
+    this.getForms();
+    /*const from = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day + ' 00:00:00').getTime();
     const to = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day + ' 23:59:59').getTime();
-    this.filteredForms = this.forms.filter((f) => { return f.uid >= from && f.uid <= to });
+    this.filteredForms = this.forms.filter((f) => { return f.uid >= from && f.uid <= to });*/
   }
   generateExcel() {
     let arrayOfArrays = [[],[],[],[]];
