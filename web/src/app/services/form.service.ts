@@ -66,4 +66,9 @@ export class FormService {
       .endAt(searchQuery + "\uf8ff")
       .once("value", (snapshot) => snapshot.val());
   }
+
+
+  fallidas(){
+    return this.angularFireDataBase.object('/totals/fallidas');
+  }
 }

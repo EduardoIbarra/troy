@@ -18,19 +18,31 @@
     </div>
   </div>
 
-  <div>
+
+  <button (click)="fallidas()">total FALLIDAS</button>
+
+
+  <div *ngIf="pagedForms.length">
     <button (click)="prevPage()" [disabled]="!prevKeys?.length">Anterior</button>
     <button (click)="nextPage()" [disabled]="false && !nextKey">Siguiente</button>
-
 
 
     <!--<button class="btn btn-warning btn-sm" [disabled]="page <= 1" (click)="prev()">Atrás</button>
     <b> &#45;&#45; Página {{page}} &#45;&#45; </b>
     <button class="btn btn-warning btn-sm" (click)="next()">Siguiente</button>
     <button class="btn btn-secondary btn-sm" (click)="showAll()">Mostrar Todos</button>-->
+    <br>
+    <small>Mostrando {{pagedForms.length}} registro(s)</small>
   </div>
-  <small>Mostrando {{pagedForms.length}} registro(s)</small>
   <hr/>
+  <ng-container *ngIf="!pagedForms.length">
+    <p>
+      <ngb-alert [dismissible]="false">
+        No se han encontrado resultados
+      </ngb-alert>
+    </p>
+  </ng-container>
+
   <table class="table table-bordered table-hover table-striped">
     <thead class="thead-dark">
     <tr>
