@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
 
-
     /*this.spinner.show();
 
     this.formsPromise = this.formService.get().valueChanges().subscribe((data) => {
