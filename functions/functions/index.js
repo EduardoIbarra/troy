@@ -149,35 +149,21 @@ exports.totalFallida = functions.database.ref('fallidas/{pushId}').onWrite(chang
 
 
 exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot) => {
-    if (!admin.apps.length) {
-        admin.initializeApp();
-    }
-
-
-    let form = snapshot.val();
-
-    console.log(form);
-
-    if (form.varilla) {
-        //    SAVE TOTAL VARILLA
-    }
-
-
-    admin.database().ref('/totals/forms').once('value').then((totalForm) => {
-        console.log(totalForm);
+    const getTotalForms = admin.database().ref('/totals/forms');
+    return getTotalForms.once('value', (res => {
+        const totalForm = res.val() + 1;
+        console.log('setTotalForm DONE');
+        return getTotalForms.set(totalForm)
+    })).then(() => {
+        if (snapshot.val() && snapshot.val().varilla) {
+            const getTotalVarillas = admin.database().ref('/totals/varillas');
+            return getTotalVarillas.once('value', (res => {
+                const totalVarilla = res.val() + 1;
+                console.log('setTotalVarillas DONE');
+                return getTotalVarillas.set(totalVarilla)
+            }));
+        } else {
+            return null;
+        }
     });
-
-    //
-    // let increment;
-    // if (change.exists() && !change.exists()) {
-    //     increment = 1;
-    // } else if (!change.exists() && change.exists()) {
-    //     increment = -1;
-    // } else {
-    //     return null;
-    // }
-    // countRef.transaction((current) => {
-    //     return (current || 0) + increment;
-    // });
-    // return null;
 });
