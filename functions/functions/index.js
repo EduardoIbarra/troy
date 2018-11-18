@@ -152,14 +152,12 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
     const getTotalForms = admin.database().ref('/totals/forms');
     return getTotalForms.once('value', (res => {
         const totalForm = res.val() + 1;
-        console.log('setTotalForm DONE');
         return getTotalForms.set(totalForm)
     })).then(() => {
-        if (snapshot.val() && snapshot.val().varilla) {
+        if (snapshot.val() && snapshot.val().varilla && snapshot.val().varilla === 'si') {
             const getTotalVarillas = admin.database().ref('/totals/varillas');
             return getTotalVarillas.once('value', (res => {
                 const totalVarilla = res.val() + 1;
-                console.log('setTotalVarillas DONE');
                 return getTotalVarillas.set(totalVarilla)
             }));
         } else {
