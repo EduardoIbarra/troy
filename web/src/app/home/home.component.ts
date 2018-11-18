@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService
   ) {
-    // this.spinner.show();
+
     /*this.spinner.show();
 
     this.formsPromise = this.formService.get().valueChanges().subscribe((data) => {
@@ -60,12 +60,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.getComments();
     window.setTimeout(() => {
       this.getComments();
     }, 1200);
     this.authService.getStatus().subscribe((data) => {
       if (!data) {
+        this.spinner.hide();
         return;
       }
       this.userSubscription = this.userService.getById(data.uid).valueChanges().subscribe((data) => {
@@ -74,11 +76,14 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['reports']);
         }
         this.userSubscription.unsubscribe();
+        this.spinner.hide();
       }, (error) => {
         console.log(error);
+        this.spinner.hide();
       });
     }, (error) => {
       console.log(error);
+      this.spinner.hide();
     });
   }
 
@@ -151,7 +156,7 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
-    if (!this.queryType.value || this.query) return;
+    if (!this.queryType.value || !this.query) return;
 
     this.spinner.show();
     this.formService.search(this.queryType.value, this.query).then((res) => {
@@ -167,6 +172,14 @@ export class HomeComponent implements OnInit {
       console.log(error);
     }).then(() => {
       this.spinner.hide();
+    })
+  }
+
+
+
+  fallidas(){
+    this.formService.fallidas().valueChanges().subscribe((res)=>{
+      console.log(res);
     })
   }
 }
