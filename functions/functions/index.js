@@ -165,3 +165,28 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
         }
     });
 });
+
+
+exports.totalSubcontratista = admin.database.ref('forms/{pushId}').onCreate((snapshot) => {
+    let form = snapshot.val();
+
+    const getTotalSubcontratistas = admin.database().ref(`/totals/subcontratistas/`${form.user.company.id});
+
+    let newTotal = {
+        id: null,
+        total: null
+    };
+
+    getTotalSubcontratistas.once('value', (snap) => {
+        if (snap.exists()) {
+            //if exists get value and update
+
+            newTotal.id = form.user.company.id;
+            newTotal.total = 1;
+
+        } else {
+            //if not create note and set value as 0
+        }
+    })
+
+});
