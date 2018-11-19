@@ -28,8 +28,7 @@ export class GlobalComponent implements OnInit {
               private fallidaService: FallidaService,
               private totalsService: TotalsService,
               private spinner: NgxSpinnerService) {
-    // alert('Estamos optimizando el sitio, disculpe las molestias');
-    // return;
+    // TODO: no borrar, tal vez lo necesitemos para ajustar los totales manualmente
     /*const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
       this.spinner.show();
@@ -58,6 +57,8 @@ export class GlobalComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });*/
+
+    this.getSubcontratistas();
   }
 
   ngOnInit() {
@@ -65,19 +66,24 @@ export class GlobalComponent implements OnInit {
       console.log(res);
       this.totals.fallidas = res[0];
       this.totals.forms = res[1];
-      this.totals.varillas = res[2];
+      this.totals.varillas = res[3];
     })
   }
 
   getSubcontratistas() {
     this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.subcontratistas = data;
-      this.subcontratistas.forEach((s) => {
-        s.instalaciones = this.forms.filter((f) => {
-          return f.user && f.user.company && f.user.company.id == s.id
-        }).length;
+      this.totalsService.getTotals().valueChanges().subscribe((data2) => {
+        const totalsArray = Object.values(data2[2]);
+        console.log(totalsArray);
+        this.subcontratistas.forEach((s) => {
+          const record = totalsArray.find((ta) => { return ta.id === s.id});
+          s.instalaciones = (record) ? record.total : 0;
+        });
+        this.subcontratistas.sort((a, b) => (a.instalaciones < b.instalaciones) ? 1 : ((b.instalaciones < a.instalaciones) ? -1 : 0));
+      }, (error) => {
+        console.log(error);
       });
-      this.subcontratistas.sort((a, b) => (a.instalaciones < b.instalaciones) ? 1 : ((b.instalaciones < a.instalaciones) ? -1 : 0));
     }, (error) => {
       console.log(error);
     });
