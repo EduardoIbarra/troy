@@ -17,6 +17,9 @@
     <div class="col-md-8">
       <div class="card">
         <h5 class="card-header">Optimizadores Instalados por Subcontratista</h5>
+        <h6 *ngIf="!subcontratistas || subcontratistas.length <= 0">
+          Sección en proceso. Disculpe las molestias...
+        </h6>
         <table class="table table-bordered table-dark table-striped table-hover">
           <tr *ngFor="let s of subcontratistas">
             <td><span class="badge badge-warning">{{s.instalaciones}}</span></td>

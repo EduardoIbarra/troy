@@ -30,7 +30,7 @@ export class GlobalComponent implements OnInit {
               private spinner: NgxSpinnerService) {
     // alert('Estamos optimizando el sitio, disculpe las molestias');
     // return;
-    const subscription = this.userService.get().valueChanges().subscribe((data) => {
+    /*const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.usuarios = data;
       this.spinner.show();
       const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
@@ -40,6 +40,8 @@ export class GlobalComponent implements OnInit {
           f.user = this.usuarios.find((u) => { return f.user && u.uid === f.user.uid });
         });
         this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
+        console.log(this.forms.length);
+        console.log(this.varillas.length);
         this.getSubcontratistas();
         subscription2.unsubscribe();
       }, (error) => {
@@ -55,7 +57,7 @@ export class GlobalComponent implements OnInit {
       subscription3.unsubscribe();
     }, (error) => {
       console.log(error);
-    });
+    });*/
   }
 
   ngOnInit() {
