@@ -149,12 +149,13 @@ exports.totalFallida = functions.database.ref('fallidas/{pushId}').onWrite(chang
 
 
 exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot) => {
+    let form = snapshot.val();
     const getTotalForms = admin.database().ref('/totals/forms');
     return getTotalForms.once('value', (res => {
         const totalForm = res.val() + 1;
         return getTotalForms.set(totalForm)
     })).then(() => {
-        if (snapshot.val() && snapshot.val().varilla && snapshot.val().varilla === 'si') {
+        if (form && form.varilla && form.varilla === 'si') {
             const getTotalVarillas = admin.database().ref('/totals/varillas');
             return getTotalVarillas.once('value', (res => {
                 const totalVarilla = res.val() + 1;
@@ -163,5 +164,23 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
         } else {
             return null;
         }
+    }).then(() => {
+        const getTotalSubcontratistas = admin.database().ref(`/totals/subcontratistas/${form.user.company.id}`);
+
+        return getTotalSubcontratistas.once('value', (snap) => {
+
+            let newTotal = {
+                id: form.user.company.id,
+                total: null
+            };
+
+            if (snap.exists()) {
+                let sub = snap.val();
+                newTotal.total = sub.total + 1;
+            } else {
+                newTotal.total = 1;
+            }
+            return getTotalSubcontratistas.set(newTotal);
+        })
     });
 });
