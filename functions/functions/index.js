@@ -19,6 +19,18 @@ exports.createUser = functions.https.onRequest((req, res) => {
             console.log("Error creating new user:", error);
         });
 });
+exports.updateMedidores = functions.https.onRequest((req, res) => {
+    const parentRef = admin.database().ref("forms");
+    return parentRef.once('value').then(snapshot => {
+        const updates = {};
+        snapshot.forEach(function(child) {
+            admin.database().ref("medidores/nest2/" + child.value().medidor).once('value').then(medidor => {
+                admin.database().ref('forms/' + child.value().uid + '/geolocation').set({lat: medidor.lat, lng: medidor.lng});
+            })
+        });
+        return parentRef.update(updates);
+    });
+});
 exports.cleanForms = functions.https.onRequest((req, res) => {
     const parentRef = admin.database().ref("forms");
     parentRef.once('value')

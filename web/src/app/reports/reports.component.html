@@ -35,6 +35,9 @@
     <div class="col-md-4">
       <button class="btn btn-block btn-warning" [disabled]="!fromDate || !toDate" (click)="generate()">Generar</button>
     </div>
+    <!--<div class="col-md-4">
+      <button class="btn btn-block btn-warning" *ngIf="user && user.superadmin" (click)="getNullRPU()">Mostrar sin RPU</button>
+    </div>-->
   </div>
   <br *ngIf="user && usersSupervised && usersSupervised.length > 0" />
   <div class="row" *ngIf="user && usersSupervised && usersSupervised.length > 0">
@@ -71,6 +74,18 @@
       </span>
     </div>
   </div>
+  <!--<table>
+    <tr>
+      <th>Medidor</th>
+      <th>Dirección</th>
+      <th>Optimizador</th>
+    </tr>
+    <tr *ngFor="let nf of nullForms">
+      <td>{{nf.medidor}}</td>
+      <td>{{nf.calle}} {{nf.colonia}}, {{nf.ciudad}}</td>
+      <td>{{nf.serie}}</td>
+    </tr>
+  </table>-->
   <table class="table table-bordered table-hover table-striped table-sm">
     <thead class="thead-dark">
     <tr>

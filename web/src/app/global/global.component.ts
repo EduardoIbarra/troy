@@ -63,7 +63,6 @@ export class GlobalComponent implements OnInit {
 
   ngOnInit() {
     this.totalsService.getTotals().valueChanges().subscribe((res) => {
-      console.log(res);
       this.totals.fallidas = res[0];
       this.totals.forms = res[1];
       this.totals.varillas = res[3];
@@ -75,7 +74,6 @@ export class GlobalComponent implements OnInit {
       this.subcontratistas = data;
       this.totalsService.getTotals().valueChanges().subscribe((data2) => {
         const totalsArray = Object.values(data2[2]);
-        console.log(totalsArray);
         this.subcontratistas.forEach((s) => {
           const record = totalsArray.find((ta) => { return ta.id === s.id});
           s.instalaciones = (record) ? record.total : 0;

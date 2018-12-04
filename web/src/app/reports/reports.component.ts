@@ -8,6 +8,7 @@ import {ReportsService} from "../services/reports.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {GeneralService} from "../services/general.service";
 import {concat} from "rxjs";
+import {MedidorService} from "../services/medidor.service";
 
 @Component({
   selector: 'app-reports',
@@ -30,11 +31,13 @@ export class ReportsComponent implements OnInit {
   formsSubscription: any;
   usersSupervised: any[] = [];
   spinnerFlag = false;
+  nullForms: any[] = [];
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
               private reportsService: ReportsService,
               private spinner: NgxSpinnerService,
               private generalService: GeneralService,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private changeDetectorRef: ChangeDetectorRef,
+              private medidorService: MedidorService) {
     const subscription = this.userService.get().valueChanges().subscribe((data) => {
       this.users = data;
       subscription.unsubscribe();
@@ -63,8 +66,35 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     // this.generalService.freeUpdate('totals/forms', 1);
+    // this.updaeMedidores();
   }
-
+  getNullRPU() {
+    let noRPUArray:any [] = [];
+    this.spinner.show();
+    this.formService.getNullRPU().on("value", (response) => {
+      if (response.val()) {
+        // noRPUArray.push(response.val());
+        // noRPUArray = Object.keys(response.val()).map(key => { return response.val()[key]; });
+        noRPUArray = Object.values(response.val());
+      }
+      this.spinner.hide();
+      console.info(noRPUArray);
+      this.nullForms = noRPUArray;
+      this.changeDetectorRef.detectChanges();
+      return;
+    });
+  }
+  updaeMedidores() {
+    /*let sub = this.formService.get().valueChanges().subscribe(forms => {
+      sub.unsubscribe();
+      forms.forEach((form: any) => {
+        let sub2 = this.medidorService.getById(form.medidor).valueChanges().subscribe((medidor: any) => {
+          sub2.unsubscribe();
+          this.generalService.freeUpdate('forms/' + form.uid + '/geolocation', {lat: medidor.lat, lng: medidor.lng});
+        });
+      })
+    });*/
+  }
   showForms() {
     this.authService.getStatus().subscribe((data) => {
       const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
@@ -143,6 +173,8 @@ export class ReportsComponent implements OnInit {
           this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
           this.spinnerFlag = false;
         }
+        this.spinnerFlag = false;
+        alert('No se encontraron formularios para este supervisor');
         console.info(this.filteredForms);
         this.changeDetectorRef.detectChanges();
       });
@@ -202,7 +234,7 @@ export class ReportsComponent implements OnInit {
         i + 1,
         (aoa.serie) ? '9000-0364-' + aoa.serie : null,
         aoa.medidor || null,
-        (aoa.calle + ' ' + aoa.numero) || null,
+        ((aoa.calle || '') + ' ' + (aoa.numero || '')) || null,
         aoa.colonia || null,
         (aoa.geolocation) ? aoa.geolocation.lat : null,
         (aoa.geolocation) ? aoa.geolocation.lng : null,
@@ -250,7 +282,7 @@ export class ReportsComponent implements OnInit {
         i + 1,
         aoa.serie || null,
         aoa.medidor || null,
-        (aoa.calle + ' ' + aoa.numero) || null,
+        ((aoa.calle || '') + ' ' + (aoa.numero || '')) || null,
         aoa.colonia || null,
         (aoa.geolocation) ? aoa.geolocation.lat : null,
         (aoa.geolocation) ? aoa.geolocation.lng : null,
@@ -271,9 +303,7 @@ export class ReportsComponent implements OnInit {
       to: to}).subscribe((data: any) => {
       var $a = $("<a>");
       $a.attr("href","https://eduardoibarra.com/laravel/public/excel/TTD-HMO-ARSUB.xlsx");
-      //https://eduardoibarra.com/laravel/public/excel/Formulario.xlsx
       $("body").append($a);
-      // $a.attr("download","file.xls");
       $a[0].click();
       $a.remove();
     }, (error) => {

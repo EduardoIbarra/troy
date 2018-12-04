@@ -12,7 +12,7 @@
         "user/uid"
       ]
     },
-    "useres": {
+    "users": {
       ".indexOn": [
         "supervisor"
       ]
