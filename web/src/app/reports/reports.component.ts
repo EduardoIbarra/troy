@@ -9,6 +9,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {GeneralService} from "../services/general.service";
 import {concat} from "rxjs";
 import {MedidorService} from "../services/medidor.service";
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-reports',
@@ -32,6 +33,21 @@ export class ReportsComponent implements OnInit {
   usersSupervised: any[] = [];
   spinnerFlag = false;
   nullForms: any[] = [];
+  offset: number = 15;
+  nextKey: any; // for next button
+  prevKeys: any[] = []; // for prev button
+  subscription: any;
+  searchQueryChild: any = [
+    {text: 'RPU', value: 'rpu'},
+    {text: 'Medidor', value: 'medidor'},
+    {text: 'Optimizador', value: 'serie'},
+    {text: 'Nombre', value: 'nombre'},
+  ];
+  pagedForms: any[] = [];
+  queryType: any = {
+    value: null,
+    text: null
+  };
   constructor(private formService: FormService, private authService: AuthService, private userService: UserService,
               private reportsService: ReportsService,
               private spinner: NgxSpinnerService,
@@ -123,58 +139,33 @@ export class ReportsComponent implements OnInit {
   }
 
   getForms() {
-    // this.spinner.show();
-    /*this.formsSubscription = this.formService.get().valueChanges().subscribe((data) => {
-      this.forms = data;
-      this.spinner.hide();
-      /!*this.forms.forEach((f, i) => {
-        if (i > 3200 && i <= 3700) {
-          this.generalService.freeUpdate('forms/' + f.uid + '/user/forms', null);
-        }
-      });*!/
-      this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
-      this.filteredForms = this.forms;
-      this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
-      this.formsSubscription.unsubscribe();
-    }, (error) => {
-      this.spinner.hide();
-      console.log(error);
-    });*/
-
-
-    /*this.formService.get().on("value", (response) => {
-      this.forms = response.val() || [];
-      this.spinner.hide();
-      if(this.forms) {
-        this.forms = Object.keys(this.forms).map(key => { return this.forms[key]; });
-      }
-      console.info(this.forms);
-      this.forms = this.forms.filter((f) => {return f.user && this.supervisados.includes(f.user.uid)});
-
-      this.filteredForms = this.forms;
-      this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
-    });*/
-
-    if (!this.fromDate || !this.toDate) {
+    /*if (!this.fromDate || !this.toDate || false) {
       alert('Por favor escoja fechas de inicio Y fin');
       return;
-    }
+    }*/
     this.supervisados.forEach((s, i) => {
       this.spinnerFlag = true;
       this.formService.getForSupervisor(s).on("value", (response) => {
         if (response.val()) {
-
+          console.log(response.val());
+          console.log(1);
           const from = new Date(this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day + ' 00:00:00').getTime();
           const to = new Date(this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day + ' 23:59:59').getTime();
-
-          let formsArray = Object.keys(response.val()).map(key => { return response.val()[key]; });
-          formsArray = formsArray.filter((f) => { return f.uid >= from && f.uid <= to });
+          console.log(2);
+          // let formsArray = Object.keys(response.val()).map(key => { return response.val()[key]; });
+          let formsArray = Object.values(response.val());
+          console.log(3);
+          formsArray = formsArray.filter((f: any) => { return f.uid >= from && f.uid <= to });
+          console.log(4);
           this.filteredForms = this.forms.concat(formsArray);
+          console.log(5);
           this.conVarilla = this.filteredForms.filter((ff) => { return ff.varilla === 'si'});
+          console.log(6);
           this.spinnerFlag = false;
+        } else {
+          this.spinnerFlag = false;
+          alert('No se encontraron formularios para este supervisor');
         }
-        this.spinnerFlag = false;
-        alert('No se encontraron formularios para este supervisor');
         console.info(this.filteredForms);
         this.changeDetectorRef.detectChanges();
       });
@@ -336,5 +327,52 @@ export class ReportsComponent implements OnInit {
 
   toggleAll() {
     this.filteredForms.forEach((f) => {f.selected = !f.selected});
+  }
+
+  private getComments(key?) {
+
+    this.formService.getPaged(this.offset, key).on("value", (response) => {
+      console.info(response.val());
+      if (response.val()) {
+        this.pagedForms = this.forms.concat(Object.keys(response.val()).map(key => {
+          return response.val()[key];
+        }));
+        this.pagedForms = _.slice(this.pagedForms, 0, this.offset);
+        this.nextKey = _.get(this.pagedForms[this.offset - 1], 'uid');
+        console.log(this.nextKey);
+      }
+    });
+  }
+
+  nextPage() {
+    this.prevKeys.push(_.first(this.pagedForms)['uid']); // set current key as pointer for previous page
+    // this.getForms(this.nextKey)
+  }
+
+  prevPage() {
+    const prevKey = _.last(this.prevKeys); // use last key in array
+    this.prevKeys = _.dropRight(this.prevKeys); // then remove the last key in the array
+
+    // this.getForms(prevKey)
+  }
+
+  search() {
+    if (!this.queryType.value || !this.query) return;
+
+    this.spinner.show();
+    this.formService.search(this.queryType.value, this.query).then((res) => {
+      if (!res.val()) return;
+      console.log(res.val());
+      let forms = res.val();
+      let keys = Object.keys(res.val());
+      this.pagedForms = [];
+      for (let key of keys) {
+        this.pagedForms.push(forms[key])
+      }
+    }).catch((error) => {
+      console.log(error);
+    }).then(() => {
+      this.spinner.hide();
+    })
   }
 }

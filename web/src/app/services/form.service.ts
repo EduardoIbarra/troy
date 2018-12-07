@@ -31,6 +31,11 @@ export class FormService {
     return this.angularFireDataBase.database.ref().child('forms/').orderByChild('user/uid').equalTo(supervisor);
   }
 
+ /* getForSupervisorPaged(supervisor, offset = 20, startKey?) {
+    startKey = (startKey) ? startKey.toString() : '1542151974732';
+    return this.angularFireDataBase.database.ref().child('forms/').orderByChild('user/uid').equalTo(supervisor).startAt(startKey.toString()).limitToFirst(offset + 1);
+  }*/
+
   getById(uid) {
     return this.angularFireDataBase.object('forms/' + uid);
   }

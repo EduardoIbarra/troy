@@ -67,13 +67,33 @@
   <h3 *ngIf="filteredForms.length > 0">{{filteredForms.length}} Formularios Llenados</h3>
   <hr />
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
+    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon2" [(ngModel)]="query">
     <div class="input-group-append">
       <span class="input-group-text" id="basic-addon2">
         <i class="fas fa-search"></i>
       </span>
     </div>
   </div>
+
+
+
+  <div *ngIf="filteredForms.length">
+    <button (click)="prevPage()" [disabled]="!prevKeys?.length">Anterior</button>
+    <button (click)="nextPage()" [disabled]="false && !nextKey">Siguiente</button>
+    <br>
+    <small>Mostrando {{filteredForms.length}} registro(s)</small>
+  </div>
+  <hr/>
+  <ng-container *ngIf="!filteredForms.length">
+    <p>
+      <ngb-alert [dismissible]="false">
+        No se han encontrado resultados
+      </ngb-alert>
+    </p>
+  </ng-container>
+
+
+
   <!--<table>
     <tr>
       <th>Medidor</th>
