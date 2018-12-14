@@ -153,9 +153,9 @@
         {{form.uid | date: 'medium'}}
       </td>
       <td>
-        <button class="btn btn-sm btn-primary" ngbTooltip="Ver" routerLink="/form/{{form.uid}}">
+        <a class="btn btn-sm btn-primary" ngbTooltip="Ver" target="_blank" href="/form/{{form.uid}}">
           <i class="fas fa-eye"></i>
-        </button>
+        </a>
         <button *ngIf="user && user.tipo == 'troy'" class="btn btn-sm btn-secondary" ngbTooltip="Editar" routerLink="/edit_form/{{form.uid}}">
           <i class="fas fa-edit"></i>
         </button>

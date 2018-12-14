@@ -77,4 +77,8 @@ export class FormService {
   getNullRPU() {
     return this.angularFireDataBase.database.ref().child('forms/').orderByChild('rpu').equalTo(null);
   }
+
+  deleteSerie(serie) {
+    return this.angularFireDataBase.object('/series/' + serie).remove();
+  }
 }
