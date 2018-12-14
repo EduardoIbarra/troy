@@ -5,3 +5,4 @@ mobile/platforms
 mobile/www
 web/node_modules
 web/dist
+.idea
