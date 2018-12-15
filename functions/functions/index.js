@@ -23,7 +23,7 @@ exports.updateMedidores = functions.https.onRequest((req, res) => {
     const parentRef = admin.database().ref("forms");
     return parentRef.once('value').then(snapshot => {
         const updates = {};
-        snapshot.forEach(function(child) {
+        snapshot.forEach(function (child) {
             admin.database().ref("medidores/nest2/" + child.value().medidor).once('value').then(medidor => {
                 admin.database().ref('forms/' + child.value().uid + '/geolocation').set({lat: medidor.lat, lng: medidor.lng});
             })
@@ -167,6 +167,7 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
         const totalForm = res.val() + 1;
         return getTotalForms.set(totalForm)
     })).then(() => {
+        //Set varillas totals
         if (form && form.varilla && form.varilla === 'si') {
             const getTotalVarillas = admin.database().ref('/totals/varillas');
             return getTotalVarillas.once('value', (res => {
@@ -177,6 +178,7 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
             return null;
         }
     }).then(() => {
+        //total subcontratistas
         const getTotalSubcontratistas = admin.database().ref(`/totals/subcontratistas/${form.user.company.id}`);
 
         return getTotalSubcontratistas.once('value', (snap) => {
@@ -194,5 +196,37 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
             }
             return getTotalSubcontratistas.set(newTotal);
         })
-    });
+    }).then(() => {
+        //Totals materiales
+
+        console.log(form.current_materials);
+
+        form.current_materials.forEach((mat) => {
+            if (!mat.current_quantity || parseFloat(mat.current_quantity)<= 0) return;
+
+            const getTotalMaterials = admin.database().ref(`/totals/materials/${mat.id}`);
+
+            let newTotalMaterial = {
+                total: null,
+                id: mat.id,
+                descripcion: mat.descripcion
+            };
+
+           return getTotalMaterials.once('value', (snap) => {
+
+               console.log(mat.id + ' exists:' +  snap.exists());
+                if (snap.exists()) {
+                    newTotalMaterial.total += parseFloat(mat.current_quantity);
+                }else{
+                    newTotalMaterial.total = parseFloat(mat.current_quantity);
+                }
+
+               return getTotalMaterials.set(newTotalMaterial)
+            });
+        });
+
+
+    })
 });
+
+
