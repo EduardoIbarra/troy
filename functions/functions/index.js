@@ -218,7 +218,8 @@ function setNewMaterialsTotal(form, url) {
         let newTotalMaterial = {
             total: parseFloat(mat.current_quantity),
             id: mat.id,
-            descripcion: mat.descripcion
+            descripcion: mat.descripcion,
+            unidad: mat.unidad
         };
 
         return getTotalMaterials.once('value', (snap) => {
