@@ -198,35 +198,38 @@ exports.totalForm = functions.database.ref('forms/{pushId}').onCreate((snapshot)
         })
     }).then(() => {
         //Totals materiales
+        setNewMaterialsTotal(form, '/totals/materials');
 
-        console.log(form.current_materials);
-
-        form.current_materials.forEach((mat) => {
-            if (!mat.current_quantity || parseFloat(mat.current_quantity)<= 0) return;
-
-            const getTotalMaterials = admin.database().ref(`/totals/materials/${mat.id}`);
-
-            let newTotalMaterial = {
-                total: null,
-                id: mat.id,
-                descripcion: mat.descripcion
-            };
-
-           return getTotalMaterials.once('value', (snap) => {
-
-               console.log(mat.id + ' exists:' +  snap.exists());
-                if (snap.exists()) {
-                    newTotalMaterial.total += parseFloat(mat.current_quantity);
-                }else{
-                    newTotalMaterial.total = parseFloat(mat.current_quantity);
-                }
-
-               return getTotalMaterials.set(newTotalMaterial)
-            });
-        });
-
+        //Totals materials by subcontratista
+        setNewMaterialsTotal(form, `/totals/materials_subcontratista/${form.user.company.id}`);
 
     })
 });
+
+
+function setNewMaterialsTotal(form, url) {
+    form.current_materials.forEach((mat) => {
+        if (!mat.current_quantity || parseFloat(mat.current_quantity) <= 0) return;
+
+        let totalUrl = `${url}/${mat.id}`;
+
+        const getTotalMaterials = admin.database().ref(totalUrl);
+
+        let newTotalMaterial = {
+            total: parseFloat(mat.current_quantity),
+            id: mat.id,
+            descripcion: mat.descripcion
+        };
+
+        return getTotalMaterials.once('value', (snap) => {
+
+            if (snap.exists()) {
+                let val = snap.val();
+                newTotalMaterial.total += parseFloat(val.total);
+            }
+            return getTotalMaterials.set(newTotalMaterial)
+        });
+    });
+};
 
 
