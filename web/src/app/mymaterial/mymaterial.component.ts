@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormService} from "../services/form.service";
 import {UserService} from "../services/user.service";
 import {FallidaService} from "../services/fallida.service";
 import {MaterialService} from "../services/material.service";
 import {AuthService} from "../services/auth.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-mymaterial',
@@ -19,24 +20,39 @@ export class MymaterialComponent implements OnInit {
   materials: any[] = [];
   selectedSupervisor: any;
   user: any;
+
   constructor(private formService: FormService,
               private authService: AuthService,
               private userService: UserService,
               private fallidaService: FallidaService,
+              private spinnerService: NgxSpinnerService,
               private materialService: MaterialService) {
-    alert('Estamos optimizando el sitio, disculpe las molestias');
-    return;
-    /*this.authService.getStatus().subscribe((data) => {
+    // alert('Estamos optimizando el sitio, disculpe las molestias');
+    // return;
+    this.authService.getStatus().subscribe((data) => {
       const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
-        this.continueNow();
+        this.getTotalsBySubcontratista();
         subscription.unsubscribe();
       }, (error) => {
         console.log(error);
       });
     }, (error) => {
       console.log(error);
-    });*/
+    });
+  }
+
+  ngOnInit() {
+
+
+  }
+
+  getTotalsBySubcontratista() {
+    this.materialService.totalBySubcontratista(this.user.company.id).valueChanges().subscribe((data) => {
+      console.log(data);
+      this.materials = data;
+      this.spinnerService.hide();
+    })
   }
 
   continueNow() {
@@ -45,7 +61,9 @@ export class MymaterialComponent implements OnInit {
       const subscription2 = this.formService.get().valueChanges().subscribe((data) => {
         this.forms = data;
         this.getMaterials();
-        this.varillas = this.forms.filter((ff) => { return ff.varilla === 'si'});
+        this.varillas = this.forms.filter((ff) => {
+          return ff.varilla === 'si'
+        });
         this.getSubcontratistas();
         subscription2.unsubscribe();
       }, (error) => {
@@ -77,7 +95,9 @@ export class MymaterialComponent implements OnInit {
     this.materials.forEach((m) => {
       m.collection = [];
       forms.forEach((f) => {
-        m.collection = m.collection.concat(f.current_materials && f.current_materials.filter((cm) => { return cm.id === m.id }));
+        m.collection = m.collection.concat(f.current_materials && f.current_materials.filter((cm) => {
+          return cm.id === m.id
+        }));
       });
       m.quantity = 0;
       m.collection.forEach((c) => {
@@ -86,15 +106,17 @@ export class MymaterialComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
 
   getSubcontratistas() {
     const subscription = this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.subcontratistas = data;
-      this.subcontratistas = this.subcontratistas.filter((sc) => { return sc.id === this.user.company.id});
+      this.subcontratistas = this.subcontratistas.filter((sc) => {
+        return sc.id === this.user.company.id
+      });
       this.subcontratistas.forEach((s) => {
-        s.instalaciones = this.forms.filter((f) => {return f.user && f.user.company && f.user.company.id == s.id});
+        s.instalaciones = this.forms.filter((f) => {
+          return f.user && f.user.company && f.user.company.id == s.id
+        });
       });
       if (this.subcontratistas && this.subcontratistas[0] && this.subcontratistas[0].instalaciones) {
         this.calculateMaterials(this.subcontratistas[0].instalaciones);

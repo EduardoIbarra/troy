@@ -2,7 +2,7 @@
   <br />
   <h2>Reporte de Materiales</h2>
   <hr />
-  <h5 *ngIf="subcontratistas && subcontratistas[0]">[{{subcontratistas[0].instalaciones.length}} instalaciones] ({{subcontratistas[0].ciudad}}) {{subcontratistas[0].nombre}}</h5>
+  <h5 *ngIf="materials && user">[{{materials.length}} instalaciones] ({{user.company.ciudad}}) {{user.company.nombre}}</h5>
   <!--<select class="form-control" (change)="subcontratistaChanged($event.target.value)" [(ngModel)]="selectedSupervisor">
     <option *ngFor="let s of subcontratistas" [ngValue]="s">[{{s.instalaciones.length}} instalaciones] ({{s.ciudad}}) {{s.nombre}}</option>
   </select>-->
@@ -15,7 +15,7 @@
         <th>Unidad</th>
       </tr>
       <tr *ngFor="let m of materials">
-        <td><span class="badge badge-warning">{{m.quantity | number: '1.2-2'}}</span></td>
+        <td><span class="badge badge-warning">{{m.total | number: '1.2-2'}}</span></td>
         <td>{{m.descripcion}}</td>
         <td>{{m.unidad}}</td>
       </tr>
