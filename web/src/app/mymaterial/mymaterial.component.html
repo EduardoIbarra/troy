@@ -1,14 +1,14 @@
 <div class="container">
-  <br />
+  <br/>
   <h2>Reporte de Materiales</h2>
-  <hr />
+  <hr/>
   <h5 *ngIf="materials && user">[{{materials.length}} instalaciones] ({{user.company.ciudad}}) {{user.company.nombre}}</h5>
   <!--<select class="form-control" (change)="subcontratistaChanged($event.target.value)" [(ngModel)]="selectedSupervisor">
     <option *ngFor="let s of subcontratistas" [ngValue]="s">[{{s.instalaciones.length}} instalaciones] ({{s.ciudad}}) {{s.nombre}}</option>
   </select>-->
   <div class="card">
     <h5 class="card-header">Materiales utilizados</h5>
-    <table class="table table-bordered table-dark table-striped table-hover">
+    <table class="table table-bordered table-dark table-striped table-hover" *ngIf="materials?.length">
       <tr>
         <th>Cantidad</th>
         <th>Material</th>
@@ -20,5 +20,8 @@
         <td>{{m.unidad}}</td>
       </tr>
     </table>
+  </div>
+  <div *ngIf="!materials.length" class="center">
+    <h3>No se han realizado instalaciones</h3>
   </div>
 </div>

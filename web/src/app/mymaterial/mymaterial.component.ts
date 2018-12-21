@@ -29,6 +29,7 @@ export class MymaterialComponent implements OnInit {
               private materialService: MaterialService) {
     // alert('Estamos optimizando el sitio, disculpe las molestias');
     // return;
+    this.spinnerService.show();
     this.authService.getStatus().subscribe((data) => {
       const subscription = this.userService.getById(data.uid).valueChanges().subscribe((data2) => {
         this.user = data2;
