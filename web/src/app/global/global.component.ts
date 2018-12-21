@@ -63,13 +63,16 @@ export class GlobalComponent implements OnInit {
 
   ngOnInit() {
     this.totalsService.getTotals().valueChanges().subscribe((res) => {
+      console.log(res);
       this.totals.fallidas = res[0];
       this.totals.forms = res[1];
-      this.totals.varillas = res[3];
+      this.totals.varillas = res[5];
+      this.spinner.hide()
     })
   }
 
   getSubcontratistas() {
+    this.spinner.show()
     this.userService.getSubcontratistas().valueChanges().subscribe((data) => {
       this.subcontratistas = data;
       this.totalsService.getTotals().valueChanges().subscribe((data2) => {
